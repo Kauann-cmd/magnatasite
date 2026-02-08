@@ -1,0 +1,8 @@
+{
+  "rewrites": [
+    {
+      "source": "/stream/play",
+      "destination": "/stream/play.js"
+    }
+  ]
+}
