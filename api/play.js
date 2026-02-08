@@ -12,7 +12,8 @@ export default function handler(req, res) {
             '1': 'light',
             '2': 'medium',
             '3': 'heavy',
-            '4': 'extreme'
+            '4': 'extreme',
+            '100': 'oloko'
         };
         
         const bassLevel = levelMap[level] || 'medium';
