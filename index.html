@@ -6,9 +6,9 @@
   <meta name="description" content="Pesquise suas músicas e escute elas. Magnata Músicas - MTA." />
   <meta property="og:title" content="Magnata Músicas - MTA" />
   <meta property="og:description" content="Pesquise suas músicas e escute elas..." />
-  <meta property="og:url" content="https://magnatasite.vercel.app/" />
+  <meta property="og:url" content="https://magnatamusicas.vercel.app/" />
   <meta property="og:type" content="website" />
-  <link rel="canonical" href="https://magnatasite.vercel.app/" />
+  <link rel="canonical" href="https://magnatamusicas.vercel.app/" />
   <link rel="icon" href="assets/img/ol5B45t.png" type="image/png" />
   <link rel="stylesheet" href="assets/css/all.min.css" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -1187,7 +1187,7 @@ animateStarfield();
 
         function copyMusicLink() {
             if (!currentMusicId) return;
-            let u = `https://magnatasite.vercel.app/api/play?id=${currentMusicId}`;
+            let u = `https://magnatamusicas.vercel.app/stream/play?id=${currentMusicId}`;
             if (bassEnabled) u += `&bass=true&level=${bassLevel}`;
             u = `setradio ${u}`;
             navigator.clipboard.writeText(u).then(() => showNotification('Link copiado!'));
@@ -1291,7 +1291,7 @@ animateStarfield();
             startDlBtn.classList.add('downloading');
             
             let name = document.getElementById('download-title').textContent.replace(/[^\w\s]/gi, '_');
-            let url = `https://magnatasite.vercel.app/api/play?id=${currentMusicId}`;
+            let url = `https://magnatamusicas.vercel.app/stream/play?id=${currentMusicId}`;
             if (bassEnabled) url += `&bass=true&level=${bassLevel}`;
             
             const a = document.createElement('a');
