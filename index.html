@@ -1187,7 +1187,7 @@ animateStarfield();
 
         function copyMusicLink() {
             if (!currentMusicId) return;
-            let u = `https://opa24hrs.site/play.php?id=${currentMusicId}`;
+            let u = `https://magnatasite.vercel.app/api/play?id=${currentMusicId}`;
             if (bassEnabled) u += `&bass=true&level=${bassLevel}`;
             u = `setradio ${u}`;
             navigator.clipboard.writeText(u).then(() => showNotification('Link copiado!'));
@@ -1291,7 +1291,7 @@ animateStarfield();
             startDlBtn.classList.add('downloading');
             
             let name = document.getElementById('download-title').textContent.replace(/[^\w\s]/gi, '_');
-            let url = `https://opa24hrs.site/play.php?id=${currentMusicId}&download=true`;
+            let url = `https://magnatasite.vercel.app/api/play?id=${currentMusicId}`;
             if (bassEnabled) url += `&bass=true&level=${bassLevel}`;
             
             const a = document.createElement('a');
