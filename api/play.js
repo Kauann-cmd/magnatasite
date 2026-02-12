@@ -9,7 +9,7 @@
     // ============================================
     // CONFIG
     // ============================================
-    var DOMAIN = 'https://magnatamusicas.vercel.app';
+    var DOMAIN = 'magnatamusicas.vercel.app';
     var API_BASE = 'https://api-music.fantasyresources.net';
 
     // ============================================
