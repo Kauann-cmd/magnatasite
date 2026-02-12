@@ -2,7 +2,7 @@
 // FANTASY MUSIC - JavaScript
 // ========================================
 
-const DOMAIN = 'https://magnatamusicas.vercel.app/';
+const DOMAIN = 'https://magnatamusicas.vercel.app';
 
 // ----------------------------------------
 // Toast System
