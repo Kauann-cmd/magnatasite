@@ -21,7 +21,7 @@
                 </svg>
                 <span class="logo-text">Fantasy <span class="logo-highlight">Music</span></span>
             </a>
-            <button class="nav-toggle" id="navToggle" aria-label="Abrir menu">
+            <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -141,279 +141,22 @@
         </div>
     </section>
 
-    <section class="results-section" id="resultados" style="display:none;">
+    <section class="results-section" id="resultados">
         <div class="results-container">
             <div class="section-header">
                 <span class="section-badge" id="resultsBadge">🔍 Resultados</span>
                 <h3 class="section-title" id="resultsTitle">Resultados da Busca</h3>
-                <p class="section-subtitle" id="resultsSubtitle"></p>
+                <p class="section-subtitle" id="resultsSubtitle">Use o campo acima para encontrar músicas</p>
             </div>
-            <div class="loading-spinner" id="loadingSpinner" style="display:none;">
-                <div class="spinner"></div>
-                <p>Buscando músicas...</p>
-            </div>
-            <div class="no-results" id="noResults" style="display:none;">
-                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="1.5">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="M21 21l-4.35-4.35"></path>
-                    <path d="M8 11h6"></path>
-                </svg>
-                <h4>Nenhuma música encontrada</h4>
-                <p>Tente buscar com outro termo</p>
-            </div>
-            <div class="music-list" id="resultsListContainer"></div>
-        </div>
-    </section>
-
-    <section class="most-played" id="sobre">
-        <div class="most-played-container">
-            <div class="section-header">
-                <span class="section-badge">🔥 Trending</span>
-                <h3 class="section-title">Mais Ouvidas</h3>
-                <p class="section-subtitle">As músicas mais populares da plataforma</p>
-            </div>
-            <div class="music-list" id="defaultMusicList">
-
-                <div class="music-card" data-id="rB7VeR2aBOQ">
-                    <div class="music-card-left">
-                        <div class="music-rank">#1</div>
-                        <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/rB7VeR2aBOQ/mqdefault.jpg" alt="Never Gonna Give You Up">
-                            <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            </div>
-                        </div>
-                        <div class="music-info">
-                            <h4 class="music-title">Never Gonna Give You Up</h4>
-                            <p class="music-artist">Rick Astley</p>
-                        </div>
-                    </div>
-                    <div class="music-card-right">
-                        <button class="action-btn" data-action="open" data-id="rB7VeR2aBOQ" type="button" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            <span class="btn-tooltip">Abrir música</span>
-                        </button>
-                        <button class="action-btn" data-action="bass" data-id="rB7VeR2aBOQ" type="button" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path><path d="M17 20V8"></path><path d="M22 20V4"></path></svg>
-                            <span class="btn-tooltip">Link com grave</span>
-                        </button>
-                        <button class="action-btn" data-action="copy" data-id="rB7VeR2aBOQ" type="button" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
-                            <span class="btn-tooltip">Copiar link</span>
-                        </button>
-                    </div>
+            <div class="music-list" id="musicList">
+                <div class="empty-state" id="emptyState">
+                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="1.5">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="M21 21l-4.35-4.35"></path>
+                    </svg>
+                    <h4>Aguardando pesquisa...</h4>
+                    <p>Digite o nome da música e clique em buscar</p>
                 </div>
-
-                <div class="music-card" data-id="kJQP7kiw5Fk">
-                    <div class="music-card-left">
-                        <div class="music-rank">#2</div>
-                        <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/kJQP7kiw5Fk/mqdefault.jpg" alt="Despacito">
-                            <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            </div>
-                        </div>
-                        <div class="music-info">
-                            <h4 class="music-title">Despacito</h4>
-                            <p class="music-artist">Luis Fonsi ft. Daddy Yankee</p>
-                        </div>
-                    </div>
-                    <div class="music-card-right">
-                        <button class="action-btn" data-action="open" data-id="kJQP7kiw5Fk" type="button" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            <span class="btn-tooltip">Abrir música</span>
-                        </button>
-                        <button class="action-btn" data-action="bass" data-id="kJQP7kiw5Fk" type="button" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path><path d="M17 20V8"></path><path d="M22 20V4"></path></svg>
-                            <span class="btn-tooltip">Link com grave</span>
-                        </button>
-                        <button class="action-btn" data-action="copy" data-id="kJQP7kiw5Fk" type="button" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
-                            <span class="btn-tooltip">Copiar link</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="music-card" data-id="RgKAFK5djSk">
-                    <div class="music-card-left">
-                        <div class="music-rank">#3</div>
-                        <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/RgKAFK5djSk/mqdefault.jpg" alt="See You Again">
-                            <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            </div>
-                        </div>
-                        <div class="music-info">
-                            <h4 class="music-title">See You Again</h4>
-                            <p class="music-artist">Wiz Khalifa ft. Charlie Puth</p>
-                        </div>
-                    </div>
-                    <div class="music-card-right">
-                        <button class="action-btn" data-action="open" data-id="RgKAFK5djSk" type="button" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            <span class="btn-tooltip">Abrir música</span>
-                        </button>
-                        <button class="action-btn" data-action="bass" data-id="RgKAFK5djSk" type="button" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path><path d="M17 20V8"></path><path d="M22 20V4"></path></svg>
-                            <span class="btn-tooltip">Link com grave</span>
-                        </button>
-                        <button class="action-btn" data-action="copy" data-id="RgKAFK5djSk" type="button" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
-                            <span class="btn-tooltip">Copiar link</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="music-card" data-id="JGwWNGJdvx8">
-                    <div class="music-card-left">
-                        <div class="music-rank">#4</div>
-                        <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/JGwWNGJdvx8/mqdefault.jpg" alt="Shape of You">
-                            <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            </div>
-                        </div>
-                        <div class="music-info">
-                            <h4 class="music-title">Shape of You</h4>
-                            <p class="music-artist">Ed Sheeran</p>
-                        </div>
-                    </div>
-                    <div class="music-card-right">
-                        <button class="action-btn" data-action="open" data-id="JGwWNGJdvx8" type="button" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            <span class="btn-tooltip">Abrir música</span>
-                        </button>
-                        <button class="action-btn" data-action="bass" data-id="JGwWNGJdvx8" type="button" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path><path d="M17 20V8"></path><path d="M22 20V4"></path></svg>
-                            <span class="btn-tooltip">Link com grave</span>
-                        </button>
-                        <button class="action-btn" data-action="copy" data-id="JGwWNGJdvx8" type="button" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
-                            <span class="btn-tooltip">Copiar link</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="music-card" data-id="OPf0YbXqDm0">
-                    <div class="music-card-left">
-                        <div class="music-rank">#5</div>
-                        <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/OPf0YbXqDm0/mqdefault.jpg" alt="Uptown Funk">
-                            <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            </div>
-                        </div>
-                        <div class="music-info">
-                            <h4 class="music-title">Uptown Funk</h4>
-                            <p class="music-artist">Mark Ronson ft. Bruno Mars</p>
-                        </div>
-                    </div>
-                    <div class="music-card-right">
-                        <button class="action-btn" data-action="open" data-id="OPf0YbXqDm0" type="button" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            <span class="btn-tooltip">Abrir música</span>
-                        </button>
-                        <button class="action-btn" data-action="bass" data-id="OPf0YbXqDm0" type="button" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path><path d="M17 20V8"></path><path d="M22 20V4"></path></svg>
-                            <span class="btn-tooltip">Link com grave</span>
-                        </button>
-                        <button class="action-btn" data-action="copy" data-id="OPf0YbXqDm0" type="button" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
-                            <span class="btn-tooltip">Copiar link</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="music-card" data-id="fJ9rUzIMcZQ">
-                    <div class="music-card-left">
-                        <div class="music-rank">#6</div>
-                        <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/fJ9rUzIMcZQ/mqdefault.jpg" alt="Bohemian Rhapsody">
-                            <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            </div>
-                        </div>
-                        <div class="music-info">
-                            <h4 class="music-title">Bohemian Rhapsody</h4>
-                            <p class="music-artist">Queen</p>
-                        </div>
-                    </div>
-                    <div class="music-card-right">
-                        <button class="action-btn" data-action="open" data-id="fJ9rUzIMcZQ" type="button" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            <span class="btn-tooltip">Abrir música</span>
-                        </button>
-                        <button class="action-btn" data-action="bass" data-id="fJ9rUzIMcZQ" type="button" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path><path d="M17 20V8"></path><path d="M22 20V4"></path></svg>
-                            <span class="btn-tooltip">Link com grave</span>
-                        </button>
-                        <button class="action-btn" data-action="copy" data-id="fJ9rUzIMcZQ" type="button" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
-                            <span class="btn-tooltip">Copiar link</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="music-card" data-id="hTWKbfoikeg">
-                    <div class="music-card-left">
-                        <div class="music-rank">#7</div>
-                        <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/hTWKbfoikeg/mqdefault.jpg" alt="Smells Like Teen Spirit">
-                            <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            </div>
-                        </div>
-                        <div class="music-info">
-                            <h4 class="music-title">Smells Like Teen Spirit</h4>
-                            <p class="music-artist">Nirvana</p>
-                        </div>
-                    </div>
-                    <div class="music-card-right">
-                        <button class="action-btn" data-action="open" data-id="hTWKbfoikeg" type="button" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            <span class="btn-tooltip">Abrir música</span>
-                        </button>
-                        <button class="action-btn" data-action="bass" data-id="hTWKbfoikeg" type="button" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path><path d="M17 20V8"></path><path d="M22 20V4"></path></svg>
-                            <span class="btn-tooltip">Link com grave</span>
-                        </button>
-                        <button class="action-btn" data-action="copy" data-id="hTWKbfoikeg" type="button" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
-                            <span class="btn-tooltip">Copiar link</span>
-                        </button>
-                    </div>
-                </div>
-
-                <div class="music-card" data-id="60ItHLz5WEA">
-                    <div class="music-card-left">
-                        <div class="music-rank">#8</div>
-                        <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/60ItHLz5WEA/mqdefault.jpg" alt="Faded">
-                            <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
-                            </div>
-                        </div>
-                        <div class="music-info">
-                            <h4 class="music-title">Faded</h4>
-                            <p class="music-artist">Alan Walker</p>
-                        </div>
-                    </div>
-                    <div class="music-card-right">
-                        <button class="action-btn" data-action="open" data-id="60ItHLz5WEA" type="button" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            <span class="btn-tooltip">Abrir música</span>
-                        </button>
-                        <button class="action-btn" data-action="bass" data-id="60ItHLz5WEA" type="button" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path><path d="M17 20V8"></path><path d="M22 20V4"></path></svg>
-                            <span class="btn-tooltip">Link com grave</span>
-                        </button>
-                        <button class="action-btn" data-action="copy" data-id="60ItHLz5WEA" type="button" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
-                            <span class="btn-tooltip">Copiar link</span>
-                        </button>
-                    </div>
-                </div>
-
             </div>
         </div>
     </section>
@@ -464,24 +207,313 @@
         </div>
     </footer>
 
-    <div class="toast-container">
-        <div class="toast" id="toast">
-            <div class="toast-icon">
-                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="2">
-                    <circle cx="12" cy="12" r="10"></circle>
-                    <path d="M12 16v-4"></path>
-                    <path d="M12 8h.01"></path>
-                </svg>
-            </div>
-            <span class="toast-message" id="toastMessage">Link copiado!</span>
-            <button class="toast-close" id="toastClose" type="button">
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
-                    <path d="M18 6L6 18M6 6l12 12"></path>
-                </svg>
-            </button>
-        </div>
-    </div>
+    <div class="notification" id="notification"></div>
 
-    <script src="play.js"></script>
+    <script>
+        /* =========================================
+           TODA A LÓGICA - DIRETO NO HTML
+           Mesma abordagem do site original
+           ========================================= */
+
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
+        const musicListContainer = document.getElementById('musicList');
+        const emptyState = document.getElementById('emptyState');
+        const resultsSection = document.getElementById('resultados');
+        const resultsBadge = document.getElementById('resultsBadge');
+        const resultsTitle = document.getElementById('resultsTitle');
+        const resultsSubtitle = document.getElementById('resultsSubtitle');
+        const notification = document.getElementById('notification');
+        const navbar = document.getElementById('navbar');
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        let currentMusicList = [];
+        const SITE_ORIGIN = window.location.origin;
+
+        /* =========================================
+           SEARCH - Igual ao original
+           ========================================= */
+        searchBtn.addEventListener('click', searchMusic);
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchMusic();
+        });
+
+        function searchMusic() {
+            const term = searchInput.value.trim();
+            if (!term) return;
+
+            musicListContainer.innerHTML = `
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Buscando músicas...</p>
+                </div>
+            `;
+            resultsTitle.textContent = 'Buscando...';
+            resultsBadge.textContent = '🔍 Buscando';
+            resultsSubtitle.textContent = '';
+
+            resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+            fetch(`https://api-music.fantasyresources.net/search?src=${encodeURIComponent(term)}`)
+                .then(r => r.json())
+                .then(data => {
+                    currentMusicList = data;
+                    displayMusicList(data, term);
+                })
+                .catch(e => {
+                    console.error(e);
+                    musicListContainer.innerHTML = `
+                        <div class="empty-state">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 8v4"></path>
+                                <path d="M12 16h.01"></path>
+                            </svg>
+                            <h4>Erro na conexão</h4>
+                            <p>Verifique sua internet e tente novamente</p>
+                        </div>
+                    `;
+                    resultsTitle.textContent = 'Erro na busca';
+                    resultsBadge.textContent = '⚠️ Erro';
+                    resultsSubtitle.textContent = '';
+                });
+        }
+
+        /* =========================================
+           DISPLAY MUSIC LIST - Igual ao original
+           ========================================= */
+        function displayMusicList(list, term) {
+            if (!list || list.length === 0) {
+                musicListContainer.innerHTML = `
+                    <div class="empty-state">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="1.5">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="M21 21l-4.35-4.35"></path>
+                            <path d="M8 11h6"></path>
+                        </svg>
+                        <h4>Nenhuma música encontrada</h4>
+                        <p>Tente buscar com outro termo</p>
+                    </div>
+                `;
+                resultsTitle.textContent = 'Resultados da Busca';
+                resultsBadge.textContent = '🔍 Resultados';
+                resultsSubtitle.textContent = `Nenhum resultado para "${term}"`;
+                return;
+            }
+
+            resultsTitle.textContent = 'Resultados da Busca';
+            resultsBadge.textContent = `🔍 ${list.length} resultado${list.length !== 1 ? 's' : ''}`;
+            resultsSubtitle.textContent = `${list.length} música${list.length !== 1 ? 's' : ''} encontrada${list.length !== 1 ? 's' : ''} para "${term}"`;
+
+            musicListContainer.innerHTML = '';
+
+            list.forEach((m, idx) => {
+                const card = document.createElement('div');
+                card.className = 'music-card';
+                card.dataset.index = idx;
+                card.dataset.id = m.id;
+
+                const thumb = m.richThumb || `https://img.youtube.com/vi/${m.id}/mqdefault.jpg`;
+
+                card.innerHTML = `
+                    <div class="music-card-left">
+                        <div class="music-rank">#${idx + 1}</div>
+                        <div class="music-cover">
+                            <img src="${thumb}" alt="${escapeHTML(m.title)}">
+                            <div class="cover-overlay">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                            </div>
+                        </div>
+                        <div class="music-info">
+                            <h4 class="music-title">${escapeHTML(m.title)}</h4>
+                            <p class="music-artist">${escapeHTML(m.author)}</p>
+                            <p class="music-duration">${m.duration_view || formatTime(m.duration)}</p>
+                        </div>
+                    </div>
+                    <div class="music-card-right">
+                        <button class="action-btn" data-action="open" data-id="${m.id}" type="button" title="Abrir música">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                            <span class="btn-tooltip">Abrir música</span>
+                        </button>
+                        <button class="action-btn" data-action="bass" data-id="${m.id}" type="button" title="Copiar link com grave">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"></path><path d="M7 20v-4"></path><path d="M12 20v-8"></path><path d="M17 20V8"></path><path d="M22 20V4"></path></svg>
+                            <span class="btn-tooltip">Link com grave</span>
+                        </button>
+                        <button class="action-btn" data-action="copy" data-id="${m.id}" type="button" title="Copiar link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
+                            <span class="btn-tooltip">Copiar link</span>
+                        </button>
+                    </div>
+                `;
+
+                // Clicar na capa abre a música
+                card.querySelector('.music-cover').addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    openMusic(m.id);
+                });
+
+                musicListContainer.appendChild(card);
+            });
+        }
+
+        /* =========================================
+           ACTIONS - Abrir, Copiar link, Copiar bass
+           Mesma lógica do original
+           ========================================= */
+
+        // Event delegation pra todos os botões de ação
+        document.addEventListener('click', (e) => {
+            const btn = e.target.closest('[data-action]');
+            if (!btn) return;
+
+            const action = btn.getAttribute('data-action');
+            const id = btn.getAttribute('data-id');
+            if (!action || !id) return;
+
+            e.preventDefault();
+            e.stopPropagation();
+
+            switch (action) {
+                case 'open':
+                    openMusic(id);
+                    break;
+                case 'copy':
+                    copyMusicLink(id);
+                    break;
+                case 'bass':
+                    copyBassLink(id);
+                    break;
+            }
+        });
+
+        // Abre a música direto na API (nova guia)
+        function openMusic(id) {
+            window.open(`https://api-music.fantasyresources.net/play-client?id=${id}`, '_blank');
+        }
+
+        // Copia link personalizado (passa pelo play.js do Vercel)
+        // Igual ao copyMusicLink do original
+        function copyMusicLink(id) {
+            const url = `${SITE_ORIGIN}/api/play?id=${id}`;
+            navigator.clipboard.writeText(url).then(() => {
+                showNotification('Link da música copiado!');
+            }).catch(() => {
+                fallbackCopy(url, 'Link da música copiado!');
+            });
+        }
+
+        // Copia link com grave (passa pelo play.js do Vercel)
+        // Igual ao original com bass=true&level=2
+        function copyBassLink(id) {
+            const url = `${SITE_ORIGIN}/api/play?id=${id}&bass=true&level=2`;
+            navigator.clipboard.writeText(url).then(() => {
+                showNotification('Link com grave copiado!');
+            }).catch(() => {
+                fallbackCopy(url, 'Link com grave copiado!');
+            });
+        }
+
+        // Fallback para navegadores sem clipboard API
+        function fallbackCopy(text, msg) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0';
+            document.body.appendChild(ta);
+            ta.focus();
+            ta.select();
+            try {
+                document.execCommand('copy');
+                showNotification(msg);
+            } catch (e) {
+                showNotification('Erro ao copiar.');
+            }
+            document.body.removeChild(ta);
+        }
+
+        /* =========================================
+           NOTIFICATION - Igual ao original
+           ========================================= */
+        function showNotification(msg) {
+            notification.textContent = msg;
+            notification.classList.add('show');
+            setTimeout(() => notification.classList.remove('show'), 3000);
+        }
+
+        /* =========================================
+           HELPERS
+           ========================================= */
+        function formatTime(s) {
+            if (!s || isNaN(s)) return '0:00';
+            const m = Math.floor(s / 60);
+            const sec = Math.floor(s % 60);
+            return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.appendChild(document.createTextNode(str));
+            return div.innerHTML;
+        }
+
+        /* =========================================
+           NAVBAR
+           ========================================= */
+        window.addEventListener('scroll', () => {
+            navbar.classList.toggle('scrolled', window.scrollY > 10);
+        });
+
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('active');
+            navMenu.classList.toggle('open');
+            document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
+        });
+
+        document.querySelectorAll('.nav-link').forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('active');
+                navMenu.classList.remove('open');
+                document.body.style.overflow = '';
+            });
+        });
+
+        // Active nav on scroll
+        const sections = document.querySelectorAll('section[id], footer[id]');
+        const navLinks = document.querySelectorAll('.nav-link');
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(s => {
+                if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id');
+            });
+            navLinks.forEach(l => {
+                l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+            });
+        });
+
+        /* =========================================
+           SCROLL ANIMATIONS
+           ========================================= */
+        if ('IntersectionObserver' in window) {
+            const obs = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        obs.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+            document.querySelectorAll('.step-card').forEach(el => {
+                el.classList.add('animate-hidden');
+                obs.observe(el);
+            });
+        }
+
+        console.log(
+            '%c Fantasy Music %c v5.0 - API Real ',
+            'background:#9b7aff;color:#fff;padding:4px 8px;border-radius:4px 0 0 4px;font-weight:bold',
+            'background:#1a1a2e;color:#fff;padding:4px 8px;border-radius:0 4px 4px 0'
+        );
+    </script>
 </body>
 </html>
