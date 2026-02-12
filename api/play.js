@@ -1,247 +1,290 @@
-// ========================================
-// FANTASY MUSIC - JavaScript
-// ========================================
+/*
+ * Fantasy Music - app.js
+ * Handles: toast, clipboard, search, navbar, mobile menu, animations
+ */
 
-const DOMAIN = 'https://magnatamusicas.vercel.app';
+(function() {
+    'use strict';
 
-// ----------------------------------------
-// Toast System
-// ----------------------------------------
-let toastTimeout = null;
+    // ============================================
+    // CONFIG
+    // ============================================
+    var DOMAIN = 'https://magnatamusicas.vercel.app';
+    var API_BASE = 'https://api-music.fantasyresources.net';
 
-function showToast(message) {
-    const toast = document.getElementById('toast');
-    const toastMessage = document.getElementById('toastMessage');
-    
-    // Clear any existing timeout
-    if (toastTimeout) {
-        clearTimeout(toastTimeout);
+    // ============================================
+    // DOM ELEMENTS
+    // ============================================
+    var navbar = document.getElementById('navbar');
+    var navToggle = document.getElementById('navToggle');
+    var navMenu = document.getElementById('navMenu');
+    var searchInput = document.getElementById('searchInput');
+    var searchBtn = document.getElementById('searchBtn');
+    var noResults = document.getElementById('noResults');
+    var toast = document.getElementById('toast');
+    var toastMessage = document.getElementById('toastMessage');
+    var toastClose = document.getElementById('toastClose');
+    var musicCards = document.querySelectorAll('.music-card');
+    var navLinks = document.querySelectorAll('.nav-link');
+
+    var toastTimeout = null;
+
+    // ============================================
+    // TOAST
+    // ============================================
+    function showToast(message) {
+        if (toastTimeout) {
+            clearTimeout(toastTimeout);
+        }
+
+        toastMessage.textContent = message || 'Link da música copiado!';
+
+        // Remove and re-add for re-trigger
+        toast.classList.remove('show');
+        void toast.offsetWidth; // force reflow
+        toast.classList.add('show');
+
+        toastTimeout = setTimeout(function() {
+            toast.classList.remove('show');
+            toastTimeout = null;
+        }, 2000);
     }
-    
-    // Update message
-    toastMessage.textContent = message || 'Link da música copiado!';
-    
-    // Remove show class first (for re-triggering)
-    toast.classList.remove('show');
-    
-    // Force reflow
-    void toast.offsetWidth;
-    
-    // Show toast
-    toast.classList.add('show');
-    
-    // Auto-hide after 2 seconds
-    toastTimeout = setTimeout(() => {
-        hideToast();
-    }, 2000);
-}
 
-function hideToast() {
-    const toast = document.getElementById('toast');
-    toast.classList.remove('show');
-    
-    if (toastTimeout) {
-        clearTimeout(toastTimeout);
-        toastTimeout = null;
+    function hideToast() {
+        toast.classList.remove('show');
+        if (toastTimeout) {
+            clearTimeout(toastTimeout);
+            toastTimeout = null;
+        }
     }
-}
 
-// ----------------------------------------
-// Copy Functions
-// ----------------------------------------
-function copyToClipboard(text) {
-    if (navigator.clipboard && navigator.clipboard.writeText) {
-        return navigator.clipboard.writeText(text);
+    toastClose.addEventListener('click', hideToast);
+
+    // ============================================
+    // CLIPBOARD
+    // ============================================
+    function copyToClipboard(text, successMsg) {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text).then(function() {
+                showToast(successMsg);
+            }).catch(function() {
+                fallbackCopy(text, successMsg);
+            });
+        } else {
+            fallbackCopy(text, successMsg);
+        }
     }
-    
-    // Fallback for older browsers
-    return new Promise((resolve, reject) => {
-        const textarea = document.createElement('textarea');
+
+    function fallbackCopy(text, successMsg) {
+        var textarea = document.createElement('textarea');
         textarea.value = text;
-        textarea.style.position = 'fixed';
-        textarea.style.left = '-9999px';
-        textarea.style.top = '-9999px';
+        textarea.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0;';
         document.body.appendChild(textarea);
         textarea.focus();
         textarea.select();
-        
+
         try {
-            const success = document.execCommand('copy');
-            document.body.removeChild(textarea);
-            if (success) {
-                resolve();
-            } else {
-                reject(new Error('Copy command failed'));
-            }
-        } catch (err) {
-            document.body.removeChild(textarea);
-            reject(err);
+            var ok = document.execCommand('copy');
+            showToast(ok ? successMsg : 'Erro ao copiar o link.');
+        } catch (e) {
+            showToast('Erro ao copiar o link.');
+        }
+
+        document.body.removeChild(textarea);
+    }
+
+    // ============================================
+    // BUTTON ACTIONS (Event Delegation)
+    // ============================================
+    document.addEventListener('click', function(e) {
+        // Check if clicked on action button or its child
+        var btn = e.target.closest('[data-action]');
+        if (!btn) return;
+
+        var action = btn.getAttribute('data-action');
+        var id = btn.getAttribute('data-id');
+
+        if (!action || !id) return;
+
+        e.preventDefault();
+        e.stopPropagation();
+
+        if (action === 'open') {
+            // Open music in new tab using the play-client API
+            window.open(API_BASE + '/play-client?id=' + id, '_blank');
+        }
+        else if (action === 'bass') {
+            // Copy link with bass
+            var bassLink = 'https://' + DOMAIN + '/play?id=' + id + '&bass=true&level=2';
+            copyToClipboard(bassLink, 'Link com grave copiado!');
+        }
+        else if (action === 'copy') {
+            // Copy normal link
+            var normalLink = 'https://' + DOMAIN + '/play?id=' + id;
+            copyToClipboard(normalLink, 'Link da música copiado!');
         }
     });
-}
 
-function copyNormalLink(id) {
-    const link = `https://${DOMAIN}/play?id=${id}`;
-    
-    copyToClipboard(link)
-        .then(() => {
-            showToast('Link da música copiado!');
-        })
-        .catch(() => {
-            showToast('Erro ao copiar o link.');
-        });
-}
+    // Also handle cover click -> open music
+    document.addEventListener('click', function(e) {
+        var cover = e.target.closest('.music-cover');
+        if (!cover) return;
 
-function copyBassLink(id) {
-    const link = `https://${DOMAIN}/play?id=${id}&bass=true&level=2`;
-    
-    copyToClipboard(link)
-        .then(() => {
-            showToast('Link com grave copiado!');
-        })
-        .catch(() => {
-            showToast('Erro ao copiar o link.');
-        });
-}
+        var card = cover.closest('.music-card');
+        if (!card) return;
 
-// ----------------------------------------
-// Navbar Scroll Effect
-// ----------------------------------------
-const navbar = document.getElementById('navbar');
-
-window.addEventListener('scroll', () => {
-    if (window.scrollY > 10) {
-        navbar.classList.add('scrolled');
-    } else {
-        navbar.classList.remove('scrolled');
-    }
-});
-
-// ----------------------------------------
-// Mobile Menu Toggle
-// ----------------------------------------
-const navToggle = document.getElementById('navToggle');
-const navMenu = document.getElementById('navMenu');
-
-navToggle.addEventListener('click', () => {
-    navToggle.classList.toggle('active');
-    navMenu.classList.toggle('open');
-    document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
-});
-
-// Close menu when clicking a link
-navMenu.querySelectorAll('.nav-link').forEach(link => {
-    link.addEventListener('click', () => {
-        navToggle.classList.remove('active');
-        navMenu.classList.remove('open');
-        document.body.style.overflow = '';
+        var id = card.getAttribute('data-id');
+        if (id) {
+            window.open(API_BASE + '/play-client?id=' + id, '_blank');
+        }
     });
-});
 
-// Close menu when clicking overlay area
-navMenu.addEventListener('click', (e) => {
-    if (e.target === navMenu) {
-        navToggle.classList.remove('active');
-        navMenu.classList.remove('open');
-        document.body.style.overflow = '';
-    }
-});
+    // ============================================
+    // NAVBAR SCROLL
+    // ============================================
+    var lastScroll = 0;
 
-// ----------------------------------------
-// Search Functionality
-// ----------------------------------------
-const searchInput = document.getElementById('searchInput');
-const searchBtn = document.getElementById('searchBtn');
-const musicCards = document.querySelectorAll('.music-card');
+    window.addEventListener('scroll', function() {
+        var scrollY = window.scrollY || window.pageYOffset;
 
-function filterMusic() {
-    const query = searchInput.value.toLowerCase().trim();
-    
-    musicCards.forEach(card => {
-        const title = card.querySelector('.music-title').textContent.toLowerCase();
-        const artist = card.querySelector('.music-artist').textContent.toLowerCase();
-        
-        if (query === '' || title.includes(query) || artist.includes(query)) {
-            card.style.display = '';
-            card.style.animation = 'fadeInUp 0.3s ease';
+        if (scrollY > 10) {
+            navbar.classList.add('scrolled');
         } else {
-            card.style.display = 'none';
+            navbar.classList.remove('scrolled');
         }
+
+        lastScroll = scrollY;
     });
-}
 
-searchInput.addEventListener('input', filterMusic);
+    // ============================================
+    // MOBILE MENU
+    // ============================================
+    navToggle.addEventListener('click', function() {
+        navToggle.classList.toggle('active');
+        navMenu.classList.toggle('open');
+        document.body.style.overflow = navMenu.classList.contains('open') ? 'hidden' : '';
+    });
 
-searchBtn.addEventListener('click', () => {
-    filterMusic();
-    
-    // Scroll to music section if there's a query
-    if (searchInput.value.trim()) {
-        document.querySelector('.most-played').scrollIntoView({ 
-            behavior: 'smooth',
-            block: 'start'
-        });
+    // Close menu on nav link click
+    for (var i = 0; i < navLinks.length; i++) {
+        navLinks[i].addEventListener('click', closeMenu);
     }
-});
 
-searchInput.addEventListener('keypress', (e) => {
-    if (e.key === 'Enter') {
+    function closeMenu() {
+        navToggle.classList.remove('active');
+        navMenu.classList.remove('open');
+        document.body.style.overflow = '';
+    }
+
+    // ============================================
+    // SEARCH / FILTER
+    // ============================================
+    function filterMusic() {
+        var query = searchInput.value.toLowerCase().trim();
+        var visibleCount = 0;
+
+        for (var i = 0; i < musicCards.length; i++) {
+            var card = musicCards[i];
+            var title = (card.getAttribute('data-title') || '').toLowerCase();
+            var artist = (card.getAttribute('data-artist') || '').toLowerCase();
+
+            if (query === '' || title.indexOf(query) !== -1 || artist.indexOf(query) !== -1) {
+                card.style.display = '';
+                visibleCount++;
+            } else {
+                card.style.display = 'none';
+            }
+        }
+
+        // Show/hide "no results" message
+        if (visibleCount === 0 && query !== '') {
+            noResults.style.display = 'flex';
+        } else {
+            noResults.style.display = 'none';
+        }
+    }
+
+    // Filter on every keystroke
+    searchInput.addEventListener('input', filterMusic);
+
+    // Search button click
+    searchBtn.addEventListener('click', function() {
         filterMusic();
+        scrollToResults();
+    });
+
+    // Enter key
+    searchInput.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter') {
+            filterMusic();
+            scrollToResults();
+        }
+    });
+
+    function scrollToResults() {
         if (searchInput.value.trim()) {
-            document.querySelector('.most-played').scrollIntoView({ 
-                behavior: 'smooth',
-                block: 'start'
-            });
+            var section = document.querySelector('.most-played');
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
         }
     }
-});
 
-// ----------------------------------------
-// Active Nav Link on Scroll
-// ----------------------------------------
-const sections = document.querySelectorAll('section[id], footer[id]');
-const navLinks = document.querySelectorAll('.nav-link');
+    // ============================================
+    // ACTIVE NAV LINK ON SCROLL
+    // ============================================
+    var allSections = document.querySelectorAll('section[id], footer[id]');
 
-window.addEventListener('scroll', () => {
-    let current = '';
-    
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 100;
-        const sectionHeight = section.clientHeight;
-        
-        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-            current = section.getAttribute('id');
+    window.addEventListener('scroll', function() {
+        var scrollPos = window.scrollY || window.pageYOffset;
+        var current = '';
+
+        for (var k = 0; k < allSections.length; k++) {
+            var section = allSections[k];
+            var sectionTop = section.offsetTop - 120;
+            if (scrollPos >= sectionTop) {
+                current = section.getAttribute('id');
+            }
+        }
+
+        for (var l = 0; l < navLinks.length; l++) {
+            navLinks[l].classList.remove('active');
+            if (navLinks[l].getAttribute('href') === '#' + current) {
+                navLinks[l].classList.add('active');
+            }
         }
     });
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${current}`) {
-            link.classList.add('active');
+
+    // ============================================
+    // SCROLL ANIMATIONS (Intersection Observer)
+    // ============================================
+    if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function(entries) {
+            for (var m = 0; m < entries.length; m++) {
+                if (entries[m].isIntersecting) {
+                    entries[m].target.classList.add('animate-in');
+                    observer.unobserve(entries[m].target);
+                }
+            }
+        }, {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        });
+
+        var animElements = document.querySelectorAll('.music-card, .step-card');
+        for (var n = 0; n < animElements.length; n++) {
+            animElements[n].classList.add('animate-hidden');
+            observer.observe(animElements[n]);
         }
-    });
-});
+    }
 
-// ----------------------------------------
-// Intersection Observer for Animations
-// ----------------------------------------
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
+    // ============================================
+    // LOADED
+    // ============================================
+    console.log(
+        '%c Fantasy Music %c Carregado! ',
+        'background:#9b7aff;color:#fff;padding:4px 8px;border-radius:4px 0 0 4px;font-weight:bold;',
+        'background:#1a1a2e;color:#fff;padding:4px 8px;border-radius:0 4px 4px 0;'
+    );
 
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            entry.target.style.animation = 'fadeInUp 0.6s ease forwards';
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-// Observe music cards
-document.querySelectorAll('.music-card, .step-card').forEach((el, index) => {
-    el.style.opacity = '0';
-    el.style.animationDelay = `${index * 0.1}s`;
-    observer.observe(el);
-});
+})();
