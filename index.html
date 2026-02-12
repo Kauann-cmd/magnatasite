@@ -116,13 +116,11 @@
                     <h4 class="step-card-title">Encontre sua música</h4>
                     <p class="step-card-desc">Busque pelo nome ou cole um link do YouTube</p>
                 </div>
-
                 <div class="step-connector">
                     <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
                         <path d="M0 12H36M36 12L28 4M36 12L28 20" stroke="#9b7aff" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                 </div>
-
                 <div class="step-card">
                     <div class="step-number"><span>2</span></div>
                     <div class="step-icon-wrapper">
@@ -133,13 +131,11 @@
                     <h4 class="step-card-title">Teste agora</h4>
                     <p class="step-card-desc">Ouça a prévia e confirme que é a música certa</p>
                 </div>
-
                 <div class="step-connector">
                     <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
                         <path d="M0 12H36M36 12L28 4M36 12L28 20" stroke="#9b7aff" stroke-width="2" stroke-linecap="round"/>
                     </svg>
                 </div>
-
                 <div class="step-card">
                     <div class="step-number"><span>3</span></div>
                     <div class="step-icon-wrapper">
@@ -152,6 +148,18 @@
                     <p class="step-card-desc">Copie o link e use diretamente no seu servidor</p>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- RESULTADOS DA BUSCA -->
+    <section class="search-results" id="searchResults" style="display:none;">
+        <div class="search-results-container">
+            <div class="section-header">
+                <span class="section-badge">🔍 Resultados</span>
+                <h3 class="section-title">Resultados da Busca</h3>
+                <p class="section-subtitle" id="searchResultsInfo"></p>
+            </div>
+            <div class="music-list" id="searchResultsList"></div>
         </div>
     </section>
 
@@ -174,18 +182,22 @@
                 <p>Tente buscar com outro termo</p>
             </div>
 
+            <!-- Loading spinner -->
+            <div class="loading-spinner" id="loadingSpinner" style="display:none;">
+                <div class="spinner"></div>
+                <p>Buscando músicas...</p>
+            </div>
+
             <div class="music-list" id="musicList">
 
                 <!-- Card 1 -->
                 <div class="music-card" data-id="rB7VeR2aBOQ" data-title="Never Gonna Give You Up" data-artist="Rick Astley">
                     <div class="music-card-left">
                         <div class="music-rank">#1</div>
-                        <div class="music-cover">
+                        <div class="music-cover" data-id="rB7VeR2aBOQ">
                             <img src="https://img.youtube.com/vi/rB7VeR2aBOQ/mqdefault.jpg" alt="Never Gonna Give You Up">
                             <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                                    <polygon points="5 3 19 12 5 21 5 3"/>
-                                </svg>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                             </div>
                         </div>
                         <div class="music-info">
@@ -194,29 +206,16 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <button class="action-btn download-btn" data-action="open" data-id="rB7VeR2aBOQ" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
+                        <button class="action-btn" data-action="open" data-id="rB7VeR2aBOQ" title="Abrir música">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                             <span class="btn-tooltip">Abrir música</span>
                         </button>
-                        <button class="action-btn bass-btn" data-action="bass" data-id="rB7VeR2aBOQ" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 20h.01"/>
-                                <path d="M7 20v-4"/>
-                                <path d="M12 20v-8"/>
-                                <path d="M17 20V8"/>
-                                <path d="M22 20V4"/>
-                            </svg>
+                        <button class="action-btn" data-action="bass" data-id="rB7VeR2aBOQ" title="Copiar link com grave">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 20V4"/></svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" data-action="copy" data-id="rB7VeR2aBOQ" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="9" y="9" width="13" height="13" rx="2"/>
-                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
-                            </svg>
+                        <button class="action-btn" data-action="copy" data-id="rB7VeR2aBOQ" title="Copiar link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
                             <span class="btn-tooltip">Copiar link</span>
                         </button>
                     </div>
@@ -226,12 +225,10 @@
                 <div class="music-card" data-id="kJQP7kiw5Fk" data-title="Despacito" data-artist="Luis Fonsi ft. Daddy Yankee">
                     <div class="music-card-left">
                         <div class="music-rank">#2</div>
-                        <div class="music-cover">
+                        <div class="music-cover" data-id="kJQP7kiw5Fk">
                             <img src="https://img.youtube.com/vi/kJQP7kiw5Fk/mqdefault.jpg" alt="Despacito">
                             <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                                    <polygon points="5 3 19 12 5 21 5 3"/>
-                                </svg>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                             </div>
                         </div>
                         <div class="music-info">
@@ -240,29 +237,16 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <button class="action-btn download-btn" data-action="open" data-id="kJQP7kiw5Fk" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
+                        <button class="action-btn" data-action="open" data-id="kJQP7kiw5Fk" title="Abrir música">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                             <span class="btn-tooltip">Abrir música</span>
                         </button>
-                        <button class="action-btn bass-btn" data-action="bass" data-id="kJQP7kiw5Fk" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 20h.01"/>
-                                <path d="M7 20v-4"/>
-                                <path d="M12 20v-8"/>
-                                <path d="M17 20V8"/>
-                                <path d="M22 20V4"/>
-                            </svg>
+                        <button class="action-btn" data-action="bass" data-id="kJQP7kiw5Fk" title="Copiar link com grave">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 20V4"/></svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" data-action="copy" data-id="kJQP7kiw5Fk" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="9" y="9" width="13" height="13" rx="2"/>
-                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
-                            </svg>
+                        <button class="action-btn" data-action="copy" data-id="kJQP7kiw5Fk" title="Copiar link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
                             <span class="btn-tooltip">Copiar link</span>
                         </button>
                     </div>
@@ -272,12 +256,10 @@
                 <div class="music-card" data-id="RgKAFK5djSk" data-title="See You Again" data-artist="Wiz Khalifa ft. Charlie Puth">
                     <div class="music-card-left">
                         <div class="music-rank">#3</div>
-                        <div class="music-cover">
+                        <div class="music-cover" data-id="RgKAFK5djSk">
                             <img src="https://img.youtube.com/vi/RgKAFK5djSk/mqdefault.jpg" alt="See You Again">
                             <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                                    <polygon points="5 3 19 12 5 21 5 3"/>
-                                </svg>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                             </div>
                         </div>
                         <div class="music-info">
@@ -286,29 +268,16 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <button class="action-btn download-btn" data-action="open" data-id="RgKAFK5djSk" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
+                        <button class="action-btn" data-action="open" data-id="RgKAFK5djSk" title="Abrir música">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                             <span class="btn-tooltip">Abrir música</span>
                         </button>
-                        <button class="action-btn bass-btn" data-action="bass" data-id="RgKAFK5djSk" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 20h.01"/>
-                                <path d="M7 20v-4"/>
-                                <path d="M12 20v-8"/>
-                                <path d="M17 20V8"/>
-                                <path d="M22 20V4"/>
-                            </svg>
+                        <button class="action-btn" data-action="bass" data-id="RgKAFK5djSk" title="Copiar link com grave">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 20V4"/></svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" data-action="copy" data-id="RgKAFK5djSk" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="9" y="9" width="13" height="13" rx="2"/>
-                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
-                            </svg>
+                        <button class="action-btn" data-action="copy" data-id="RgKAFK5djSk" title="Copiar link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
                             <span class="btn-tooltip">Copiar link</span>
                         </button>
                     </div>
@@ -318,12 +287,10 @@
                 <div class="music-card" data-id="JGwWNGJdvx8" data-title="Shape of You" data-artist="Ed Sheeran">
                     <div class="music-card-left">
                         <div class="music-rank">#4</div>
-                        <div class="music-cover">
+                        <div class="music-cover" data-id="JGwWNGJdvx8">
                             <img src="https://img.youtube.com/vi/JGwWNGJdvx8/mqdefault.jpg" alt="Shape of You">
                             <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                                    <polygon points="5 3 19 12 5 21 5 3"/>
-                                </svg>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                             </div>
                         </div>
                         <div class="music-info">
@@ -332,29 +299,16 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <button class="action-btn download-btn" data-action="open" data-id="JGwWNGJdvx8" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
+                        <button class="action-btn" data-action="open" data-id="JGwWNGJdvx8" title="Abrir música">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                             <span class="btn-tooltip">Abrir música</span>
                         </button>
-                        <button class="action-btn bass-btn" data-action="bass" data-id="JGwWNGJdvx8" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 20h.01"/>
-                                <path d="M7 20v-4"/>
-                                <path d="M12 20v-8"/>
-                                <path d="M17 20V8"/>
-                                <path d="M22 20V4"/>
-                            </svg>
+                        <button class="action-btn" data-action="bass" data-id="JGwWNGJdvx8" title="Copiar link com grave">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 20V4"/></svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" data-action="copy" data-id="JGwWNGJdvx8" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="9" y="9" width="13" height="13" rx="2"/>
-                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
-                            </svg>
+                        <button class="action-btn" data-action="copy" data-id="JGwWNGJdvx8" title="Copiar link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
                             <span class="btn-tooltip">Copiar link</span>
                         </button>
                     </div>
@@ -364,12 +318,10 @@
                 <div class="music-card" data-id="OPf0YbXqDm0" data-title="Uptown Funk" data-artist="Mark Ronson ft. Bruno Mars">
                     <div class="music-card-left">
                         <div class="music-rank">#5</div>
-                        <div class="music-cover">
+                        <div class="music-cover" data-id="OPf0YbXqDm0">
                             <img src="https://img.youtube.com/vi/OPf0YbXqDm0/mqdefault.jpg" alt="Uptown Funk">
                             <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                                    <polygon points="5 3 19 12 5 21 5 3"/>
-                                </svg>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                             </div>
                         </div>
                         <div class="music-info">
@@ -378,29 +330,16 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <button class="action-btn download-btn" data-action="open" data-id="OPf0YbXqDm0" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
+                        <button class="action-btn" data-action="open" data-id="OPf0YbXqDm0" title="Abrir música">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                             <span class="btn-tooltip">Abrir música</span>
                         </button>
-                        <button class="action-btn bass-btn" data-action="bass" data-id="OPf0YbXqDm0" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 20h.01"/>
-                                <path d="M7 20v-4"/>
-                                <path d="M12 20v-8"/>
-                                <path d="M17 20V8"/>
-                                <path d="M22 20V4"/>
-                            </svg>
+                        <button class="action-btn" data-action="bass" data-id="OPf0YbXqDm0" title="Copiar link com grave">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 20V4"/></svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" data-action="copy" data-id="OPf0YbXqDm0" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="9" y="9" width="13" height="13" rx="2"/>
-                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
-                            </svg>
+                        <button class="action-btn" data-action="copy" data-id="OPf0YbXqDm0" title="Copiar link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
                             <span class="btn-tooltip">Copiar link</span>
                         </button>
                     </div>
@@ -410,12 +349,10 @@
                 <div class="music-card" data-id="fJ9rUzIMcZQ" data-title="Bohemian Rhapsody" data-artist="Queen">
                     <div class="music-card-left">
                         <div class="music-rank">#6</div>
-                        <div class="music-cover">
+                        <div class="music-cover" data-id="fJ9rUzIMcZQ">
                             <img src="https://img.youtube.com/vi/fJ9rUzIMcZQ/mqdefault.jpg" alt="Bohemian Rhapsody">
                             <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                                    <polygon points="5 3 19 12 5 21 5 3"/>
-                                </svg>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                             </div>
                         </div>
                         <div class="music-info">
@@ -424,29 +361,16 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <button class="action-btn download-btn" data-action="open" data-id="fJ9rUzIMcZQ" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
+                        <button class="action-btn" data-action="open" data-id="fJ9rUzIMcZQ" title="Abrir música">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                             <span class="btn-tooltip">Abrir música</span>
                         </button>
-                        <button class="action-btn bass-btn" data-action="bass" data-id="fJ9rUzIMcZQ" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 20h.01"/>
-                                <path d="M7 20v-4"/>
-                                <path d="M12 20v-8"/>
-                                <path d="M17 20V8"/>
-                                <path d="M22 20V4"/>
-                            </svg>
+                        <button class="action-btn" data-action="bass" data-id="fJ9rUzIMcZQ" title="Copiar link com grave">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 20V4"/></svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" data-action="copy" data-id="fJ9rUzIMcZQ" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="9" y="9" width="13" height="13" rx="2"/>
-                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
-                            </svg>
+                        <button class="action-btn" data-action="copy" data-id="fJ9rUzIMcZQ" title="Copiar link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
                             <span class="btn-tooltip">Copiar link</span>
                         </button>
                     </div>
@@ -456,12 +380,10 @@
                 <div class="music-card" data-id="hTWKbfoikeg" data-title="Smells Like Teen Spirit" data-artist="Nirvana">
                     <div class="music-card-left">
                         <div class="music-rank">#7</div>
-                        <div class="music-cover">
+                        <div class="music-cover" data-id="hTWKbfoikeg">
                             <img src="https://img.youtube.com/vi/hTWKbfoikeg/mqdefault.jpg" alt="Smells Like Teen Spirit">
                             <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                                    <polygon points="5 3 19 12 5 21 5 3"/>
-                                </svg>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                             </div>
                         </div>
                         <div class="music-info">
@@ -470,29 +392,16 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <button class="action-btn download-btn" data-action="open" data-id="hTWKbfoikeg" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
+                        <button class="action-btn" data-action="open" data-id="hTWKbfoikeg" title="Abrir música">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                             <span class="btn-tooltip">Abrir música</span>
                         </button>
-                        <button class="action-btn bass-btn" data-action="bass" data-id="hTWKbfoikeg" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 20h.01"/>
-                                <path d="M7 20v-4"/>
-                                <path d="M12 20v-8"/>
-                                <path d="M17 20V8"/>
-                                <path d="M22 20V4"/>
-                            </svg>
+                        <button class="action-btn" data-action="bass" data-id="hTWKbfoikeg" title="Copiar link com grave">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 20V4"/></svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" data-action="copy" data-id="hTWKbfoikeg" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="9" y="9" width="13" height="13" rx="2"/>
-                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
-                            </svg>
+                        <button class="action-btn" data-action="copy" data-id="hTWKbfoikeg" title="Copiar link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
                             <span class="btn-tooltip">Copiar link</span>
                         </button>
                     </div>
@@ -502,12 +411,10 @@
                 <div class="music-card" data-id="60ItHLz5WEA" data-title="Faded" data-artist="Alan Walker">
                     <div class="music-card-left">
                         <div class="music-rank">#8</div>
-                        <div class="music-cover">
+                        <div class="music-cover" data-id="60ItHLz5WEA">
                             <img src="https://img.youtube.com/vi/60ItHLz5WEA/mqdefault.jpg" alt="Faded">
                             <div class="cover-overlay">
-                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
-                                    <polygon points="5 3 19 12 5 21 5 3"/>
-                                </svg>
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"/></svg>
                             </div>
                         </div>
                         <div class="music-info">
@@ -516,29 +423,16 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <button class="action-btn download-btn" data-action="open" data-id="60ItHLz5WEA" title="Abrir música">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
-                                <polyline points="15 3 21 3 21 9"/>
-                                <line x1="10" y1="14" x2="21" y2="3"/>
-                            </svg>
+                        <button class="action-btn" data-action="open" data-id="60ItHLz5WEA" title="Abrir música">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
                             <span class="btn-tooltip">Abrir música</span>
                         </button>
-                        <button class="action-btn bass-btn" data-action="bass" data-id="60ItHLz5WEA" title="Copiar link com grave">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M2 20h.01"/>
-                                <path d="M7 20v-4"/>
-                                <path d="M12 20v-8"/>
-                                <path d="M17 20V8"/>
-                                <path d="M22 20V4"/>
-                            </svg>
+                        <button class="action-btn" data-action="bass" data-id="60ItHLz5WEA" title="Copiar link com grave">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 20h.01"/><path d="M7 20v-4"/><path d="M12 20v-8"/><path d="M17 20V8"/><path d="M22 20V4"/></svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" data-action="copy" data-id="60ItHLz5WEA" title="Copiar link">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <rect x="9" y="9" width="13" height="13" rx="2"/>
-                                <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
-                            </svg>
+                        <button class="action-btn" data-action="copy" data-id="60ItHLz5WEA" title="Copiar link">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/></svg>
                             <span class="btn-tooltip">Copiar link</span>
                         </button>
                     </div>
@@ -596,7 +490,7 @@
     </footer>
 
     <!-- TOAST -->
-    <div class="toast-container" id="toastContainer">
+    <div class="toast-container">
         <div class="toast" id="toast">
             <div class="toast-icon">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="2">
