@@ -8,6 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 40 40'><circle cx='20' cy='20' r='18' stroke='%239b7aff' stroke-width='3' fill='none'/><path d='M16 12V28L30 20L16 12Z' fill='%239b7aff'/></svg>" type="image/svg+xml">
 </head>
 <body>
 
@@ -15,7 +16,7 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#" class="nav-logo">
-                <svg class="logo-icon" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <svg class="logo-icon" viewBox="0 0 40 40" fill="none">
                     <circle cx="20" cy="20" r="18" stroke="#9b7aff" stroke-width="3" fill="none"/>
                     <path d="M16 12V28L30 20L16 12Z" fill="#9b7aff"/>
                 </svg>
@@ -49,13 +50,11 @@
                 <span>Plataforma de Música para MTA:SA</span>
             </div>
 
-            <h1 class="hero-title">
-                Ouça sua música preferida com
-            </h1>
+            <h1 class="hero-title">Ouça sua música preferida com</h1>
             <h2 class="hero-brand">Fantasy Music</h2>
 
             <p class="hero-description">
-                Integre músicas ao MTA:SA com nossa API rápida, estável e de alta qualidade.<br>
+                Integre músicas ao MTA:SA com nossa API rápida, estável e de alta qualidade.
                 Transforme a experiência dos jogadores com o som ideal para cada momento.
             </p>
 
@@ -65,12 +64,7 @@
                         <circle cx="11" cy="11" r="8"/>
                         <path d="M21 21l-4.35-4.35"/>
                     </svg>
-                    <input 
-                        type="text" 
-                        class="search-input" 
-                        id="searchInput"
-                        placeholder="Busque pelo nome da música ou cole um link aqui..."
-                    >
+                    <input type="text" class="search-input" id="searchInput" placeholder="Busque pelo nome da música ou cole um link aqui...">
                     <button class="search-btn" id="searchBtn">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
                             <circle cx="11" cy="11" r="8"/>
@@ -106,15 +100,13 @@
     </section>
 
     <!-- PASSO A PASSO -->
-    <section class="steps-section">
+    <section class="steps-section" id="documentacao">
         <div class="steps-container">
             <h3 class="steps-title">Como funciona?</h3>
             <p class="steps-subtitle">Em apenas 3 passos simples</p>
             <div class="steps-wrapper">
                 <div class="step-card">
-                    <div class="step-number">
-                        <span>1</span>
-                    </div>
+                    <div class="step-number"><span>1</span></div>
                     <div class="step-icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="2">
                             <circle cx="11" cy="11" r="8"/>
@@ -132,9 +124,7 @@
                 </div>
 
                 <div class="step-card">
-                    <div class="step-number">
-                        <span>2</span>
-                    </div>
+                    <div class="step-number"><span>2</span></div>
                     <div class="step-icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="2">
                             <polygon points="5 3 19 12 5 21 5 3"/>
@@ -151,9 +141,7 @@
                 </div>
 
                 <div class="step-card">
-                    <div class="step-number">
-                        <span>3</span>
-                    </div>
+                    <div class="step-number"><span>3</span></div>
                     <div class="step-icon-wrapper">
                         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="2">
                             <rect x="9" y="9" width="13" height="13" rx="2"/>
@@ -176,14 +164,24 @@
                 <p class="section-subtitle">As músicas mais populares da plataforma</p>
             </div>
 
+            <div class="no-results" id="noResults">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="1.5">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                    <path d="M8 11h6"/>
+                </svg>
+                <h4>Nenhuma música encontrada</h4>
+                <p>Tente buscar com outro termo</p>
+            </div>
+
             <div class="music-list" id="musicList">
 
                 <!-- Card 1 -->
-                <div class="music-card" data-id="dQw4w9WgXcQ">
+                <div class="music-card" data-id="rB7VeR2aBOQ" data-title="Never Gonna Give You Up" data-artist="Rick Astley">
                     <div class="music-card-left">
                         <div class="music-rank">#1</div>
                         <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/dQw4w9WgXcQ/mqdefault.jpg" alt="Capa da música" loading="lazy">
+                            <img src="https://img.youtube.com/vi/rB7VeR2aBOQ/mqdefault.jpg" alt="Never Gonna Give You Up">
                             <div class="cover-overlay">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
                                     <polygon points="5 3 19 12 5 21 5 3"/>
@@ -196,16 +194,15 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <a href="https://api-music.fantasyresources.net/download?id=dQw4w9WgXcQ" 
-                           class="action-btn download-btn" title="Download" target="_blank">
+                        <button class="action-btn download-btn" data-action="open" data-id="rB7VeR2aBOQ" title="Abrir música">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-                                <polyline points="7 10 12 15 17 10"/>
-                                <line x1="12" y1="15" x2="12" y2="3"/>
+                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
                             </svg>
-                            <span class="btn-tooltip">Download</span>
-                        </a>
-                        <button class="action-btn bass-btn" onclick="copyBassLink('dQw4w9WgXcQ')" title="Copiar link com grave">
+                            <span class="btn-tooltip">Abrir música</span>
+                        </button>
+                        <button class="action-btn bass-btn" data-action="bass" data-id="rB7VeR2aBOQ" title="Copiar link com grave">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M2 20h.01"/>
                                 <path d="M7 20v-4"/>
@@ -215,7 +212,7 @@
                             </svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" onclick="copyNormalLink('dQw4w9WgXcQ')" title="Copiar link">
+                        <button class="action-btn copy-btn" data-action="copy" data-id="rB7VeR2aBOQ" title="Copiar link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2"/>
                                 <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -226,11 +223,11 @@
                 </div>
 
                 <!-- Card 2 -->
-                <div class="music-card" data-id="kJQP7kiw5Fk">
+                <div class="music-card" data-id="kJQP7kiw5Fk" data-title="Despacito" data-artist="Luis Fonsi ft. Daddy Yankee">
                     <div class="music-card-left">
                         <div class="music-rank">#2</div>
                         <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/kJQP7kiw5Fk/mqdefault.jpg" alt="Capa da música" loading="lazy">
+                            <img src="https://img.youtube.com/vi/kJQP7kiw5Fk/mqdefault.jpg" alt="Despacito">
                             <div class="cover-overlay">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
                                     <polygon points="5 3 19 12 5 21 5 3"/>
@@ -243,16 +240,15 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <a href="https://api-music.fantasyresources.net/download?id=kJQP7kiw5Fk" 
-                           class="action-btn download-btn" title="Download" target="_blank">
+                        <button class="action-btn download-btn" data-action="open" data-id="kJQP7kiw5Fk" title="Abrir música">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-                                <polyline points="7 10 12 15 17 10"/>
-                                <line x1="12" y1="15" x2="12" y2="3"/>
+                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
                             </svg>
-                            <span class="btn-tooltip">Download</span>
-                        </a>
-                        <button class="action-btn bass-btn" onclick="copyBassLink('kJQP7kiw5Fk')" title="Copiar link com grave">
+                            <span class="btn-tooltip">Abrir música</span>
+                        </button>
+                        <button class="action-btn bass-btn" data-action="bass" data-id="kJQP7kiw5Fk" title="Copiar link com grave">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M2 20h.01"/>
                                 <path d="M7 20v-4"/>
@@ -262,7 +258,7 @@
                             </svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" onclick="copyNormalLink('kJQP7kiw5Fk')" title="Copiar link">
+                        <button class="action-btn copy-btn" data-action="copy" data-id="kJQP7kiw5Fk" title="Copiar link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2"/>
                                 <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -273,11 +269,11 @@
                 </div>
 
                 <!-- Card 3 -->
-                <div class="music-card" data-id="RgKAFK5djSk">
+                <div class="music-card" data-id="RgKAFK5djSk" data-title="See You Again" data-artist="Wiz Khalifa ft. Charlie Puth">
                     <div class="music-card-left">
                         <div class="music-rank">#3</div>
                         <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/RgKAFK5djSk/mqdefault.jpg" alt="Capa da música" loading="lazy">
+                            <img src="https://img.youtube.com/vi/RgKAFK5djSk/mqdefault.jpg" alt="See You Again">
                             <div class="cover-overlay">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
                                     <polygon points="5 3 19 12 5 21 5 3"/>
@@ -290,16 +286,15 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <a href="https://api-music.fantasyresources.net/download?id=RgKAFK5djSk" 
-                           class="action-btn download-btn" title="Download" target="_blank">
+                        <button class="action-btn download-btn" data-action="open" data-id="RgKAFK5djSk" title="Abrir música">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-                                <polyline points="7 10 12 15 17 10"/>
-                                <line x1="12" y1="15" x2="12" y2="3"/>
+                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
                             </svg>
-                            <span class="btn-tooltip">Download</span>
-                        </a>
-                        <button class="action-btn bass-btn" onclick="copyBassLink('RgKAFK5djSk')" title="Copiar link com grave">
+                            <span class="btn-tooltip">Abrir música</span>
+                        </button>
+                        <button class="action-btn bass-btn" data-action="bass" data-id="RgKAFK5djSk" title="Copiar link com grave">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M2 20h.01"/>
                                 <path d="M7 20v-4"/>
@@ -309,7 +304,7 @@
                             </svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" onclick="copyNormalLink('RgKAFK5djSk')" title="Copiar link">
+                        <button class="action-btn copy-btn" data-action="copy" data-id="RgKAFK5djSk" title="Copiar link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2"/>
                                 <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -320,11 +315,11 @@
                 </div>
 
                 <!-- Card 4 -->
-                <div class="music-card" data-id="JGwWNGJdvx8">
+                <div class="music-card" data-id="JGwWNGJdvx8" data-title="Shape of You" data-artist="Ed Sheeran">
                     <div class="music-card-left">
                         <div class="music-rank">#4</div>
                         <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/JGwWNGJdvx8/mqdefault.jpg" alt="Capa da música" loading="lazy">
+                            <img src="https://img.youtube.com/vi/JGwWNGJdvx8/mqdefault.jpg" alt="Shape of You">
                             <div class="cover-overlay">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
                                     <polygon points="5 3 19 12 5 21 5 3"/>
@@ -337,16 +332,15 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <a href="https://api-music.fantasyresources.net/download?id=JGwWNGJdvx8" 
-                           class="action-btn download-btn" title="Download" target="_blank">
+                        <button class="action-btn download-btn" data-action="open" data-id="JGwWNGJdvx8" title="Abrir música">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-                                <polyline points="7 10 12 15 17 10"/>
-                                <line x1="12" y1="15" x2="12" y2="3"/>
+                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
                             </svg>
-                            <span class="btn-tooltip">Download</span>
-                        </a>
-                        <button class="action-btn bass-btn" onclick="copyBassLink('JGwWNGJdvx8')" title="Copiar link com grave">
+                            <span class="btn-tooltip">Abrir música</span>
+                        </button>
+                        <button class="action-btn bass-btn" data-action="bass" data-id="JGwWNGJdvx8" title="Copiar link com grave">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M2 20h.01"/>
                                 <path d="M7 20v-4"/>
@@ -356,7 +350,7 @@
                             </svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" onclick="copyNormalLink('JGwWNGJdvx8')" title="Copiar link">
+                        <button class="action-btn copy-btn" data-action="copy" data-id="JGwWNGJdvx8" title="Copiar link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2"/>
                                 <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -367,11 +361,11 @@
                 </div>
 
                 <!-- Card 5 -->
-                <div class="music-card" data-id="OPf0YbXqDm0">
+                <div class="music-card" data-id="OPf0YbXqDm0" data-title="Uptown Funk" data-artist="Mark Ronson ft. Bruno Mars">
                     <div class="music-card-left">
                         <div class="music-rank">#5</div>
                         <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/OPf0YbXqDm0/mqdefault.jpg" alt="Capa da música" loading="lazy">
+                            <img src="https://img.youtube.com/vi/OPf0YbXqDm0/mqdefault.jpg" alt="Uptown Funk">
                             <div class="cover-overlay">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
                                     <polygon points="5 3 19 12 5 21 5 3"/>
@@ -384,16 +378,15 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <a href="https://api-music.fantasyresources.net/download?id=OPf0YbXqDm0" 
-                           class="action-btn download-btn" title="Download" target="_blank">
+                        <button class="action-btn download-btn" data-action="open" data-id="OPf0YbXqDm0" title="Abrir música">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-                                <polyline points="7 10 12 15 17 10"/>
-                                <line x1="12" y1="15" x2="12" y2="3"/>
+                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
                             </svg>
-                            <span class="btn-tooltip">Download</span>
-                        </a>
-                        <button class="action-btn bass-btn" onclick="copyBassLink('OPf0YbXqDm0')" title="Copiar link com grave">
+                            <span class="btn-tooltip">Abrir música</span>
+                        </button>
+                        <button class="action-btn bass-btn" data-action="bass" data-id="OPf0YbXqDm0" title="Copiar link com grave">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M2 20h.01"/>
                                 <path d="M7 20v-4"/>
@@ -403,7 +396,7 @@
                             </svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" onclick="copyNormalLink('OPf0YbXqDm0')" title="Copiar link">
+                        <button class="action-btn copy-btn" data-action="copy" data-id="OPf0YbXqDm0" title="Copiar link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2"/>
                                 <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -414,11 +407,11 @@
                 </div>
 
                 <!-- Card 6 -->
-                <div class="music-card" data-id="fJ9rUzIMcZQ">
+                <div class="music-card" data-id="fJ9rUzIMcZQ" data-title="Bohemian Rhapsody" data-artist="Queen">
                     <div class="music-card-left">
                         <div class="music-rank">#6</div>
                         <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/fJ9rUzIMcZQ/mqdefault.jpg" alt="Capa da música" loading="lazy">
+                            <img src="https://img.youtube.com/vi/fJ9rUzIMcZQ/mqdefault.jpg" alt="Bohemian Rhapsody">
                             <div class="cover-overlay">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
                                     <polygon points="5 3 19 12 5 21 5 3"/>
@@ -431,16 +424,15 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <a href="https://api-music.fantasyresources.net/download?id=fJ9rUzIMcZQ" 
-                           class="action-btn download-btn" title="Download" target="_blank">
+                        <button class="action-btn download-btn" data-action="open" data-id="fJ9rUzIMcZQ" title="Abrir música">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-                                <polyline points="7 10 12 15 17 10"/>
-                                <line x1="12" y1="15" x2="12" y2="3"/>
+                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
                             </svg>
-                            <span class="btn-tooltip">Download</span>
-                        </a>
-                        <button class="action-btn bass-btn" onclick="copyBassLink('fJ9rUzIMcZQ')" title="Copiar link com grave">
+                            <span class="btn-tooltip">Abrir música</span>
+                        </button>
+                        <button class="action-btn bass-btn" data-action="bass" data-id="fJ9rUzIMcZQ" title="Copiar link com grave">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M2 20h.01"/>
                                 <path d="M7 20v-4"/>
@@ -450,7 +442,7 @@
                             </svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" onclick="copyNormalLink('fJ9rUzIMcZQ')" title="Copiar link">
+                        <button class="action-btn copy-btn" data-action="copy" data-id="fJ9rUzIMcZQ" title="Copiar link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2"/>
                                 <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -461,11 +453,11 @@
                 </div>
 
                 <!-- Card 7 -->
-                <div class="music-card" data-id="hTWKbfoikeg">
+                <div class="music-card" data-id="hTWKbfoikeg" data-title="Smells Like Teen Spirit" data-artist="Nirvana">
                     <div class="music-card-left">
                         <div class="music-rank">#7</div>
                         <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/hTWKbfoikeg/mqdefault.jpg" alt="Capa da música" loading="lazy">
+                            <img src="https://img.youtube.com/vi/hTWKbfoikeg/mqdefault.jpg" alt="Smells Like Teen Spirit">
                             <div class="cover-overlay">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
                                     <polygon points="5 3 19 12 5 21 5 3"/>
@@ -478,16 +470,15 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <a href="https://api-music.fantasyresources.net/download?id=hTWKbfoikeg" 
-                           class="action-btn download-btn" title="Download" target="_blank">
+                        <button class="action-btn download-btn" data-action="open" data-id="hTWKbfoikeg" title="Abrir música">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-                                <polyline points="7 10 12 15 17 10"/>
-                                <line x1="12" y1="15" x2="12" y2="3"/>
+                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
                             </svg>
-                            <span class="btn-tooltip">Download</span>
-                        </a>
-                        <button class="action-btn bass-btn" onclick="copyBassLink('hTWKbfoikeg')" title="Copiar link com grave">
+                            <span class="btn-tooltip">Abrir música</span>
+                        </button>
+                        <button class="action-btn bass-btn" data-action="bass" data-id="hTWKbfoikeg" title="Copiar link com grave">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M2 20h.01"/>
                                 <path d="M7 20v-4"/>
@@ -497,7 +488,7 @@
                             </svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" onclick="copyNormalLink('hTWKbfoikeg')" title="Copiar link">
+                        <button class="action-btn copy-btn" data-action="copy" data-id="hTWKbfoikeg" title="Copiar link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2"/>
                                 <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -508,11 +499,11 @@
                 </div>
 
                 <!-- Card 8 -->
-                <div class="music-card" data-id="60ItHLz5WEA">
+                <div class="music-card" data-id="60ItHLz5WEA" data-title="Faded" data-artist="Alan Walker">
                     <div class="music-card-left">
                         <div class="music-rank">#8</div>
                         <div class="music-cover">
-                            <img src="https://img.youtube.com/vi/60ItHLz5WEA/mqdefault.jpg" alt="Capa da música" loading="lazy">
+                            <img src="https://img.youtube.com/vi/60ItHLz5WEA/mqdefault.jpg" alt="Faded">
                             <div class="cover-overlay">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="white">
                                     <polygon points="5 3 19 12 5 21 5 3"/>
@@ -520,21 +511,20 @@
                             </div>
                         </div>
                         <div class="music-info">
-                            <h4 class="music-title">Alan Walker - Faded</h4>
+                            <h4 class="music-title">Faded</h4>
                             <p class="music-artist">Alan Walker</p>
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <a href="https://api-music.fantasyresources.net/download?id=60ItHLz5WEA" 
-                           class="action-btn download-btn" title="Download" target="_blank">
+                        <button class="action-btn download-btn" data-action="open" data-id="60ItHLz5WEA" title="Abrir música">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/>
-                                <polyline points="7 10 12 15 17 10"/>
-                                <line x1="12" y1="15" x2="12" y2="3"/>
+                                <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/>
+                                <polyline points="15 3 21 3 21 9"/>
+                                <line x1="10" y1="14" x2="21" y2="3"/>
                             </svg>
-                            <span class="btn-tooltip">Download</span>
-                        </a>
-                        <button class="action-btn bass-btn" onclick="copyBassLink('60ItHLz5WEA')" title="Copiar link com grave">
+                            <span class="btn-tooltip">Abrir música</span>
+                        </button>
+                        <button class="action-btn bass-btn" data-action="bass" data-id="60ItHLz5WEA" title="Copiar link com grave">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M2 20h.01"/>
                                 <path d="M7 20v-4"/>
@@ -544,7 +534,7 @@
                             </svg>
                             <span class="btn-tooltip">Link com grave</span>
                         </button>
-                        <button class="action-btn copy-btn" onclick="copyNormalLink('60ItHLz5WEA')" title="Copiar link">
+                        <button class="action-btn copy-btn" data-action="copy" data-id="60ItHLz5WEA" title="Copiar link">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="9" y="9" width="13" height="13" rx="2"/>
                                 <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"/>
@@ -616,7 +606,7 @@
                 </svg>
             </div>
             <span class="toast-message" id="toastMessage">Link da música copiado!</span>
-            <button class="toast-close" onclick="hideToast()">
+            <button class="toast-close" id="toastClose">
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#999" stroke-width="2">
                     <path d="M18 6L6 18M6 6l12 12"/>
                 </svg>
@@ -624,6 +614,6 @@
         </div>
     </div>
 
-    <script src="script.js"></script>
+    <script src="play.js"></script>
 </body>
 </html>
