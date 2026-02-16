@@ -1,0 +1,4 @@
+User-agent 
+Allow 
+
+Sitemap httpsmagnatamusicas.vercel.appsitemap.xml
