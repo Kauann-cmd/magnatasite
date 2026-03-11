@@ -48,7 +48,7 @@ img{display:block;max-width:100%}
 /* ===== AD LATERAL DIREITA FIXA ===== */
 .ad-right-fixed {
     position: fixed;
-    top: 70px;      /* começa abaixo da navbar; ajuste se precisar */
+    top: 68px;      /* começa abaixo da navbar; ajuste se precisar */
     right: 0;       /* encostado na borda direita */
     width: 160px;   /* largura do banner 160x600 */
     z-index: 1000;
