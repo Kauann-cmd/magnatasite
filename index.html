@@ -459,7 +459,7 @@
            SCROLL ANIMATIONS
            ========================================= */
         if ('IntersectionObserver' in window) {
-            const obs = new IntersectionObserver((entries) => {
+            const obs = new IntersectionObserver((entries) => { 
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('animate-in');
