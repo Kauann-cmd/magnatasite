@@ -137,19 +137,6 @@
         </div>
     </section>
 
-    <div class="ad-right-fixed">
-        <script>
-            atOptions = {
-                'key' : 'fb42f5f807415d2e4c578927dc24f3c4',
-                'format' : 'iframe',
-                'height' : 600,
-                'width' : 140,
-                'params' : {}
-            };
-        </script>
-        <script src="https://www.highperformanceformat.com/fb42f5f807415d2e4c578927dc24f3c4/invoke.js"></script>
-    </div>
-
     <section class="results-section" id="resultados">
         <div class="results-container">
             <div class="section-header">
@@ -459,7 +446,7 @@
            SCROLL ANIMATIONS
            ========================================= */
         if ('IntersectionObserver' in window) {
-            const obs = new IntersectionObserver((entries) => { 
+            const obs = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
                         entry.target.classList.add('animate-in');
