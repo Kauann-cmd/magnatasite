@@ -252,6 +252,18 @@ input[type="range"]::-moz-range-track{height:5px;border-radius:3px;background:va
 ::selection{background:var(--purple);color:#fff}
 
 /* ===========================================
+   NOTIFICATION
+   =========================================== */
+.notification{position:fixed;bottom:20px;right:20px;background:var(--white);border-radius:var(--radius-md);box-shadow:var(--shadow-xl);min-width:260px;max-width:320px;overflow:hidden;opacity:0;pointer-events:none;transform:translateY(16px);transition:opacity .3s ease,transform .3s ease;z-index:2000}
+.notification.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+.notif-inner{display:flex;align-items:center;gap:12px;padding:14px 18px 12px}
+.notif-icon{width:36px;height:36px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.notif-msg{font-size:.88rem;font-weight:600;color:var(--black);line-height:1.4}
+.notif-bar{height:3px;background:linear-gradient(90deg,var(--purple),var(--purple-dark));width:100%;transform-origin:left}
+.notification.show .notif-bar{animation:notifProgress 4s linear forwards}
+@keyframes notifProgress{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+
+/* ===========================================
    RESPONSIVO TABLET
    =========================================== */
 @media(max-width:900px){
@@ -279,4 +291,6 @@ input[type="range"]::-moz-range-track{height:5px;border-radius:3px;background:va
   .intro-btn-card{min-width:100%}
   .player-row{flex-direction:column}
   .waveform-wrap{width:100%}
+  .notification{bottom:16px;left:16px;right:16px;max-width:none;transform:translateY(16px)}
+  .notification.show{transform:translateY(0)}
 }
