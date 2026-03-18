@@ -98,8 +98,14 @@ img{display:block;max-width:100%}
 .action-btn:hover .btn-tooltip{opacity:1;transform:translateX(-50%) scale(1)}
 
 /* NOTIFICATION - Igual ao original */
-.notification{position:fixed;top:20px;right:20px;background:var(--white);color:var(--black);padding:14px 24px;border-radius:var(--radius-md);border-left:4px solid var(--purple);box-shadow:var(--shadow-xl);transform:translateX(150%);transition:transform .4s cubic-bezier(.68,-.55,.27,1.55);z-index:2000;font-weight:600;font-size:.9rem}
-.notification.show{transform:translateX(0)}
+.notification{position:fixed;bottom:20px;right:20px;background:var(--white);border-radius:var(--radius-md);box-shadow:var(--shadow-xl);min-width:260px;max-width:320px;overflow:hidden;opacity:0;pointer-events:none;transform:translateY(16px);transition:opacity .3s ease,transform .3s ease;z-index:2000}
+.notification.show{opacity:1;pointer-events:auto;transform:translateY(0)}
+.notif-inner{display:flex;align-items:center;gap:12px;padding:14px 18px 12px}
+.notif-icon{width:36px;height:36px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.notif-msg{font-size:.88rem;font-weight:600;color:var(--black);line-height:1.4}
+.notif-bar{height:3px;background:linear-gradient(90deg,var(--purple),var(--purple-dark));width:100%;transform-origin:left}
+.notification.show .notif-bar{animation:notifProgress 4s linear forwards}
+@keyframes notifProgress{from{transform:scaleX(1)}to{transform:scaleX(0)}}
 
 /* FOOTER */
 .footer{background:#e5dfff;color:rgba(255,255,255,.7);padding:24px 32px}
@@ -142,7 +148,7 @@ img{display:block;max-width:100%}
 .music-card-left{gap:12px}.music-rank{min-width:24px;font-size:.75rem}.music-cover{width:48px;height:48px}
 .music-card-right{margin-left:0;justify-content:flex-end;gap:4px;padding-top:8px;border-top:1px solid var(--border)}
 .action-btn{width:36px;height:36px}
-.notification{left:16px;right:16px;top:auto;bottom:16px;transform:translateY(150%)}
+.notification{bottom:16px;left:16px;right:16px;max-width:none;transform:translateY(16px)}
 .notification.show{transform:translateY(0)}
 }
 
