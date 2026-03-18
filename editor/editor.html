@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Editor de Música — Magnata Músicas</title>
+  <meta name="description" content="Editor de Música da Magnata Músicas — faça upload da sua track, aplique efeitos, adicione a intro oficial e exporte em MP3. Tudo grátis para servidores MTA:SA.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -945,6 +946,23 @@ function resetEditor() {
    ============================================================ */
 function exportAudio() {
   if (!mainBuffer) return;
+
+  if (!introBuffer) {
+    var btn = document.getElementById('exportBtn');
+    var original = btn.innerHTML;
+    btn.innerHTML = '<svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg> Selecione uma intro primeiro';
+    btn.style.background = 'linear-gradient(135deg,#f59e0b,#d97706)';
+    btn.disabled = true;
+    setTimeout(function() {
+      btn.innerHTML = original;
+      btn.style.background = '';
+      btn.disabled = false;
+    }, 3000);
+    return;
+  }
+
+  initCtx();
+
   initCtx();
   var exportBtn   = document.getElementById('exportBtn');
   var progressDiv = document.getElementById('exportProgress');
