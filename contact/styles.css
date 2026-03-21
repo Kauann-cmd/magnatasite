@@ -57,7 +57,8 @@ ul{list-style:none}
 .scard-link{font-size:.82rem;font-weight:600;color:var(--purple);transition:var(--ease)}
 .scard:hover .scard-link{color:var(--purple-dark)}
 
-.footer{background:#e5dfff;padding:22px 32px}
+.footer{background:#e5dfff;color:rgba(255,255,255,.7);padding:24px 32px}
+.footer-container{max-width:1200px;margin:0 auto}
 .footer-bottom{text-align:center;font-size:.85rem;color:var(--medium-gray)}
 
 @keyframes fadeInUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
