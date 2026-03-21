@@ -189,4 +189,4 @@ input[type="range"]::-moz-range-track{height:5px;border-radius:3px;background:va
   .waveform-wrap{width:100%}
   .notification{bottom:16px;left:16px;right:16px;max-width:none;transform:translateY(16px)}
   .notification.show{transform:translateY(0)}
-}
+} 
