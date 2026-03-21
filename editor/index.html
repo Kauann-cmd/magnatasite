@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editor de Música — Magnata Músicas</title>
+  <meta name="description" content="Editor de Música da Magnata Músicas — faça upload da sua track, aplique efeitos, adicione a intro oficial e exporte em MP3. Tudo grátis para servidores MTA:SA.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <meta name="keywords" content="músicas para MTA, música MTA SA, som automotivo MTA, música roleplay MTA, músicas para servidor MTA">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="navbar" id="navbar">
+  <div class="nav-container">
+    <a href="index.html" class="nav-logo">
+      <span class="logo-text">Magnata Músicas</span>
+    </a>
+    <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    <ul class="nav-menu" id="navMenu">
+      <li><a href="../index.html" class="nav-link">Início</a></li>
+      <li><a href="/" class="nav-link active">Editor</a></li>
+      <li><a href="/contact" class="nav-link">Contato</a></li>
+      <li><a href="#" class="nav-link">Em Breve</a></li>
+    </ul>
+  </div>
+</nav>
+
+<div class="page">
+
+  <div class="page-header">
+    <h1 class="page-title">Editor de Música</h1>
+    <p class="page-desc">Faça upload da sua track, aplique efeitos, corte e exporte com a intro oficial da Magnata.</p>
+  </div>
+
+  <div class="card">
+    <p class="card-title">
+      <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 17L4 8L8 12L12 4L16 12L20 8L22 17H2Z"/><line x1="2" y1="21" x2="22" y2="21"/></svg>
+      Intro Magnata
+    </p>
+    <div class="intro-buttons-row">
+      <button class="intro-btn-card" id="introCard1" type="button" onclick="loadIntro(1)">
+        <div class="intro-btn-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <div class="intro-btn-info">
+          <div class="intro-btn-title">Intro 1</div>
+          <div class="intro-btn-status" id="introStatus1">Clique para carregar</div>
+        </div>
+        <span class="intro-badge" id="introBadge1">PRONTO</span>
+      </button>
+      <button class="intro-btn-card" id="introCard2" type="button" onclick="loadIntro(2)">
+        <div class="intro-btn-icon">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <div class="intro-btn-info">
+          <div class="intro-btn-title">Intro 2</div>
+          <div class="intro-btn-status" id="introStatus2">Clique para carregar</div>
+        </div>
+        <span class="intro-badge" id="introBadge2">PRONTO</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="card" id="uploadSection">
+    <div class="upload-zone" id="dropZone" onclick="document.getElementById('audioInput').click()">
+      <input type="file" id="audioInput" accept="audio/*" class="hidden" onchange="onFileSelected(event)">
+      <div class="upload-zone-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+      <h3>Arraste sua música aqui</h3>
+      <p>ou clique para selecionar</p>
+      <div class="upload-formats">
+        <span class="fmt-tag">MP3</span>
+        <span class="fmt-tag">WAV</span>
+        <span class="fmt-tag">OGG</span>
+        <span class="fmt-tag">FLAC</span>
+      </div>
+    </div>
+  </div>
+
+  <div id="editorSection" class="hidden">
+
+    <div class="card">
+      <div class="track-row">
+        <div class="track-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+        </div>
+        <div class="track-info">
+          <div class="track-name" id="trackName">—</div>
+          <div class="track-meta" id="trackMeta">—</div>
+        </div>
+        <button class="btn btn-secondary" onclick="resetEditor()" type="button">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>
+          Nova Track
+        </button>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="player-row">
+        <button class="play-btn" id="playBtn" onclick="togglePlay()" type="button">
+          <svg id="playIcon" width="22" height="22" viewBox="0 0 24 24" fill="currentColor"><polygon points="5,3 19,12 5,21"/></svg>
+        </button>
+        <div class="waveform-wrap" id="waveformWrap" onclick="seekAudio(event)">
+          <canvas id="waveformCanvas"></canvas>
+          <div class="waveform-progress" id="waveformProgress"></div>
+        </div>
+      </div>
+      <div class="time-row">
+        <span id="currentTime">0:00</span>
+        <span class="intro-indicator" id="introIndicator">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg>
+          Selecione uma intro acima para adicionar no início
+        </span>
+        <span id="duration">0:00</span>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-title">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+        Presets
+      </p>
+      <div class="presets-grid">
+        <button class="preset-btn" id="preset-original"  type="button" onclick="applyPreset('original')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Original</button>
+        <button class="preset-btn" id="preset-bass"      type="button" onclick="applyPreset('bass')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"/></svg>Bass Boost</button>
+        <button class="preset-btn" id="preset-ambient"   type="button" onclick="applyPreset('ambient')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Ambiente</button>
+        <button class="preset-btn" id="preset-lofi"      type="button" onclick="applyPreset('lofi')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="15.5" r="2.5"/><polyline points="8 17 8 5 20 3 20 15"/><line x1="8" y1="11" x2="20" y2="9"/></svg>Lo-Fi</button>
+        <button class="preset-btn" id="preset-radio"     type="button" onclick="applyPreset('radio')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/><circle cx="12" cy="14" r="3"/><line x1="18" y1="11" x2="18" y2="11.01"/></svg>Rádio MTA</button>
+        <button class="preset-btn" id="preset-nightcore" type="button" onclick="applyPreset('nightcore')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Nightcore</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-title">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M4.93 4.93a10 10 0 0 0 0 14.14"/></svg>
+        Efeitos
+      </p>
+      <div class="effects-grid">
+
+        <div class="effect-card">
+          <div class="effect-header">
+            <div class="effect-label">
+              <div class="effect-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/></svg></div>
+              <div><div class="effect-name">Volume</div><div class="effect-desc">Controle de ganho</div></div>
+            </div>
+          </div>
+          <div class="slider-wrap">
+            <input type="range" id="volumeSlider" min="0" max="200" value="100" oninput="updateVolume(this.value)">
+            <div class="slider-labels"><span>0%</span><span class="slider-val" id="volumeValue">100%</span><span>200%</span></div>
+          </div>
+        </div>
+
+        <div class="effect-card toggleable" id="bassCard" onclick="toggleEffect('bass')">
+          <div class="effect-header">
+            <div class="effect-label">
+              <div class="effect-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"/></svg></div>
+              <div><div class="effect-name">Bass Boost</div><div class="effect-desc">Graves potentes</div></div>
+            </div>
+            <div class="toggle" id="bassToggle"><div class="toggle-knob"></div></div>
+          </div>
+          <div class="slider-wrap hidden" id="bassSlider" onclick="event.stopPropagation()">
+            <input type="range" id="bassAmount" min="0" max="40" value="15" oninput="updateBass(this.value)">
+            <div class="slider-labels"><span>0 dB</span><span class="slider-val" id="bassValue">+15 dB</span><span>+40 dB</span></div>
+          </div>
+        </div>
+
+        <div class="effect-card toggleable" id="reverbCard" onclick="toggleEffect('reverb')">
+          <div class="effect-header">
+            <div class="effect-label">
+              <div class="effect-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 18v-6a9 9 0 0 1 18 0v6"/><path d="M21 19a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3z"/><path d="M3 19a2 2 0 0 0 2 2h1a2 2 0 0 0 2-2v-3a2 2 0 0 0-2-2H3z"/></svg></div>
+              <div><div class="effect-name">Reverb</div><div class="effect-desc">Ambiência espacial</div></div>
+            </div>
+            <div class="toggle" id="reverbToggle"><div class="toggle-knob"></div></div>
+          </div>
+          <div class="slider-wrap hidden" id="reverbSlider" onclick="event.stopPropagation()">
+            <input type="range" id="reverbAmount" min="0" max="100" value="30" oninput="updateReverb(this.value)">
+            <div class="slider-labels"><span>0%</span><span class="slider-val" id="reverbValue">30%</span><span>100%</span></div>
+          </div>
+        </div>
+
+        <div class="effect-card toggleable" id="lowpassCard" onclick="toggleEffect('lowpass')">
+          <div class="effect-header">
+            <div class="effect-label">
+              <div class="effect-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
+              <div><div class="effect-name">Low Pass</div><div class="effect-desc">Filtro de frequência</div></div>
+            </div>
+            <div class="toggle" id="lowpassToggle"><div class="toggle-knob"></div></div>
+          </div>
+          <div class="slider-wrap hidden" id="lowpassSlider" onclick="event.stopPropagation()">
+            <input type="range" id="lowpassAmount" min="200" max="20000" value="5000" oninput="updateLowpass(this.value)">
+            <div class="slider-labels"><span>200 Hz</span><span class="slider-val" id="lowpassValue">5000 Hz</span><span>20k Hz</span></div>
+          </div>
+        </div>
+
+        <div class="effect-card">
+          <div class="effect-header">
+            <div class="effect-label">
+              <div class="effect-icon"><svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg></div>
+              <div><div class="effect-name">Velocidade</div><div class="effect-desc">Pitch &amp; Speed</div></div>
+            </div>
+          </div>
+          <div class="slider-wrap">
+            <input type="range" id="speedSlider" min="50" max="150" value="100" oninput="updateSpeed(this.value)">
+            <div class="slider-labels"><span>0.5x</span><span class="slider-val" id="speedValue">1.0x</span><span>1.5x</span></div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-title">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
+        Fade In / Fade Out
+      </p>
+      <div class="fade-grid">
+        <div>
+          <div class="fade-label">Fade In (segundos)</div>
+          <input type="range" id="fadeInSlider" min="0" max="10" value="0" step="0.5" oninput="updateFadeIn(this.value)">
+          <div class="slider-labels"><span>0s</span><span class="slider-val" id="fadeInValue">0s</span><span>10s</span></div>
+        </div>
+        <div>
+          <div class="fade-label">Fade Out (segundos)</div>
+          <input type="range" id="fadeOutSlider" min="0" max="10" value="0" step="0.5" oninput="updateFadeOut(this.value)">
+          <div class="slider-labels"><span>0s</span><span class="slider-val" id="fadeOutValue">0s</span><span>10s</span></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <p class="card-title">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>
+        Ferramenta de Corte
+      </p>
+      <p style="font-size:.82rem;color:var(--medium-gray);margin-bottom:16px;">Arraste as alças para definir o início e fim do trecho que deseja manter.</p>
+      <div class="trim-canvas-wrap" id="trimWrap"><canvas id="trimCanvas"></canvas></div>
+      <div class="trim-info-row">
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <span class="trim-time-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Início: <strong id="trimStartLabel">0:00</strong></span>
+          <span class="trim-time-badge"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Fim: <strong id="trimEndLabel">0:00</strong></span>
+          <span class="trim-time-badge" style="background:var(--white);border-color:var(--border);color:var(--medium-gray)">Duração: <strong id="trimDurLabel">0:00</strong></span>
+        </div>
+        <div class="trim-actions">
+          <button class="btn btn-secondary btn-sm" onclick="resetTrim()" type="button"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 .49-3.51"/></svg>Resetar</button>
+          <button class="btn btn-primary btn-sm"   onclick="applyTrim()"  type="button"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="3"/><circle cx="6" cy="18" r="3"/><line x1="20" y1="4" x2="8.12" y2="15.88"/><line x1="14.47" y1="14.48" x2="20" y2="20"/><line x1="8.12" y1="8.12" x2="12" y2="12"/></svg>Aplicar Corte</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Export -->
+    <div class="card export-center">
+      <div class="export-icon"><svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="var(--purple)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg></div>
+      <div class="export-title">Pronto para Exportar?</div>
+      <p class="export-desc">Sua música será exportada em MP3 com os efeitos aplicados e a intro oficial da Magnata no início.</p>
+      <div class="progress-wrap hidden" id="exportProgress">
+        <div class="progress-track"><div class="progress-bar" id="exportProgressBar"></div></div>
+        <p class="progress-status" id="exportStatus">Processando...</p>
+      </div>
+      <button class="btn btn-primary" id="exportBtn" onclick="exportAudio()" type="button">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Exportar MP3
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<footer class="footer">
+  <div class="footer-bottom"><p>© 2025 - 2026 Magnata Músicas. Todos os direitos reservados.</p></div>
+</footer>
+
+<div class="notification" id="notification">
+  <div class="notif-inner">
+    <div class="notif-icon" id="notifIcon"></div>
+    <span class="notif-msg" id="notifMsg"></span>
+  </div>
+  <div class="notif-bar" id="notifBar"></div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
+<script>
+
+var INTRO_PATHS = {
+  1: 'intros/intro1.mp3',
+  2: 'intros/intro2.mp3'
+};
+
+var PRESETS = {
+  original:  {volume:100,speed:100,bass:false,bassGain:0,  reverb:false,reverbMix:0,  lowpass:false,lowpassFreq:20000,fadeIn:0,fadeOut:0},
+  bass:      {volume:100,speed:100,bass:true, bassGain:22, reverb:false,reverbMix:0,  lowpass:false,lowpassFreq:20000,fadeIn:0,fadeOut:0},
+  ambient:   {volume:90, speed:100,bass:false,bassGain:0,  reverb:true, reverbMix:60, lowpass:true, lowpassFreq:8000, fadeIn:2,fadeOut:3},
+  lofi:      {volume:85, speed:95, bass:true, bassGain:10, reverb:true, reverbMix:25, lowpass:true, lowpassFreq:4000, fadeIn:0,fadeOut:0},
+  radio:     {volume:110,speed:100,bass:false,bassGain:0,  reverb:false,reverbMix:0,  lowpass:true, lowpassFreq:12000,fadeIn:1,fadeOut:1},
+  nightcore: {volume:100,speed:125,bass:true, bassGain:12, reverb:false,reverbMix:0,  lowpass:false,lowpassFreq:20000,fadeIn:0,fadeOut:0}
+};
+
+var audioCtx      = null;  
+var mainBuffer    = null;  
+var introBuffer   = null; 
+var sourceNode    = null;  
+var gainNode      = null;
+var bassFilter    = null;
+var lowpassFilter = null;
+var reverbGain    = null;
+var dryGain       = null;
+
+var isPlaying   = false;
+var startOffset = 0;     
+var startTime   = 0;     
+var rafId       = null;
+
+var effects  = {bass:false, reverb:false, lowpass:false};
+var settings = {volume:1, speed:1, bassGain:15, reverbMix:0.3, lowpassFreq:5000, fadeIn:0, fadeOut:0};
+
+var trimStart    = 0;
+var trimEnd      = 0;
+var trimDragging = null;
+
+var navbar    = document.getElementById('navbar');
+var navToggle = document.getElementById('navToggle');
+var navMenu   = document.getElementById('navMenu');
+
+window.addEventListener('scroll', function () {
+  navbar.classList.toggle('scrolled', window.scrollY > 10);
+});
+
+navToggle.addEventListener('click', function () {
+  var open = navMenu.classList.toggle('open');
+  navToggle.classList.toggle('active', open);
+  document.body.style.overflow = open ? 'hidden' : '';
+});
+
+document.querySelectorAll('.nav-link').forEach(function (link) {
+  link.addEventListener('click', function () {
+    navToggle.classList.remove('active');
+    navMenu.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+});
+
+var dropZone = document.getElementById('dropZone');
+dropZone.addEventListener('dragover',  function (e) { e.preventDefault(); dropZone.classList.add('dragover'); });
+dropZone.addEventListener('dragleave', function ()  { dropZone.classList.remove('dragover'); });
+dropZone.addEventListener('drop', function (e) {
+  e.preventDefault();
+  dropZone.classList.remove('dragover');
+  var f = e.dataTransfer.files[0];
+  if (f && f.type.startsWith('audio/')) loadAudioFile(f);
+});
+
+function initCtx() {
+  if (!audioCtx) {
+    audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  }
+  if (audioCtx.state === 'suspended') audioCtx.resume();
+}
+
+function makeReverbBuffer() {
+  var dur = 2.5, decay = 3.0;
+  var sr  = audioCtx.sampleRate;
+  var len = Math.ceil(sr * dur);
+  var buf = audioCtx.createBuffer(2, len, sr);
+  for (var c = 0; c < 2; c++) {
+    var d = buf.getChannelData(c);
+    for (var i = 0; i < len; i++) {
+      d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / len, decay);
+    }
+  }
+  return buf;
+}
+
+function loadIntro(num) {
+  initCtx();
+  var path   = INTRO_PATHS[num];
+  var card   = document.getElementById('introCard'   + num);
+  var status = document.getElementById('introStatus' + num);
+  var badge  = document.getElementById('introBadge'  + num);
+
+  card.classList.remove('loaded', 'error');
+  status.textContent = 'Carregando...';
+  badge.textContent  = '...';
+
+  fetch(path)
+    .then(function (r) {
+      if (!r.ok) throw new Error('HTTP ' + r.status);
+      return r.arrayBuffer();
+    })
+    .then(function (ab) {
+      return audioCtx.decodeAudioData(ab);
+    })
+    .then(function (buf) {
+      introBuffer = buf;
+
+      card.classList.add('loaded');
+      status.textContent = '✓ Pronta (' + fmt(buf.duration) + ')';
+      badge.textContent  = 'ATIVA';
+
+      var other = num === 1 ? 2 : 1;
+      document.getElementById('introCard'   + other).classList.remove('loaded','error');
+      document.getElementById('introStatus' + other).textContent = 'Clique para carregar';
+      document.getElementById('introBadge'  + other).textContent = 'PRONTO';
+
+      var ind = document.getElementById('introIndicator');
+      ind.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Intro ' + num + ' ativa (' + fmt(buf.duration) + ')';
+      ind.className = 'intro-indicator ok';
+    })
+    .catch(function (err) {
+      introBuffer = null;
+      card.classList.add('error');
+      status.textContent = '✗ Não encontrada';
+      badge.textContent  = 'ERRO';
+      console.error('[Intro ' + num + ']', err);
+    });
+}
+
+function onFileSelected(e) {
+  var f = e.target.files[0];
+  if (f) loadAudioFile(f);
+}
+
+function loadAudioFile(file) {
+  initCtx();
+  playerStop(true);  
+
+  var reader = new FileReader();
+  reader.onload = function (e) {
+    audioCtx.decodeAudioData(e.target.result, function (buf) {
+      mainBuffer  = buf;
+      startOffset = 0;
+      trimStart   = 0;
+      trimEnd     = buf.duration;
+
+      document.getElementById('trackName').textContent = file.name.replace(/\.[^.]+$/, '');
+      document.getElementById('trackMeta').textContent =
+        fmt(buf.duration) + ' · ' + (file.size / 1048576).toFixed(1) + ' MB · ' + buf.sampleRate + ' Hz';
+      document.getElementById('duration').textContent    = fmt(buf.duration);
+      document.getElementById('currentTime').textContent = '0:00';
+      document.getElementById('waveformProgress').style.width = '0%';
+
+      document.getElementById('uploadSection').classList.add('hidden');
+      document.getElementById('editorSection').classList.remove('hidden');
+
+      drawWaveform();
+      drawTrim();
+    }, function () {
+      alert('Erro ao decodificar o arquivo. Certifique-se de que é um áudio válido.');
+      showNotification('Erro ao decodificar o arquivo.', 'error');
+    });
+  };
+  reader.onerror = function () {
+    showNotification('Erro ao ler o arquivo.', 'error');
+  };
+  reader.readAsArrayBuffer(file);
+}
+
+function drawWaveform() {
+  var canvas = document.getElementById('waveformCanvas');
+  var wrap   = document.getElementById('waveformWrap');
+  canvas.width  = wrap.clientWidth;
+  canvas.height = wrap.clientHeight;
+  var ctx  = canvas.getContext('2d');
+  var data = mainBuffer.getChannelData(0);
+  var step = Math.ceil(data.length / canvas.width);
+  var amp  = canvas.height / 2;
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.strokeStyle = '#9b7aff';
+  ctx.lineWidth   = 1.5;
+  for (var x = 0; x < canvas.width; x++) {
+    var mn = 1, mx = -1;
+    for (var j = 0; j < step; j++) {
+      var v = data[x * step + j] || 0;
+      if (v < mn) mn = v;
+      if (v > mx) mx = v;
+    }
+    ctx.beginPath();
+    ctx.moveTo(x, amp + mn * amp * 0.9);
+    ctx.lineTo(x, amp + mx * amp * 0.9);
+    ctx.stroke();
+  }
+}
+
+window.addEventListener('resize', function () {
+  if (mainBuffer) { drawWaveform(); drawTrim(); }
+});
+
+function seekAudio(e) {
+  if (!mainBuffer) return;
+  var ratio       = e.offsetX / document.getElementById('waveformWrap').clientWidth;
+  startOffset     = ratio * mainBuffer.duration;
+  if (isPlaying) {
+    playerStop(false);   // para sem resetar startOffset
+    playerStart();
+  } else {
+    document.getElementById('currentTime').textContent      = fmt(startOffset);
+    document.getElementById('waveformProgress').style.width = (ratio * 100) + '%';
+  }
+}
+
+function buildGraph() {
+  gainNode = audioCtx.createGain();
+  gainNode.gain.value = settings.volume;
+
+  bassFilter = audioCtx.createBiquadFilter();
+  bassFilter.type            = 'lowshelf';
+  bassFilter.frequency.value = 200;
+  bassFilter.gain.value      = effects.bass ? settings.bassGain : 0;
+
+  lowpassFilter = audioCtx.createBiquadFilter();
+  lowpassFilter.type            = 'lowpass';
+  lowpassFilter.frequency.value = effects.lowpass ? settings.lowpassFreq : 20000;
+
+  if (effects.reverb) {
+    var conv = audioCtx.createConvolver();
+    conv.buffer  = makeReverbBuffer();
+    reverbGain   = audioCtx.createGain();
+    dryGain      = audioCtx.createGain();
+    reverbGain.gain.value = settings.reverbMix;
+    dryGain.gain.value    = 1 - settings.reverbMix;
+    lowpassFilter.connect(dryGain);
+    lowpassFilter.connect(conv);
+    conv.connect(reverbGain);
+    dryGain.connect(gainNode);
+    reverbGain.connect(gainNode);
+  } else {
+    lowpassFilter.connect(gainNode);
+    reverbGain = null;
+    dryGain    = null;
+  }
+  gainNode.connect(audioCtx.destination);
+}
+
+function playerStart() {
+  if (!mainBuffer) return;
+  initCtx();
+  buildGraph();
+
+  sourceNode = audioCtx.createBufferSource();
+  sourceNode.buffer             = mainBuffer;
+  sourceNode.playbackRate.value = settings.speed;
+
+  sourceNode.connect(bassFilter);
+  bassFilter.connect(lowpassFilter);
+
+  var offset = Math.max(0, Math.min(startOffset, mainBuffer.duration - 0.01));
+
+  sourceNode.start(0, offset);
+  startTime = audioCtx.currentTime;  
+  isPlaying = true;
+
+  if (settings.fadeIn > 0) {
+    gainNode.gain.setValueAtTime(0, audioCtx.currentTime);
+    gainNode.gain.linearRampToValueAtTime(settings.volume, audioCtx.currentTime + settings.fadeIn);
+  }
+  if (settings.fadeOut > 0) {
+    var remaining = (mainBuffer.duration - offset) / settings.speed;
+    var endAt     = audioCtx.currentTime + remaining;
+    gainNode.gain.setValueAtTime(settings.volume, endAt - settings.fadeOut);
+    gainNode.gain.linearRampToValueAtTime(0, endAt);
+  }
+
+  sourceNode.onended = function () {
+    if (!isPlaying) return;  
+    isPlaying   = false;
+    startOffset = 0;
+    cancelAnimationFrame(rafId);
+    setPlayIcon(false);
+    document.getElementById('currentTime').textContent      = '0:00';
+    document.getElementById('waveformProgress').style.width = '0%';
+  };
+
+  setPlayIcon(true);
+  rafLoop();
+}
+
+function playerStop(keepPos) {
+
+  if (sourceNode) {
+    sourceNode.onended = null;
+    try { sourceNode.stop(0); } catch (e) {}
+    sourceNode = null;
+  }
+
+  cancelAnimationFrame(rafId);
+  rafId = null;
+  if (!keepPos) {
+    startOffset = 0;
+  }
+
+  isPlaying = false;
+  setPlayIcon(false);
+}
+
+function togglePlay() {
+  if (!mainBuffer) return;
+  initCtx();
+  if (isPlaying) {
+    startOffset += audioCtx.currentTime - startTime;
+    startOffset  = Math.min(Math.max(startOffset, 0), mainBuffer.duration);
+    playerStop(true);  
+  } else {
+    playerStart();    
+  }
+}
+
+function rebuildAndResume() {
+  if (!isPlaying) return;
+
+  startOffset += audioCtx.currentTime - startTime;
+  startOffset  = Math.min(Math.max(startOffset, 0), mainBuffer.duration);
+
+  playerStop(true);
+
+  playerStart();
+}
+
+function setPlayIcon(playing) {
+  document.getElementById('playIcon').innerHTML = playing
+    ? '<rect x="6" y="4" width="4" height="16"/><rect x="14" y="4" width="4" height="16"/>'
+    : '<polygon points="5,3 19,12 5,21"/>';
+}
+
+function rafLoop() {
+  if (!isPlaying || !mainBuffer) return;
+  var elapsed = startOffset + (audioCtx.currentTime - startTime) * settings.speed;
+  elapsed = Math.min(elapsed, mainBuffer.duration);
+  document.getElementById('currentTime').textContent      = fmt(elapsed);
+  document.getElementById('waveformProgress').style.width = (elapsed / mainBuffer.duration * 100) + '%';
+  rafId = requestAnimationFrame(rafLoop);
+}
+
+function toggleEffect(name) {
+  effects[name] = !effects[name];
+  document.getElementById(name + 'Card').classList.toggle('active', effects[name]);
+  document.getElementById(name + 'Toggle').classList.toggle('on',   effects[name]);
+  var sl = document.getElementById(name + 'Slider');
+  if (sl) sl.classList.toggle('hidden', !effects[name]);
+  if (isPlaying) rebuildAndResume();
+}
+
+function updateVolume(v) {
+  settings.volume = v / 100;
+  document.getElementById('volumeValue').textContent = v + '%';
+  if (gainNode) gainNode.gain.value = settings.volume;
+}
+function updateBass(v) {
+  settings.bassGain = +v;
+  document.getElementById('bassValue').textContent = '+' + v + ' dB';
+  if (bassFilter && effects.bass) bassFilter.gain.value = settings.bassGain;
+}
+function updateSpeed(v) {
+  settings.speed = v / 100;
+  document.getElementById('speedValue').textContent = (+v / 100).toFixed(1) + 'x';
+  if (sourceNode) sourceNode.playbackRate.value = settings.speed;
+}
+function updateReverb(v) {
+  settings.reverbMix = v / 100;
+  document.getElementById('reverbValue').textContent = v + '%';
+  if (reverbGain) { reverbGain.gain.value = settings.reverbMix; dryGain.gain.value = 1 - settings.reverbMix; }
+}
+function updateLowpass(v) {
+  settings.lowpassFreq = +v;
+  document.getElementById('lowpassValue').textContent = v >= 1000 ? (v / 1000).toFixed(1) + 'k Hz' : v + ' Hz';
+  if (lowpassFilter && effects.lowpass) lowpassFilter.frequency.value = settings.lowpassFreq;
+}
+function updateFadeIn(v)  { settings.fadeIn  = +v; document.getElementById('fadeInValue').textContent  = v + 's'; }
+function updateFadeOut(v) { settings.fadeOut = +v; document.getElementById('fadeOutValue').textContent = v + 's'; }
+
+function applyPreset(name) {
+  var p = PRESETS[name];
+  if (!p) return;
+
+  document.querySelectorAll('.preset-btn').forEach(function (b) { b.classList.remove('active'); });
+  document.getElementById('preset-' + name).classList.add('active');
+
+  document.getElementById('volumeSlider').value  = p.volume;      updateVolume(p.volume);
+  document.getElementById('speedSlider').value   = p.speed;       updateSpeed(p.speed);
+  document.getElementById('bassAmount').value    = p.bassGain;    updateBass(p.bassGain);
+  document.getElementById('reverbAmount').value  = p.reverbMix;   updateReverb(p.reverbMix);
+  document.getElementById('lowpassAmount').value = p.lowpassFreq; updateLowpass(p.lowpassFreq);
+  document.getElementById('fadeInSlider').value  = p.fadeIn;      updateFadeIn(p.fadeIn);
+  document.getElementById('fadeOutSlider').value = p.fadeOut;     updateFadeOut(p.fadeOut);
+
+  ['bass','reverb','lowpass'].forEach(function (fx) {
+    effects[fx] = p[fx];
+    document.getElementById(fx + 'Card').classList.toggle('active', effects[fx]);
+    document.getElementById(fx + 'Toggle').classList.toggle('on',   effects[fx]);
+    var sl = document.getElementById(fx + 'Slider');
+    if (sl) sl.classList.toggle('hidden', !effects[fx]);
+  });
+
+  if (isPlaying) rebuildAndResume();
+}
+
+function drawTrim() {
+  var wrap = document.getElementById('trimWrap');
+  var c    = document.getElementById('trimCanvas');
+  c.width  = wrap.clientWidth;
+  c.height = wrap.clientHeight;
+  var ctx  = c.getContext('2d');
+  var W    = c.width, H = c.height;
+  var dur  = mainBuffer.duration;
+  var data = mainBuffer.getChannelData(0);
+  var step = Math.ceil(data.length / W);
+  var amp  = H / 2;
+  var sx   = (trimStart / dur) * W;
+  var ex   = (trimEnd   / dur) * W;
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.fillStyle = 'rgba(155,122,255,.06)';
+  ctx.fillRect(0, 0, W, H);
+
+  for (var x = 0; x < W; x++) {
+    var mn = 1, mxv = -1;
+    for (var j = 0; j < step; j++) {
+      var v = data[x * step + j] || 0;
+      if (v < mn) mn = v; if (v > mxv) mxv = v;
+    }
+    var inR = (x >= sx && x <= ex);
+    ctx.strokeStyle = inR ? '#9b7aff' : '#c4b5fd';
+    ctx.lineWidth   = inR ? 1.5 : 1;
+    ctx.beginPath();
+    ctx.moveTo(x, amp + mn  * amp * 0.9);
+    ctx.lineTo(x, amp + mxv * amp * 0.9);
+    ctx.stroke();
+  }
+  ctx.fillStyle = 'rgba(155,122,255,.12)';
+  ctx.fillRect(sx, 0, ex - sx, H);
+
+  [sx, ex].forEach(function (x, i) {
+    ctx.fillStyle = '#9b7aff'; ctx.fillRect(x - 2, 0, 4, H);
+    ctx.fillStyle = '#fff'; ctx.strokeStyle = '#9b7aff'; ctx.lineWidth = 2;
+    ctx.beginPath(); ctx.arc(x, H / 2, 9, 0, Math.PI * 2); ctx.fill(); ctx.stroke();
+    ctx.fillStyle = '#9b7aff'; ctx.font = 'bold 10px Inter,sans-serif';
+    ctx.textAlign = 'center'; ctx.textBaseline = 'middle';
+    ctx.fillText(i === 0 ? '◀' : '▶', x, H / 2);
+  });
+
+  document.getElementById('trimStartLabel').textContent = fmt(trimStart);
+  document.getElementById('trimEndLabel').textContent   = fmt(trimEnd);
+  document.getElementById('trimDurLabel').textContent   = fmt(trimEnd - trimStart);
+}
+
+var trimWrap = document.getElementById('trimWrap');
+
+trimWrap.addEventListener('mousedown', function (e) {
+  if (!mainBuffer) return;
+  var r  = trimWrap.getBoundingClientRect();
+  var x  = e.clientX - r.left;
+  var W  = trimWrap.clientWidth;
+  var sx = (trimStart / mainBuffer.duration) * W;
+  var ex = (trimEnd   / mainBuffer.duration) * W;
+  if      (Math.abs(x - sx) < 14) trimDragging = 'start';
+  else if (Math.abs(x - ex) < 14) trimDragging = 'end';
+});
+
+window.addEventListener('mousemove', function (e) {
+  if (!trimDragging || !mainBuffer) return;
+  var r = trimWrap.getBoundingClientRect();
+  var x = Math.max(0, Math.min(e.clientX - r.left, trimWrap.clientWidth));
+  var t = (x / trimWrap.clientWidth) * mainBuffer.duration;
+  if (trimDragging === 'start') trimStart = Math.min(t, trimEnd - 0.5);
+  else                          trimEnd   = Math.max(t, trimStart + 0.5);
+  trimStart = Math.max(0, trimStart);
+  trimEnd   = Math.min(mainBuffer.duration, trimEnd);
+  drawTrim();
+});
+
+window.addEventListener('mouseup',   function () { trimDragging = null; });
+
+trimWrap.addEventListener('touchstart', function (e) {
+  if (!mainBuffer) return;
+  var r  = trimWrap.getBoundingClientRect();
+  var x  = e.touches[0].clientX - r.left;
+  var W  = trimWrap.clientWidth;
+  var sx = (trimStart / mainBuffer.duration) * W;
+  var ex = (trimEnd   / mainBuffer.duration) * W;
+  if      (Math.abs(x - sx) < 18) trimDragging = 'start';
+  else if (Math.abs(x - ex) < 18) trimDragging = 'end';
+  e.preventDefault();
+}, {passive: false});
+
+window.addEventListener('touchmove', function (e) {
+  if (!trimDragging || !mainBuffer) return;
+  var r = trimWrap.getBoundingClientRect();
+  var x = Math.max(0, Math.min(e.touches[0].clientX - r.left, trimWrap.clientWidth));
+  var t = (x / trimWrap.clientWidth) * mainBuffer.duration;
+  if (trimDragging === 'start') trimStart = Math.min(t, trimEnd - 0.5);
+  else                          trimEnd   = Math.max(t, trimStart + 0.5);
+  trimStart = Math.max(0, trimStart);
+  trimEnd   = Math.min(mainBuffer.duration, trimEnd);
+  drawTrim();
+}, {passive: true});
+
+window.addEventListener('touchend', function () { trimDragging = null; });
+
+function resetTrim() {
+  if (!mainBuffer) return;
+  trimStart = 0; trimEnd = mainBuffer.duration; drawTrim();
+}
+
+function applyTrim() {
+  if (!mainBuffer) return;
+  playerStop(false);
+  initCtx();
+  var sr = mainBuffer.sampleRate, ch = mainBuffer.numberOfChannels;
+  var s  = Math.floor(trimStart * sr);
+  var e  = Math.floor(trimEnd   * sr);
+  var tb = audioCtx.createBuffer(ch, e - s, sr);
+  for (var c = 0; c < ch; c++) {
+    tb.copyToChannel(mainBuffer.getChannelData(c).subarray(s, e), c);
+  }
+  mainBuffer  = tb;
+  trimStart   = 0;
+  trimEnd     = mainBuffer.duration;
+  startOffset = 0;
+  document.getElementById('duration').textContent = fmt(mainBuffer.duration);
+  document.getElementById('trackMeta').textContent =
+    document.getElementById('trackMeta').textContent.replace(/^[\d:]+/, fmt(mainBuffer.duration));
+  drawWaveform(); drawTrim();
+  showNotification('Corte aplicado! Nova duração: ' + fmt(mainBuffer.duration), 'success');
+}
+
+function resetEditor() {
+  playerStop(false);
+  mainBuffer  = null;
+  startOffset = 0;
+  document.getElementById('editorSection').classList.add('hidden');
+  document.getElementById('uploadSection').classList.remove('hidden');
+  document.getElementById('audioInput').value = '';
+  document.querySelectorAll('.preset-btn').forEach(function (b) { b.classList.remove('active'); });
+}
+
+function exportAudio() {
+  if (!mainBuffer) return;
+
+  if (!introBuffer) {
+    showNotification('Selecione uma intro antes de exportar!', 'error');
+    return;
+  }
+
+  initCtx();
+
+  initCtx();
+  var exportBtn   = document.getElementById('exportBtn');
+  var progressDiv = document.getElementById('exportProgress');
+  var progressBar = document.getElementById('exportProgressBar');
+  var statusText  = document.getElementById('exportStatus');
+
+  exportBtn.disabled = true;
+  progressDiv.classList.remove('hidden');
+  statusText.textContent  = 'Preparando...';
+  progressBar.style.width = '5%';
+
+  var mainDur  = mainBuffer.duration / settings.speed;
+  var introDur = introBuffer ? introBuffer.duration : 0;
+  var total    = introDur + mainDur;
+  var sr       = mainBuffer.sampleRate;
+  var offCtx   = new OfflineAudioContext(2, Math.ceil(total * sr), sr);
+
+  var introPromise;
+  if (introBuffer) {
+    if (introBuffer.sampleRate !== sr) {
+      introPromise = resample(introBuffer, sr, offCtx);
+    } else {
+      introPromise = Promise.resolve(introBuffer);
+    }
+  } else {
+    introPromise = Promise.resolve(null);
+  }
+
+  introPromise.then(function (iBuf) {
+    if (iBuf) {
+      var iSrc = offCtx.createBufferSource();
+      iSrc.buffer = iBuf;
+      iSrc.connect(offCtx.destination);
+      iSrc.start(0);
+    }
+
+    statusText.textContent  = 'Aplicando efeitos...';
+    progressBar.style.width = '30%';
+
+    var src  = offCtx.createBufferSource();
+    src.buffer = mainBuffer;
+    src.playbackRate.value = settings.speed;
+
+    var gain = offCtx.createGain(); gain.gain.value = settings.volume;
+    var bass = offCtx.createBiquadFilter(); bass.type = 'lowshelf'; bass.frequency.value = 200; bass.gain.value = effects.bass ? settings.bassGain : 0;
+    var lp   = offCtx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = effects.lowpass ? settings.lowpassFreq : 20000;
+
+    src.connect(bass); bass.connect(lp);
+
+    if (effects.reverb) {
+      var conv = offCtx.createConvolver();
+      var rBuf = offCtx.createBuffer(2, Math.ceil(2.5 * sr), sr);
+      for (var c = 0; c < 2; c++) { var d = rBuf.getChannelData(c); for (var i = 0; i < d.length; i++) d[i] = (Math.random() * 2 - 1) * Math.pow(1 - i / d.length, 3); }
+      conv.buffer = rBuf;
+      var rg = offCtx.createGain(); rg.gain.value = settings.reverbMix;
+      var dg = offCtx.createGain(); dg.gain.value = 1 - settings.reverbMix;
+      lp.connect(dg); lp.connect(conv); conv.connect(rg);
+      dg.connect(gain); rg.connect(gain);
+    } else { lp.connect(gain); }
+
+    if (settings.fadeIn  > 0) { gain.gain.setValueAtTime(0, introDur); gain.gain.linearRampToValueAtTime(settings.volume, introDur + settings.fadeIn); }
+    if (settings.fadeOut > 0) { gain.gain.setValueAtTime(settings.volume, total - settings.fadeOut); gain.gain.linearRampToValueAtTime(0, total); }
+
+    gain.connect(offCtx.destination);
+    src.start(introDur);
+
+    statusText.textContent  = 'Renderizando...';
+    progressBar.style.width = '50%';
+    return offCtx.startRendering();
+  }).then(function (rendered) {
+    statusText.textContent  = 'Convertendo para MP3...';
+    progressBar.style.width = '70%';
+    return encodeMP3(rendered, function (p) { progressBar.style.width = (70 + p * 25) + '%'; });
+  }).then(function (blob) {
+    progressBar.style.width = '100%';
+    statusText.textContent  = 'Concluído! 🎉';
+    var a = document.createElement('a');
+    a.href     = URL.createObjectURL(blob);
+    a.download = (document.getElementById('trackName').textContent || 'musica') + '_magnata.mp3';
+    a.click();
+    URL.revokeObjectURL(a.href);
+    setTimeout(function () {
+      progressDiv.classList.add('hidden');
+      progressBar.style.width = '0%';
+      exportBtn.disabled = false;
+    }, 2500);
+  }).catch(function (err) {
+    console.error(err);
+    statusText.textContent = 'Erro na exportação. Tente novamente.';
+    exportBtn.disabled = false;
+  });
+}
+
+function encodeMP3(buf, onProgress) {
+  return new Promise(function (resolve) {
+    var ch = buf.numberOfChannels, sr = buf.sampleRate;
+    var enc = new lamejs.Mp3Encoder(ch, sr, 192), out = [];
+    var L = buf.getChannelData(0), R = ch > 1 ? buf.getChannelData(1) : L;
+    var bs = 1152, total = Math.ceil(L.length / bs);
+    var LI = new Int16Array(L.length), RI = new Int16Array(R.length);
+    for (var i = 0; i < L.length; i++) {
+      LI[i] = Math.max(-32768, Math.min(32767, L[i] * 32767 | 0));
+      RI[i] = Math.max(-32768, Math.min(32767, R[i] * 32767 | 0));
+    }
+    var blk = 0;
+    function next() {
+      var end = Math.min(blk + 100, total);
+      for (var i = blk; i < end; i++) {
+        var s = i * bs, e = Math.min(s + bs, LI.length);
+        var mb = ch === 2 ? enc.encodeBuffer(LI.subarray(s,e), RI.subarray(s,e)) : enc.encodeBuffer(LI.subarray(s,e));
+        if (mb.length > 0) out.push(mb);
+      }
+      blk = end; onProgress(blk / total);
+      if (blk < total) { setTimeout(next, 0); return; }
+      var last = enc.flush(); if (last.length > 0) out.push(last);
+      resolve(new Blob(out, {type: 'audio/mp3'}));
+    }
+    next();
+  });
+}
+
+function resample(buf, targetSR) {
+  var ctx = new OfflineAudioContext(buf.numberOfChannels, Math.ceil(buf.duration * targetSR), targetSR);
+  var src = ctx.createBufferSource();
+  src.buffer = buf; src.connect(ctx.destination); src.start(0);
+  return ctx.startRendering();
+}
+
+function fmt(s) {
+  if (!s || isNaN(s) || s < 0) return '0:00';
+  var m = Math.floor(s / 60), sec = Math.floor(s % 60);
+  return m + ':' + (sec < 10 ? '0' : '') + sec;
+}
+
+if ('IntersectionObserver' in window) {
+  var obs = new IntersectionObserver(function(entries) {
+    entries.forEach(function(entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('animate-in');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.card').forEach(function(el) {
+    el.classList.add('animate-hidden');
+    obs.observe(el);
+  });
+}
+
+var NOTIF_ICONS = {
+  success: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
+  error:   '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>',
+};
+var NOTIF_BG = {
+  success: '#f0fdf4',
+  error:   '#fee2e2',
+};
+var NOTIF_COLOR = {
+  success: '#16a34a',
+  error:   '#ef4444',
+};
+var notifTimer = null;
+
+function showNotification(msg, type) {
+  type = type || 'sucess';
+  var notif  = document.getElementById('notification');
+  var icon   = document.getElementById('notifIcon');
+  var msgEl  = document.getElementById('notifMsg');
+  var bar    = document.getElementById('notifBar');
+
+  icon.innerHTML        = NOTIF_ICONS[type];
+  icon.style.background = NOTIF_BG[type];
+  icon.style.color      = NOTIF_COLOR[type];
+  msgEl.textContent     = msg;
+
+  bar.style.animation = 'none';
+  bar.offsetHeight;
+  bar.style.animation = '';
+
+  notif.classList.remove('show');
+  void notif.offsetWidth;
+  notif.classList.add('show');
+
+  clearTimeout(notifTimer);
+  notifTimer = setTimeout(function() { notif.classList.remove('show'); }, 4000);
+}
+</script>
+</body>
+</html>
