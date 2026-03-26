@@ -177,83 +177,85 @@
         const searchInput = document.getElementById('searchInput');
         const searchBtn = document.getElementById('searchBtn');
         const musicListContainer = document.getElementById('musicList');
+        const emptyState = document.getElementById('emptyState');
         const resultsSection = document.getElementById('resultados');
         const resultsTitle = document.getElementById('resultsTitle');
         const resultsSubtitle = document.getElementById('resultsSubtitle');
+        const notification = document.getElementById('notification');
         const navbar = document.getElementById('navbar');
         const navToggle = document.getElementById('navToggle');
         const navMenu = document.getElementById('navMenu');
 
         let currentMusicList = [];
         const SITE_ORIGIN = window.location.origin;
+        const SERVERS = [
+            'https://server1.mtabrasil.com.br',
+            'https://server2.mtabrasil.com.br',
+            'https://server3.mtabrasil.com.br',
+        ];
 
-        function normalizeGoat(data) {
-            const arr = Array.isArray(data) ? data : (data.items || data.results || []);
-            return arr.map(v => ({
-                id: v.id || v.videoId || v.video_id || '',
-                title: v.title || v.name || '',
-                author: v.author || v.channel || v.artist || '',
-                duration: v.duration || v.lengthSeconds || 0,
-                duration_view: v.duration_view || formatTime(v.duration || v.lengthSeconds || 0),
-                thumb: v.richThumb || v.thumbnail || v.thumb || `https://img.youtube.com/vi/${v.id || v.videoId}/mqdefault.jpg`,
-                playUrl: `https://server1.mtabrasil.com.br/play?id=${v.id || v.videoId}`,
-                downloadUrl: `https://api.goatmusicas.com/download/?id=${v.id || v.videoId}`,
-            }));
+        async function fetchWithFallback(path) {
+            for (const server of SERVERS) {
+                try {
+                    const r = await fetch(server + path);
+                    if (!r.ok) continue;
+                    const data = await r.json();
+                    if (data && (Array.isArray(data) ? data.length > 0 : data.items?.length > 0)) {
+                        return { data, server };
+                    }
+                } catch (e) {}
+            }
+            throw new Error('Todos os servidores falharam');
         }
 
-        function normalizeMtaBrasil(data) {
-            const arr = Array.isArray(data) ? data : (data.items || []);
-            return arr.map(v => ({
-                id: v.id || '',
-                title: v.name || v.title || '',
-                author: v.author || v.channel || '',
-                duration: v.duration || 0,
-                duration_view: formatTime(v.duration || 0),
-                thumb: v.thumbnail || v.richThumb || `https://img.youtube.com/vi/${v.id}/mqdefault.jpg`,
-                playUrl: `https://server1.mtabrasil.com.br/play?id=${v.id}`,
-                downloadUrl: `https://api.goatmusicas.com/download/?id=${v.id}`,
-            }));
-        }
+        searchBtn.addEventListener('click', searchMusic);
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') searchMusic();
+        });
 
         function searchMusic() {
             const term = searchInput.value.trim();
             if (!term) return;
 
-            musicListContainer.innerHTML = `<div class="loading-state"><div class="spinner"></div><p>Buscando músicas...</p></div>`;
+            musicListContainer.innerHTML = `
+                <div class="loading-state">
+                    <div class="spinner"></div>
+                    <p>Buscando músicas...</p>
+                </div>
+            `;
             resultsTitle.textContent = 'Buscando...';
             resultsSubtitle.textContent = '';
             resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            fetch(`https://api.goatmusicas.com/search/?q=${encodeURIComponent(term)}`)
-                .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-                .then(data => {
-                    const list = normalizeGoat(data);
-                    if (!list.length) throw new Error();
-                    currentMusicList = list;
-                    displayMusicList(list, term);
+            fetchWithFallback(`/search?q=${encodeURIComponent(term.replace(/ /g, '+'))}`)
+                .then(({ data, server }) => {
+                    const arr = Array.isArray(data) ? data : (data.items || []);
+                    currentMusicList = arr.map(v => ({
+                        id: v.id || '',
+                        title: v.name || v.title || '',
+                        author: v.author || v.channel || '',
+                        duration: v.duration || 0,
+                        duration_view: formatTime(v.duration || 0),
+                        richThumb: v.thumbnail || v.richThumb || `https://img.youtube.com/vi/${v.id}/mqdefault.jpg`,
+                        playUrl: `${server}/play?id=${v.id}`,
+                        bassUrl: `${server}/bass?id=${v.id}`,
+                    }));
+                    displayMusicList(currentMusicList, term);
                 })
                 .catch(() => {
-                    fetch(`https://server1.mtabrasil.com.br/search?q=${encodeURIComponent(term.replace(/ /g, '+'))}`)
-                        .then(r => { if (!r.ok) throw new Error(); return r.json(); })
-                        .then(data => {
-                            const list = normalizeMtaBrasil(data);
-                            currentMusicList = list;
-                            displayMusicList(list, term);
-                        })
-                        .catch(() => {
-                            musicListContainer.innerHTML = `
-                                <div class="empty-state">
-                                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="1.5">
-                                        <circle cx="12" cy="12" r="10"></circle>
-                                        <path d="M12 8v4"></path>
-                                        <path d="M12 16h.01"></path>
-                                    </svg>
-                                    <h4>Erro na conexão</h4>
-                                    <p>Verifique sua internet e tente novamente</p>
-                                </div>`;
-                            resultsTitle.textContent = 'Erro na busca';
-                            resultsSubtitle.textContent = '';
-                        });
+                    musicListContainer.innerHTML = `
+                        <div class="empty-state">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 8v4"></path>
+                                <path d="M12 16h.01"></path>
+                            </svg>
+                            <h4>Erro na conexão</h4>
+                            <p>Verifique sua internet e tente novamente</p>
+                        </div>
+                    `;
+                    resultsTitle.textContent = 'Erro na busca';
+                    resultsSubtitle.textContent = '';
                 });
         }
 
@@ -268,7 +270,8 @@
                         </svg>
                         <h4>Nenhuma música encontrada</h4>
                         <p>Tente buscar com outro termo</p>
-                    </div>`;
+                    </div>
+                `;
                 resultsTitle.textContent = 'Resultados da Busca';
                 resultsSubtitle.textContent = `Nenhum resultado para "${term}"`;
                 return;
@@ -284,11 +287,13 @@
                 card.dataset.index = idx;
                 card.dataset.id = m.id;
 
+                const thumb = m.richThumb || `https://img.youtube.com/vi/${m.id}/mqdefault.jpg`;
+
                 card.innerHTML = `
                     <div class="music-card-left">
                         <div class="music-rank">#${idx + 1}</div>
                         <div class="music-cover">
-                            <img src="${m.thumb}" alt="${escapeHTML(m.title)}">
+                            <img src="${thumb}" alt="${escapeHTML(m.title)}">
                             <div class="cover-overlay">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                             </div>
@@ -296,23 +301,20 @@
                         <div class="music-info">
                             <h4 class="music-title">${escapeHTML(m.title)}</h4>
                             <p class="music-artist">${escapeHTML(m.author)}</p>
-                            <p class="music-duration">${m.duration_view}</p>
+                            <p class="music-duration">${m.duration_view || formatTime(m.duration)}</p>
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <button class="action-btn" data-action="open" data-id="${m.id}" type="button">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            <span class="btn-tooltip">Abrir música</span>
-                        </button>
-                        <button class="action-btn" data-action="download" data-id="${m.id}" type="button">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                            <span class="btn-tooltip">Download</span>
+                        <button class="action-btn" data-action="bass" data-id="${m.id}" type="button">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"></path></svg>
+                            <span class="btn-tooltip">Link com grave</span>
                         </button>
                         <button class="action-btn" data-action="copy" data-id="${m.id}" type="button">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
                             <span class="btn-tooltip">Copiar link</span>
                         </button>
-                    </div>`;
+                    </div>
+                `;
 
                 card.querySelector('.music-cover').addEventListener('click', (e) => {
                     e.stopPropagation();
@@ -331,9 +333,10 @@
             if (!action || !id) return;
             e.preventDefault();
             e.stopPropagation();
-            if (action === 'open') openMusic(id);
-            if (action === 'copy') copyMusicLink(id);
-            if (action === 'download') downloadMusic(id);
+            switch (action) {
+                case 'copy': copyMusicLink(id); break;
+                case 'bass': copyBassLink(id); break;
+            }
         });
 
         function openMusic(id) {
@@ -342,15 +345,23 @@
         }
 
         function copyMusicLink(id) {
-            const url = `setradio ${SITE_ORIGIN}/api/play?id=${id}`;
-            navigator.clipboard.writeText(url)
-                .then(() => showNotification('Link copiado!', 'success'))
-                .catch(() => fallbackCopy(url, 'Link da música copiado!'));
+            const m = currentMusicList.find(x => x.id === id);
+            const url = `setradio ${m ? m.playUrl : `${SITE_ORIGIN}/api/play?id=${id}`}`;
+            navigator.clipboard.writeText(url).then(() => {
+                showNotification('Link copiado!', 'success');
+            }).catch(() => {
+                fallbackCopy(url, 'Link da música copiado!');
+            });
         }
 
-        function downloadMusic(id) {
+        function copyBassLink(id) {
             const m = currentMusicList.find(x => x.id === id);
-            window.open(m ? m.downloadUrl : `https://api.goatmusicas.com/download/?id=${id}`, '_blank');
+            const url = `setradio ${m ? m.bassUrl : `https://server1.mtabrasil.com.br/bass?id=${id}`}`;
+            navigator.clipboard.writeText(url).then(() => {
+                showNotification('Link com grave copiado!', 'success');
+            }).catch(() => {
+                fallbackCopy(url, 'Link com grave copiado!');
+            });
         }
 
         function fallbackCopy(text, msg) {
@@ -360,8 +371,12 @@
             document.body.appendChild(ta);
             ta.focus();
             ta.select();
-            try { document.execCommand('copy'); showNotification(msg); }
-            catch (e) { showNotification('Erro ao copiar.', 'error'); }
+            try {
+                document.execCommand('copy');
+                showNotification(msg);
+            } catch (e) {
+                showNotification('Erro ao copiar.', 'error');
+            }
             document.body.removeChild(ta);
         }
 
@@ -406,9 +421,6 @@
             return div.innerHTML;
         }
 
-        searchBtn.addEventListener('click', searchMusic);
-        searchInput.addEventListener('keypress', (e) => { if (e.key === 'Enter') searchMusic(); });
-
         window.addEventListener('scroll', () => {
             navbar.classList.toggle('scrolled', window.scrollY > 10);
         });
@@ -431,17 +443,27 @@
         const navLinks = document.querySelectorAll('.nav-link');
         window.addEventListener('scroll', () => {
             let current = '';
-            sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id'); });
-            navLinks.forEach(l => { l.classList.toggle('active', l.getAttribute('href') === '#' + current); });
+            sections.forEach(s => {
+                if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id');
+            });
+            navLinks.forEach(l => {
+                l.classList.toggle('active', l.getAttribute('href') === '#' + current);
+            });
         });
 
         if ('IntersectionObserver' in window) {
             const obs = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) { entry.target.classList.add('animate-in'); obs.unobserve(entry.target); }
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('animate-in');
+                        obs.unobserve(entry.target);
+                    }
                 });
             }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-            document.querySelectorAll('.step-card').forEach(el => { el.classList.add('animate-hidden'); obs.observe(el); });
+            document.querySelectorAll('.step-card').forEach(el => {
+                el.classList.add('animate-hidden');
+                obs.observe(el);
+            });
         }
     </script>
 </body>
