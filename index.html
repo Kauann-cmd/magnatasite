@@ -199,45 +199,24 @@
             }
             return '';
         }
+
 function parseDuration(v) {
-    const raw = v.duration ?? v.lengthSeconds ?? v.length ?? 0;
+    const raw = v.duration || v.lengthSeconds || v.length || 0;
     if (!raw) return 0;
 
-    // Já é número
     if (typeof raw === 'number') {
         return raw > 10000 ? Math.floor(raw / 1000) : raw;
     }
-
     if (typeof raw === 'string') {
-        // Formato ISO: PT1H30M45S
         const iso = raw.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-        if (iso) {
+        if (iso && (iso[1] || iso[2] || iso[3])) {  // ← garante que capturou algo
             return (parseInt(iso[1] || 0) * 3600)
                  + (parseInt(iso[2] || 0) * 60)
                  + parseInt(iso[3] || 0);
         }
-
-        // ✅ NOVO: Formato "H:MM:SS" ou "MM:SS" ou "M:SS"
-        const timeParts = raw.match(/^(\d+):(\d{1,2}):(\d{2})$/);
-        if (timeParts) {
-            return (parseInt(timeParts[1]) * 3600)
-                 + (parseInt(timeParts[2]) * 60)
-                 + parseInt(timeParts[3]);
-        }
-
-        const minSec = raw.match(/^(\d+):(\d{2})$/);
-        if (minSec) {
-            return (parseInt(minSec[1]) * 60)
-                 + parseInt(minSec[2]);
-        }
-
-        // Número puro como string
         const plain = parseInt(raw);
-        if (!isNaN(plain)) {
-            return plain > 10000 ? Math.floor(plain / 1000) : plain;
-        }
+        if (!isNaN(plain)) return plain > 10000 ? Math.floor(plain / 1000) : plain;
     }
-
     return 0;
 }
 
