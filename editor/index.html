@@ -15,7 +15,7 @@
 
 <nav class="navbar" id="navbar">
   <div class="nav-container">
-    <a href="index.html" class="nav-logo">
+    <a href="/" class="nav-logo">
       <span class="logo-text">Magnata Músicas</span>
     </a>
     <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu">
@@ -404,7 +404,7 @@ function loadIntro(num) {
       introBuffer = buf;
 
       card.classList.add('loaded');
-      status.textContent = '✓ Carregada (' + fmt(buf.duration) + ')';
+      status.textContent = '✓ Pronta (' + fmt(buf.duration) + ')';
       badge.textContent  = 'ATIVA';
 
       var other = num === 1 ? 2 : 1;
