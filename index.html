@@ -16,7 +16,7 @@
     <nav class="navbar" id="navbar">
         <div class="nav-container">
             <a href="#inicio" class="nav-logo">
-                <span class="logo-text">Magnata Músicas</span></span>
+                <span class="logo-text">Magnata Músicas</span>
             </a>
             <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu">
                 <span class="hamburger-line"></span>
@@ -200,25 +200,31 @@
             return '';
         }
 
-function parseDuration(v) {
-    const raw = v.duration || v.lengthSeconds || v.length || 0;
-    if (!raw) return 0;
-
-    if (typeof raw === 'number') {
-        return raw > 10000 ? Math.floor(raw / 1000) : raw;
-    }
-    if (typeof raw === 'string') {
-        const iso = raw.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
-        if (iso && (iso[1] || iso[2] || iso[3])) {  // ← garante que capturou algo
-            return (parseInt(iso[1] || 0) * 3600)
-                 + (parseInt(iso[2] || 0) * 60)
-                 + parseInt(iso[3] || 0);
+        function parseDuration(v) {
+            const raw = v.duration || v.lengthSeconds || v.length || 0;
+            if (!raw) return 0;
+            if (typeof raw === 'number') {
+                return raw > 10000 ? Math.floor(raw / 1000) : raw;
+            }
+            if (typeof raw === 'object' && raw !== null) {
+                const n = raw.seconds || raw.value || raw.total || raw.duration || 0;
+                return typeof n === 'number' ? n : 0;
+            }
+            if (typeof raw === 'string') {
+                const mmss = raw.match(/^(\d+):(\d+)(?::(\d+))?$/);
+                if (mmss) {
+                    if (mmss[3]) return parseInt(mmss[1]) * 3600 + parseInt(mmss[2]) * 60 + parseInt(mmss[3]);
+                    return parseInt(mmss[1]) * 60 + parseInt(mmss[2]);
+                }
+                const iso = raw.match(/PT(?:(\d+)H)?(?:(\d+)M)?(?:(\d+)S)?/);
+                if (iso && (iso[1] || iso[2] || iso[3])) {
+                    return (parseInt(iso[1] || 0) * 3600) + (parseInt(iso[2] || 0) * 60) + parseInt(iso[3] || 0);
+                }
+                const plain = parseInt(raw);
+                if (!isNaN(plain)) return plain > 10000 ? Math.floor(plain / 1000) : plain;
+            }
+            return 0;
         }
-        const plain = parseInt(raw);
-        if (!isNaN(plain)) return plain > 10000 ? Math.floor(plain / 1000) : plain;
-    }
-    return 0;
-}
 
         searchBtn.addEventListener('click', searchMusic);
         searchInput.addEventListener('keypress', (e) => {
