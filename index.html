@@ -29,8 +29,8 @@
                 <li><a href="/contact" class="nav-link">Contato</a></li>
                 <li><a href="#" class="nav-link">Em Breve</a></li>
             </ul>
-        </div>
-    </nav>
+            </div>
+            </nav>
 
     <section class="hero" id="inicio">
         <div class="hero-container">
@@ -158,96 +158,100 @@
     </section>
 
     <footer class="footer">
-        <div class="footer-container">
-            <div class="footer-bottom">
-                <p>© 2025 - 2026 Magnata Músicas. Todos os direitos reservados.</p>
-            </div>
-        </div>
-    </footer>
-
-    <div class="fm-player-wrap" id="miniPlayer">
-        <audio id="playerAudio" preload="none"></audio>
-        <div class="fm-player-card">
-
-            <div class="fm-thumb-group" id="mplayerPlayPause">
-                <img id="mplayerThumb" alt="thumb" src="">
-                <div class="fm-thumb-overlay">
-                    <svg class="fm-icon-play" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-                    <svg class="fm-icon-pause" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="none" style="display:none"><rect x="5" y="3" width="4" height="18" rx="1"/><rect x="15" y="3" width="4" height="18" rx="1"/></svg>
-                </div>
-            </div>
-
-            <div class="fm-title-area">
-                <div class="fm-title-row">
-                    <p class="fm-title" id="mplayerTitle">–</p>
-                    <p class="fm-time" id="mplayerTime">0:00 / 0:00</p>
-                </div>
-                <div class="fm-seek-wrap">
-                    <input type="range" class="fm-seek" id="mplayerSeek" min="0" max="100" value="0" step="0.1">
-                    <div class="fm-seek-fill" id="mplayerSeekFill"></div>
-                </div>
-            </div>
-
-            <div class="fm-player-right">
-                <svg class="fm-vol-icon" id="mplayerVolBtn" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#646464" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-                </svg>
-                <div class="fm-vol-wrap">
-                    <input type="range" class="fm-volume" id="mplayerVolume" min="0" max="1" step="0.01" value="1">
-                    <div class="fm-vol-fill" id="mplayerVolFill"></div>
-                </div>
-            </div>
-
-            <button class="fm-close" id="mplayerClose" type="button">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-                    <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
-                </svg>
-            </button>
-
+    <div class="footer-container">
+        <div class="footer-bottom">
+            <p>© 2025 - 2026 Magnata Músicas. Todos os direitos reservados.</p>
         </div>
     </div>
+</footer>
+
+<div class="fm-player-wrap" id="miniPlayer">
+    <audio id="playerAudio" preload="none"></audio>
+    <div class="fm-player-card">
+
+        <div class="fm-thumb-group" id="mplayerPlayPause">
+            <img id="mplayerThumb" alt="thumb" src="">
+            <div class="fm-thumb-overlay">
+                <svg class="fm-icon-play" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="none"><polygon points="6 3 20 12 6 21 6 3"/></svg>
+                <svg class="fm-icon-pause" xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="white" stroke="none" style="display:none"><rect x="5" y="3" width="4" height="18" rx="1"/><rect x="15" y="3" width="4" height="18" rx="1"/></svg>
+            </div>
+        </div>
+
+        <div class="fm-title-area">
+            <div class="fm-title-row">
+                <p class="fm-title" id="mplayerTitle">–</p>
+                <p class="fm-time" id="mplayerTime">0:00 / 0:00</p>
+            </div>
+            <div class="fm-seek-wrap">
+                <input type="range" class="fm-seek" id="mplayerSeek" min="0" max="100" value="0" step="0.1">
+                <div class="fm-seek-fill" id="mplayerSeekFill"></div>
+            </div>
+        </div>
+
+        <div class="fm-player-right">
+            <svg class="fm-vol-icon" id="mplayerVolBtn" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#646464" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+            </svg>
+            <div class="fm-vol-wrap">
+                <input type="range" class="fm-volume" id="mplayerVolume" min="0" max="1" step="0.01" value="1">
+                <div class="fm-vol-fill" id="mplayerVolFill"></div>
+            </div>
+        </div>
+
+        <button class="fm-close" id="mplayerClose" type="button">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+
+    </div>
+</div>
 
     <div class="notification" id="notification">
-        <div class="notif-inner">
-            <div class="notif-icon" id="notifIcon"></div>
-            <span class="notif-msg" id="notifMsg"></span>
-        </div>
-        <div class="notif-bar" id="notifBar"></div>
+    <div class="notif-inner">
+        <div class="notif-icon" id="notifIcon"></div>
+        <span class="notif-msg" id="notifMsg"></span>
     </div>
+    <div class="notif-bar" id="notifBar"></div>
+</div>
 
     <script>
-        const searchInput        = document.getElementById('searchInput');
-        const searchBtn          = document.getElementById('searchBtn');
+        const searchInput = document.getElementById('searchInput');
+        const searchBtn = document.getElementById('searchBtn');
         const musicListContainer = document.getElementById('musicList');
-        const emptyState         = document.getElementById('emptyState');
-        const resultsSection     = document.getElementById('resultados');
-        const resultsTitle       = document.getElementById('resultsTitle');
-        const resultsSubtitle    = document.getElementById('resultsSubtitle');
-        const navbar             = document.getElementById('navbar');
-        const navToggle          = document.getElementById('navToggle');
-        const navMenu            = document.getElementById('navMenu');
+        const emptyState = document.getElementById('emptyState');
+        const resultsSection = document.getElementById('resultados');
+        const resultsTitle = document.getElementById('resultsTitle');
+        const resultsSubtitle = document.getElementById('resultsSubtitle');
+        const notification = document.getElementById('notification');
+        const navbar = document.getElementById('navbar');
+        const navToggle = document.getElementById('navToggle');
+        const navMenu = document.getElementById('navMenu');
 
         let currentMusicList = [];
-        const SITE_ORIGIN    = window.location.origin;
-        const API_MM         = 'https://search.mtamusicas.com/api/v1';
-        const API_BRASIL     = 'https://server1.mtabrasil.com.br';
+        const SITE_ORIGIN = window.location.origin;
+        const API = 'https://server1.mtabrasil.com.br';
 
         function parseAuthor(v) {
+            if (!v.author && !v.channel && !v.channelTitle) return '';
             const raw = v.author || v.channel || v.channelTitle;
-            if (!raw) return '';
             if (typeof raw === 'string') return raw;
-            if (typeof raw === 'object') return raw.name || raw.displayName || raw.title || '';
+            if (typeof raw === 'object' && raw !== null) {
+                return raw.name || raw.displayName || raw.title || raw.channelTitle || '';
+            }
             return '';
         }
 
         function parseDuration(v) {
             const raw = v.duration || v.lengthSeconds || v.length || 0;
             if (!raw) return 0;
-            if (typeof raw === 'number') return raw > 10000 ? Math.floor(raw / 1000) : raw;
+            if (typeof raw === 'number') {
+                return raw > 10000 ? Math.floor(raw / 1000) : raw;
+            }
             if (typeof raw === 'object' && raw !== null) {
-                const n = raw.seconds || raw.value || raw.total || 0;
+                const n = raw.seconds || raw.value || raw.total || raw.duration || 0;
                 return typeof n === 'number' ? n : 0;
             }
             if (typeof raw === 'string') {
@@ -266,23 +270,6 @@
             return 0;
         }
 
-        function formatTime(s) {
-            if (!s || isNaN(s)) return '0:00';
-            const m   = Math.floor(s / 60);
-            const sec = Math.floor(s % 60);
-            return `${m}:${sec < 10 ? '0' : ''}${sec}`;
-        }
-
-        function escapeHTML(str) {
-            const div = document.createElement('div');
-            div.appendChild(document.createTextNode(str || ''));
-            return div.innerHTML;
-        }
-
-        function playUrl(music) {
-            return `${SITE_ORIGIN}/api/play?id=${music.id}&title=${encodeURIComponent(music.title || '')}`;
-        }
-
         searchBtn.addEventListener('click', searchMusic);
         searchInput.addEventListener('keypress', (e) => {
             if (e.key === 'Enter') searchMusic();
@@ -298,31 +285,27 @@
                     <p>Buscando músicas...</p>
                 </div>
             `;
-            resultsTitle.textContent    = 'Buscando...';
+            resultsTitle.textContent = 'Buscando...';
             resultsSubtitle.textContent = '';
             resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            const q = encodeURIComponent(term.replace(/ /g, '+'));
-
-            fetch(`${API_MM}/search-youtube?q=${q}`)
+            fetch(`${API}/search?q=${encodeURIComponent(term.replace(/ /g, '+'))}`)
                 .then(r => r.json())
                 .then(data => {
-                    const arr = Array.isArray(data) ? data : (data && data.items ? data.items : []);
-                    const merged = arr.map(v => {
-                        const id   = v.id || '';
+                    const arr = Array.isArray(data) ? data : (data.items || []);
+                    currentMusicList = arr.map(v => {
                         const secs = parseDuration(v);
+                        const author = parseAuthor(v);
                         return {
-                            id,
-                            title:         v.name || v.title || '',
-                            author:        parseAuthor(v),
-                            duration:      secs,
+                            id:           v.id || '',
+                            title:        v.name || v.title || '',
+                            author:       author,
+                            duration:     secs,
                             duration_view: formatTime(secs),
-                            richThumb:     v.thumbnail || v.richThumb || v.thumb
-                                           || `https://img.youtube.com/vi/${id}/mqdefault.jpg`
+                            richThumb:    v.thumbnail || v.richThumb || v.thumb
+                                          || `https://img.youtube.com/vi/${v.id}/mqdefault.jpg`,
                         };
-                    }).filter(v => v.id);
-
-                    currentMusicList = merged;
+                    });
                     displayMusicList(currentMusicList, term);
                 })
                 .catch(() => {
@@ -337,7 +320,7 @@
                             <p>Verifique sua internet e tente novamente</p>
                         </div>
                     `;
-                    resultsTitle.textContent    = 'Erro na busca';
+                    resultsTitle.textContent = 'Erro na busca';
                     resultsSubtitle.textContent = '';
                 });
         }
@@ -355,20 +338,20 @@
                         <p>Tente buscar com outro termo</p>
                     </div>
                 `;
-                resultsTitle.textContent    = 'Resultados da Busca';
+                resultsTitle.textContent = 'Resultados da Busca';
                 resultsSubtitle.textContent = `Nenhum resultado para "${term}"`;
                 return;
             }
 
-            resultsTitle.textContent    = 'Resultados da Busca';
+            resultsTitle.textContent = 'Resultados da Busca';
             resultsSubtitle.textContent = `${list.length} música${list.length !== 1 ? 's' : ''} encontrada${list.length !== 1 ? 's' : ''} para "${term}"`;
             musicListContainer.innerHTML = '';
 
             list.forEach((m, idx) => {
                 const card = document.createElement('div');
-                card.className     = 'music-card';
+                card.className = 'music-card';
                 card.dataset.index = idx;
-                card.dataset.id    = m.id;
+                card.dataset.id = m.id;
 
                 const thumb = m.richThumb || `https://img.youtube.com/vi/${m.id}/mqdefault.jpg`;
 
@@ -416,12 +399,12 @@
             const btn = e.target.closest('[data-action]');
             if (!btn) return;
             const action = btn.getAttribute('data-action');
-            const id     = btn.getAttribute('data-id');
+            const id = btn.getAttribute('data-id');
             if (!action || !id) return;
             e.preventDefault();
             e.stopPropagation();
             switch (action) {
-                case 'youtube':  openYoutube(id); break;
+                case 'youtube': openYoutube(id); break;
                 case 'download': downloadMusic(id, btn.getAttribute('data-title')); break;
                 case 'copy':     copyMusicLink(id); break;
             }
@@ -431,14 +414,47 @@
             window.open(`https://www.youtube.com/watch?v=${id}`, '_blank');
         }
 
+        const miniPlayer=document.getElementById('miniPlayer'),playerAudio=document.getElementById('playerAudio'),mplayerThumb=document.getElementById('mplayerThumb'),mplayerTitle=document.getElementById('mplayerTitle'),mplayerTime=document.getElementById('mplayerTime'),mplayerSeek=document.getElementById('mplayerSeek'),mplayerSeekFill=document.getElementById('mplayerSeekFill'),mplayerVolume=document.getElementById('mplayerVolume'),mplayerVolFill=document.getElementById('mplayerVolFill'),mplayerVolBtn=document.getElementById('mplayerVolBtn'),mplayerClose=document.getElementById('mplayerClose'),mplayerPP=document.getElementById('mplayerPlayPause'),fmIconPlay=mplayerPP.querySelector('.fm-icon-play'),fmIconPause=mplayerPP.querySelector('.fm-icon-pause');
+        let currentPlayerId=null,lastVol=1,isSeeking=false;
+
+        function playMusic(id){
+            const music=currentMusicList.find(m=>m.id===id);
+            if(!music){window.open(`${API}/play?id=${id}`,'_blank');return;}
+            if(currentPlayerId===id){playerAudio.paused?playerAudio.play():playerAudio.pause();return;}
+            currentPlayerId=id;
+            mplayerThumb.src=music.richThumb||`https://img.youtube.com/vi/${id}/mqdefault.jpg`;
+            mplayerTitle.textContent=music.title;
+            mplayerTime.textContent=`0:00 / ${music.duration_view||'0:00'}`;
+            mplayerSeek.value=0;setSeekFill(0);
+            playerAudio.src=`${API}/play?id=${id}`;
+            playerAudio.load();playerAudio.play().catch(()=>{});
+            miniPlayer.classList.add('active');
+            document.querySelectorAll('.music-card').forEach(c=>c.classList.remove('is-playing'));
+            const card=document.querySelector(`.music-card[data-id="${id}"]`);
+            if(card)card.classList.add('is-playing');
+        }
+        function setSeekFill(p){mplayerSeekFill.style.width=Math.max(0,Math.min(100,p))+'%'}
+        function setVolFill(v){mplayerVolFill.style.width=Math.max(0,Math.min(1,v))*100+'%'}
+            playerAudio.addEventListener('play',()=>{fmIconPlay.style.display='none';fmIconPause.style.display='block'});
+            playerAudio.addEventListener('pause',()=>{fmIconPlay.style.display='block';fmIconPause.style.display='none'});
+            playerAudio.addEventListener('ended',()=>{fmIconPlay.style.display='block';fmIconPause.style.display='none';setSeekFill(100)});
+            mplayerPP.addEventListener('click',()=>{if(!currentPlayerId)return;playerAudio.paused?playerAudio.play():playerAudio.pause()});
+            playerAudio.addEventListener('timeupdate',()=>{if(isSeeking)return;const c=playerAudio.currentTime,d=playerAudio.duration||0,p=d>0?(c/d)*100:0;mplayerSeek.value=p;setSeekFill(p);mplayerTime.textContent=`${formatTime(c)} / ${formatTime(d)}`});
+            mplayerSeek.addEventListener('mousedown',()=>{isSeeking=true});
+            mplayerSeek.addEventListener('touchstart',()=>{isSeeking=true});
+            mplayerSeek.addEventListener('input',()=>{const p=parseFloat(mplayerSeek.value);setSeekFill(p);const d=playerAudio.duration;if(d)playerAudio.currentTime=(p/100)*d});
+            mplayerSeek.addEventListener('change',()=>{isSeeking=false});
+            mplayerVolume.addEventListener('input',()=>{const v=parseFloat(mplayerVolume.value);playerAudio.volume=v;if(v>0)lastVol=v;setVolFill(v)});
+            mplayerVolBtn.addEventListener('click',()=>{if(playerAudio.volume>0){lastVol=playerAudio.volume;playerAudio.volume=0;mplayerVolume.value=0;setVolFill(0)}else{playerAudio.volume=lastVol;mplayerVolume.value=lastVol;setVolFill(lastVol)}});
+            mplayerClose.addEventListener('click',()=>{playerAudio.pause();playerAudio.src='';currentPlayerId=null;miniPlayer.classList.remove('active');document.querySelectorAll('.music-card').forEach(c=>c.classList.remove('is-playing'));mplayerSeek.value=0;setSeekFill(0);fmIconPlay.style.display='block';fmIconPause.style.display='none'});
+            setVolFill(1);
+
         function downloadMusic(id, title) {
-            window.open(`${API_BRASIL}/download?id=${id}&title=${encodeURIComponent(title || '')}`, '_blank');
+            window.open(`${API}/download?id=${id}&title=${encodeURIComponent(title || '')}`, '_blank');
         }
 
         function copyMusicLink(id) {
-            const music = currentMusicList.find(m => m.id === id);
-            if (!music) return;
-            const url = `setradio ${playUrl(music)}`;
+            const url = `setradio ${SITE_ORIGIN}/api/play?id=${id}`;
             navigator.clipboard.writeText(url).then(() => {
                 showNotification('Link copiado!', 'success');
             }).catch(() => {
@@ -462,113 +478,6 @@
             document.body.removeChild(ta);
         }
 
-        const miniPlayer      = document.getElementById('miniPlayer');
-        const playerAudio     = document.getElementById('playerAudio');
-        const mplayerThumb    = document.getElementById('mplayerThumb');
-        const mplayerTitle    = document.getElementById('mplayerTitle');
-        const mplayerTime     = document.getElementById('mplayerTime');
-        const mplayerSeek     = document.getElementById('mplayerSeek');
-        const mplayerSeekFill = document.getElementById('mplayerSeekFill');
-        const mplayerVolume   = document.getElementById('mplayerVolume');
-        const mplayerVolFill  = document.getElementById('mplayerVolFill');
-        const mplayerVolBtn   = document.getElementById('mplayerVolBtn');
-        const mplayerClose    = document.getElementById('mplayerClose');
-        const mplayerPP       = document.getElementById('mplayerPlayPause');
-        const fmIconPlay      = mplayerPP.querySelector('.fm-icon-play');
-        const fmIconPause     = mplayerPP.querySelector('.fm-icon-pause');
-
-        let currentPlayerId = null;
-        let lastVol         = 1;
-        let isSeeking       = false;
-
-        function playMusic(id) {
-            const music = currentMusicList.find(m => m.id === id);
-            if (!music) { window.open(`${SITE_ORIGIN}/api/play?id=${id}`, '_blank'); return; }
-            if (currentPlayerId === id) { playerAudio.paused ? playerAudio.play() : playerAudio.pause(); return; }
-
-            currentPlayerId          = id;
-            mplayerThumb.src         = music.richThumb || `https://img.youtube.com/vi/${id}/mqdefault.jpg`;
-            mplayerTitle.textContent = music.title;
-            mplayerTime.textContent  = `0:00 / ${music.duration_view || '0:00'}`;
-            mplayerSeek.value        = 0;
-            setSeekFill(0);
-
-            playerAudio.src = playUrl(music);
-            playerAudio.load();
-            playerAudio.play().catch(() => {});
-
-            miniPlayer.classList.add('active');
-            document.querySelectorAll('.music-card').forEach(c => c.classList.remove('is-playing'));
-            const card = document.querySelector(`.music-card[data-id="${id}"]`);
-            if (card) card.classList.add('is-playing');
-        }
-
-        function setSeekFill(p) { mplayerSeekFill.style.width = Math.max(0, Math.min(100, p)) + '%'; }
-        function setVolFill(v)  { mplayerVolFill.style.width  = Math.max(0, Math.min(1, v)) * 100 + '%'; }
-
-        playerAudio.addEventListener('play',  () => { fmIconPlay.style.display = 'none';  fmIconPause.style.display = 'block'; });
-        playerAudio.addEventListener('pause', () => { fmIconPlay.style.display = 'block'; fmIconPause.style.display = 'none';  });
-        playerAudio.addEventListener('ended', () => { fmIconPlay.style.display = 'block'; fmIconPause.style.display = 'none'; setSeekFill(100); });
-
-        mplayerPP.addEventListener('click', () => {
-            if (!currentPlayerId) return;
-            playerAudio.paused ? playerAudio.play() : playerAudio.pause();
-        });
-
-        playerAudio.addEventListener('timeupdate', () => {
-            if (isSeeking) return;
-            const c = playerAudio.currentTime;
-            const d = playerAudio.duration || 0;
-            const p = d > 0 ? (c / d) * 100 : 0;
-            mplayerSeek.value = p;
-            setSeekFill(p);
-            mplayerTime.textContent = `${formatTime(c)} / ${formatTime(d)}`;
-        });
-
-        mplayerSeek.addEventListener('mousedown',  () => { isSeeking = true; });
-        mplayerSeek.addEventListener('touchstart', () => { isSeeking = true; });
-        mplayerSeek.addEventListener('input', () => {
-            const p = parseFloat(mplayerSeek.value);
-            setSeekFill(p);
-            const d = playerAudio.duration;
-            if (d) playerAudio.currentTime = (p / 100) * d;
-        });
-        mplayerSeek.addEventListener('change', () => { isSeeking = false; });
-
-        mplayerVolume.addEventListener('input', () => {
-            const v = parseFloat(mplayerVolume.value);
-            playerAudio.volume = v;
-            if (v > 0) lastVol = v;
-            setVolFill(v);
-        });
-
-        mplayerVolBtn.addEventListener('click', () => {
-            if (playerAudio.volume > 0) {
-                lastVol = playerAudio.volume;
-                playerAudio.volume  = 0;
-                mplayerVolume.value = 0;
-                setVolFill(0);
-            } else {
-                playerAudio.volume  = lastVol;
-                mplayerVolume.value = lastVol;
-                setVolFill(lastVol);
-            }
-        });
-
-        mplayerClose.addEventListener('click', () => {
-            playerAudio.pause();
-            playerAudio.src  = '';
-            currentPlayerId  = null;
-            miniPlayer.classList.remove('active');
-            document.querySelectorAll('.music-card').forEach(c => c.classList.remove('is-playing'));
-            mplayerSeek.value         = 0;
-            setSeekFill(0);
-            fmIconPlay.style.display  = 'block';
-            fmIconPause.style.display = 'none';
-        });
-
-        setVolFill(1);
-
         const NOTIF_ICONS = {
             success: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
             error:   '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>',
@@ -579,10 +488,10 @@
 
         function showNotification(msg, type) {
             type = type || 'success';
-            const notif = document.getElementById('notification');
-            const icon  = document.getElementById('notifIcon');
-            const msgEl = document.getElementById('notifMsg');
-            const bar   = document.getElementById('notifBar');
+            const notif  = document.getElementById('notification');
+            const icon   = document.getElementById('notifIcon');
+            const msgEl  = document.getElementById('notifMsg');
+            const bar    = document.getElementById('notifBar');
             icon.innerHTML        = NOTIF_ICONS[type];
             icon.style.background = NOTIF_BG[type];
             icon.style.color      = NOTIF_COLOR[type];
@@ -595,6 +504,19 @@
             notif.classList.add('show');
             clearTimeout(notifTimer);
             notifTimer = setTimeout(() => notif.classList.remove('show'), 4000);
+        }
+
+        function formatTime(s) {
+            if (!s || isNaN(s)) return '0:00';
+            const m = Math.floor(s / 60);
+            const sec = Math.floor(s % 60);
+            return `${m}:${sec < 10 ? '0' : ''}${sec}`;
+        }
+
+        function escapeHTML(str) {
+            const div = document.createElement('div');
+            div.appendChild(document.createTextNode(str || ''));
+            return div.innerHTML;
         }
 
         window.addEventListener('scroll', () => {
