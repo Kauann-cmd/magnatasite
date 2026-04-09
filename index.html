@@ -230,9 +230,9 @@
         const navMenu            = document.getElementById('navMenu');
 
         let currentMusicList = [];
-        const SITE_ORIGIN = window.location.origin;
-        const API_BRASIL  = 'https://server1.mtabrasil.com.br';
-        const API_MM      = 'https://search.mtamusicas.com/api/v1';
+        const SITE_ORIGIN    = window.location.origin;
+        const API_MM         = 'https://search.mtamusicas.com/api/v1';
+        const API_BRASIL     = 'https://server1.mtabrasil.com.br';
 
         function parseAuthor(v) {
             const raw = v.author || v.channel || v.channelTitle;
@@ -279,12 +279,8 @@
             return div.innerHTML;
         }
 
-        // Retorna a URL de play pela nossa própria API
         function playUrl(music) {
-            if (music.source === 'mm') {
-                return `${SITE_ORIGIN}/api/play?id=${music.id}&title=${encodeURIComponent(music.title || '')}`;
-            }
-            return `${SITE_ORIGIN}/api/play?id=${music.id}`;
+            return `${SITE_ORIGIN}/api/play?id=${music.id}&title=${encodeURIComponent(music.title || '')}`;
         }
 
         searchBtn.addEventListener('click', searchMusic);
@@ -308,53 +304,42 @@
 
             const q = encodeURIComponent(term.replace(/ /g, '+'));
 
-            Promise.allSettled([
-                fetch(`${API_MM}/search-youtube?q=${q}`).then(r => r.json()),
-                fetch(`${API_BRASIL}/search?q=${q}`).then(r => r.json())
-            ]).then(([resMM, resBrasil]) => {
-                const seen   = new Set();
-                const merged = [];
-
-                function pushItems(data, source) {
+            fetch(`${API_MM}/search-youtube?q=${q}`)
+                .then(r => r.json())
+                .then(data => {
                     const arr = Array.isArray(data) ? data : (data && data.items ? data.items : []);
-                    arr.forEach(v => {
-                        const id = v.id || '';
-                        if (!id || seen.has(id)) return;
-                        seen.add(id);
+                    const merged = arr.map(v => {
+                        const id   = v.id || '';
                         const secs = parseDuration(v);
-                        merged.push({
+                        return {
                             id,
                             title:         v.name || v.title || '',
                             author:        parseAuthor(v),
                             duration:      secs,
                             duration_view: formatTime(secs),
                             richThumb:     v.thumbnail || v.richThumb || v.thumb
-                                           || `https://img.youtube.com/vi/${id}/mqdefault.jpg`,
-                            source
-                        });
-                    });
-                }
+                                           || `https://img.youtube.com/vi/${id}/mqdefault.jpg`
+                        };
+                    }).filter(v => v.id);
 
-                if (resMM.status     === 'fulfilled') pushItems(resMM.value,     'mm');
-                if (resBrasil.status === 'fulfilled') pushItems(resBrasil.value, 'brasil');
-
-                currentMusicList = merged;
-                displayMusicList(currentMusicList, term);
-            }).catch(() => {
-                musicListContainer.innerHTML = `
-                    <div class="empty-state">
-                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="1.5">
-                            <circle cx="12" cy="12" r="10"></circle>
-                            <path d="M12 8v4"></path>
-                            <path d="M12 16h.01"></path>
-                        </svg>
-                        <h4>Erro na conexão</h4>
-                        <p>Verifique sua internet e tente novamente</p>
-                    </div>
-                `;
-                resultsTitle.textContent    = 'Erro na busca';
-                resultsSubtitle.textContent = '';
-            });
+                    currentMusicList = merged;
+                    displayMusicList(currentMusicList, term);
+                })
+                .catch(() => {
+                    musicListContainer.innerHTML = `
+                        <div class="empty-state">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="1.5">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <path d="M12 8v4"></path>
+                                <path d="M12 16h.01"></path>
+                            </svg>
+                            <h4>Erro na conexão</h4>
+                            <p>Verifique sua internet e tente novamente</p>
+                        </div>
+                    `;
+                    resultsTitle.textContent    = 'Erro na busca';
+                    resultsSubtitle.textContent = '';
+                });
         }
 
         function displayMusicList(list, term) {
