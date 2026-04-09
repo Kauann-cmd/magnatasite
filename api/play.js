@@ -17,8 +17,7 @@ export default function handler(req, res) {
             return s.length === 0 ? '_' : s;
         }
         const slug = sanitize(title).replace(/\s+/g, '_');
-        return res.redirect(308, `https://play.mtamusicas.com/${slug}/${id}`);
+        return res.redirect(308, `https://play.mtamusicas.com/live/${slug}/${id}`);
     }
-
     return res.redirect(308, `https://server1.mtabrasil.com.br/play?id=${id}`);
 }
