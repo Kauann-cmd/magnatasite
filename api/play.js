@@ -9,15 +9,13 @@ export default function handler(req, res) {
         return res.status(400).json({ error: 'ID inválido' });
     }
 
-    if (title !== undefined) {
-        function sanitize(t) {
-            if (!t) return '_';
-            let s = t.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
-            s = s.replace(/[^a-zA-Z0-9\s]/g, '').trim();
-            return s.length === 0 ? '_' : s;
-        }
-        const slug = sanitize(title).replace(/\s+/g, '_');
-        return res.redirect(308, `https://play.mtamusicas.com/live/${slug}/${id}`);
+    function sanitize(t) {
+        if (!t) return '_';
+        let s = t.normalize('NFD').replace(/[\u0300-\u036f]/g, '');
+        s = s.replace(/[^a-zA-Z0-9\s]/g, '').trim();
+        return s.length === 0 ? '_' : s;
     }
-    return res.redirect(308, `https://server1.mtabrasil.com.br/play?id=${id}`);
+
+    const slug = title ? sanitize(title).replace(/\s+/g, '_') : '_';
+    return res.redirect(308, `https://play.mtamusicas.com/live/${slug}/${id}`);
 }
