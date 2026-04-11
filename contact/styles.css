@@ -69,15 +69,6 @@ ul{list-style:none}
 ::-webkit-scrollbar-thumb:hover{background:var(--purple)}
 ::selection{background:var(--purple);color:#fff}
 
-.notification{position:fixed;bottom:20px;right:20px;background:var(--white);border-radius:var(--radius-md);box-shadow:var(--shadow-xl);min-width:260px;max-width:320px;overflow:hidden;opacity:0;pointer-events:none;transform:translateY(16px);transition:opacity .3s ease,transform .3s ease;z-index:2000}
-.notification.show{opacity:1;pointer-events:auto;transform:translateY(0)}
-.notif-inner{display:flex;align-items:center;gap:12px;padding:14px 18px 12px}
-.notif-icon{width:36px;height:36px;border-radius:var(--radius-sm);display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.notif-msg{font-size:.88rem;font-weight:600;color:var(--black);line-height:1.4}
-.notif-bar{height:3px;background:linear-gradient(90deg,var(--purple),var(--purple-dark));width:100%;transform-origin:left}
-.notification.show .notif-bar{animation:notifProgress 4s linear forwards}
-@keyframes notifProgress{from{transform:scaleX(1)}to{transform:scaleX(0)}}
-
 @media(max-width:900px){
 .logo-text{padding-left:24px}
 .cards-grid{grid-template-columns:1fr 1fr;gap:14px}
@@ -99,8 +90,6 @@ ul{list-style:none}
 .scard{padding:28px 14px 22px}
 .scard-icon{width:58px;height:58px;margin-bottom:16px}
 .apoio-card{padding:24px 20px;flex-direction:column;gap:20px}
-.notification{bottom:16px;left:16px;right:16px;max-width:none;transform:translateY(16px)}
-.notification.show{transform:translateY(0)}
 }
 
 @media(max-width:380px){.cards-grid{grid-template-columns:1fr}}
