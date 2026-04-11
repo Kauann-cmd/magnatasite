@@ -167,6 +167,7 @@ img{display:block;max-width:100%}
 .fm-seek::-webkit-slider-thumb:active{transform:scale(1.25)}
 .fm-seek::-moz-range-thumb{width:13px;height:13px;border-radius:50%;background:#7D67E8;border:2px solid #fff;cursor:pointer}
 .fm-player-right{display:flex;align-items:center;gap:10px;flex-shrink:0;width:140px}
+.fm-vol-btn{background:none;border:none;cursor:pointer;padding:0;display:flex;align-items:center;justify-content:center}
 .fm-vol-icon{flex-shrink:0;cursor:pointer;transition:stroke .2s}
 .fm-vol-icon:hover{stroke:#7D67E8}
 .fm-vol-wrap{position:relative;flex:1;height:5px}
