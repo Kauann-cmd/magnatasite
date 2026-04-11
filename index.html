@@ -189,11 +189,13 @@
         </div>
 
         <div class="fm-player-right">
-            <svg class="fm-vol-icon" id="mplayerVolBtn" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#646464" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
-                <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
-                <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
-            </svg>
+            <button class="fm-vol-btn" id="mplayerVolBtn" type="button">
+                <svg class="fm-vol-icon" id="volSvg" xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#646464" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/>
+                    <path d="M15.54 8.46a5 5 0 0 1 0 7.07"/>
+                    <path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>
+                </svg>
+            </button>
             <div class="fm-vol-wrap">
                 <input type="range" class="fm-volume" id="mplayerVolume" min="0" max="1" step="0.01" value="1">
                 <div class="fm-vol-fill" id="mplayerVolFill"></div>
@@ -232,7 +234,7 @@
 
         let currentMusicList = [];
         const SITE_ORIGIN = window.location.origin;
-        const API = 'https://server1.mtabrasil.com.br';
+        const API = 'https://apimusic.thryl.com.br';
 
         function parseAuthor(v) {
             if (!v.author && !v.channel && !v.channelTitle) return '';
@@ -289,15 +291,19 @@
             resultsSubtitle.textContent = '';
             resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
-            fetch(`${API}/search?q=${encodeURIComponent(term.replace(/ /g, '+'))}`)
-                .then(r => r.json())
+            fetch(`${API}/search?q=${encodeURIComponent(term.replace(/ /g, '+'))}`, { signal: AbortSignal.timeout(10000) })
+                .then(r => {
+                    if (!r.ok) throw new Error('Network response was not ok');
+                    return r.json();
+                })
                 .then(data => {
-                    const arr = Array.isArray(data) ? data : (data.items || []);
+                    const arr = Array.isArray(data) ? data : (data.data || data.items || []);
                     currentMusicList = arr.map(v => {
                         const secs = parseDuration(v);
                         const author = parseAuthor(v);
+                        const validId = /^[a-zA-Z0-9_-]{1,50}$/.test(v.id) ? v.id : '';
                         return {
-                            id:           v.id || '',
+                            id:           validId,
                             title:        v.name || v.title || '',
                             author:       author,
                             duration:     secs,
@@ -375,13 +381,13 @@
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
                             <span class="btn-tooltip">Abrir no Youtube</span>
                         </button>
-                        <button class="action-btn" data-action="download" data-id="${m.id}" data-title="${escapeHTML(m.title)}" type="button">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
-                            <span class="btn-tooltip">Download</span>
-                        </button>
                         <button class="action-btn" data-action="copy" data-id="${m.id}" type="button">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
                             <span class="btn-tooltip">Copiar link</span>
+                        </button>
+                        <button class="action-btn" data-action="copybass" data-id="${m.id}" type="button">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"></path></svg>
+                            <span class="btn-tooltip">Copiar com grave</span>
                         </button>
                     </div>
                 `;
@@ -405,8 +411,8 @@
             e.stopPropagation();
             switch (action) {
                 case 'youtube': openYoutube(id); break;
-                case 'download': downloadMusic(id, btn.getAttribute('data-title')); break;
                 case 'copy':     copyMusicLink(id); break;
+                case 'copybass': copyMusicLinkBass(id); break;
             }
         });
 
@@ -419,15 +425,15 @@
 
         function playMusic(id){
             const music=currentMusicList.find(m=>m.id===id);
-            if(!music){window.open(`${API}/play?id=${id}`,'_blank');return;}
+            if(!music){window.open(`${API}/play?q=${id}`,'_blank');return;}
             if(currentPlayerId===id){playerAudio.paused?playerAudio.play():playerAudio.pause();return;}
             currentPlayerId=id;
             mplayerThumb.src=music.richThumb||`https://img.youtube.com/vi/${id}/mqdefault.jpg`;
             mplayerTitle.textContent=music.title;
             mplayerTime.textContent=`0:00 / ${music.duration_view||'0:00'}`;
             mplayerSeek.value=0;setSeekFill(0);
-            playerAudio.src=`${API}/play?id=${id}`;
-            playerAudio.load();playerAudio.play().catch(()=>{});
+            playerAudio.src=`${API}/play?q=${id}`;
+            playerAudio.load();playerAudio.play().catch(e=>console.log('Play error:',e));
             miniPlayer.classList.add('active');
             document.querySelectorAll('.music-card').forEach(c=>c.classList.remove('is-playing'));
             const card=document.querySelector(`.music-card[data-id="${id}"]`);
@@ -444,25 +450,39 @@
             mplayerSeek.addEventListener('touchstart',()=>{isSeeking=true});
             mplayerSeek.addEventListener('input',()=>{const p=parseFloat(mplayerSeek.value);setSeekFill(p);const d=playerAudio.duration;if(d)playerAudio.currentTime=(p/100)*d});
             mplayerSeek.addEventListener('change',()=>{isSeeking=false});
-            mplayerVolume.addEventListener('input',()=>{const v=parseFloat(mplayerVolume.value);playerAudio.volume=v;if(v>0)lastVol=v;setVolFill(v)});
-            mplayerVolBtn.addEventListener('click',()=>{if(playerAudio.volume>0){lastVol=playerAudio.volume;playerAudio.volume=0;mplayerVolume.value=0;setVolFill(0)}else{playerAudio.volume=lastVol;mplayerVolume.value=lastVol;setVolFill(lastVol)}});
+            mplayerVolume.addEventListener('input',()=>{const v=parseFloat(mplayerVolume.value);playerAudio.volume=v;if(v>0){lastVol=v;}setVolFill(v);updateVolIcon(v)});
+            mplayerVolBtn.addEventListener('click',()=>{if(playerAudio.volume>0){lastVol=playerAudio.volume;playerAudio.volume=0;mplayerVolume.value=0;setVolFill(0);updateVolIcon(0)}else{playerAudio.volume=lastVol;mplayerVolume.value=lastVol;setVolFill(lastVol);updateVolIcon(lastVol)}});
             mplayerClose.addEventListener('click',()=>{playerAudio.pause();playerAudio.src='';currentPlayerId=null;miniPlayer.classList.remove('active');document.querySelectorAll('.music-card').forEach(c=>c.classList.remove('is-playing'));mplayerSeek.value=0;setSeekFill(0);fmIconPlay.style.display='block';fmIconPause.style.display='none'});
             setVolFill(1);
 
-        function downloadMusic(id, title) {
-            window.open(`${API}/download?id=${id}&title=${encodeURIComponent(title || '')}`, '_blank');
+        function updateVolIcon(vol){
+            const svg=document.getElementById('volSvg');
+            if(vol<=0){
+                svg.innerHTML='<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"/><line x1="22" x2="16" y1="9" y2="15"/><line x1="16" x2="22" y1="9" y2="15"/>';
+            }else{
+                svg.innerHTML='<polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/>';
+            }
         }
 
         function copyMusicLink(id) {
-            const url = `setradio ${SITE_ORIGIN}/api/play?id=${id}`;
+            const url = `setradio ${SITE_ORIGIN}/api/play?q=${id}`;
             navigator.clipboard.writeText(url).then(() => {
                 showNotification('Link copiado!', 'success');
             }).catch(() => {
-                fallbackCopy(url, 'Link da música copiado!');
+                fallbackCopy(url, 'Link copiado!', 'error');
             });
         }
 
-        function fallbackCopy(text, msg) {
+        function copyMusicLinkBass(id) {
+            const url = `setradio ${SITE_ORIGIN}/api/play?q=${id}&bass=true`;
+            navigator.clipboard.writeText(url).then(() => {
+                showNotification('Link com grave copiado!', 'success');
+            }).catch(() => {
+                fallbackCopy(url, 'Link com grave copiado!', 'error');
+            });
+        }
+
+        function fallbackCopy(text, msg, type) {
             const ta = document.createElement('textarea');
             ta.value = text;
             ta.style.cssText = 'position:fixed;left:-9999px;top:-9999px;opacity:0';
@@ -471,7 +491,7 @@
             ta.select();
             try {
                 document.execCommand('copy');
-                showNotification(msg);
+                showNotification(msg, type);
             } catch (e) {
                 showNotification('Erro ao copiar.', 'error');
             }
