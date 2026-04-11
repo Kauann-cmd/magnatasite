@@ -1,14 +1,19 @@
 export default function handler(req, res) {
-    const { id } = req.query;
+    res.setHeader('X-Content-Type-Options', 'nosniff');
+    res.setHeader('Referrer-Policy', 'no-referrer');
+    res.setHeader('X-Robots-Tag', 'noindex, nofollow');
 
-    if (!id) {
-        return res.status(400).json({ error: 'ID obrigatório' });
+    const { q, bass } = req.query;
+
+    if (!q) {
+        return res.status(400).json({ error: 'Parâmetro q obrigatório' });
     }
 
-    if (!/^[a-zA-Z0-9_-]{1,50}$/.test(id)) {
+    if (!/^[a-zA-Z0-9_-]{1,50}$/.test(q)) {
         return res.status(400).json({ error: 'ID inválido' });
     }
 
-    res.redirect(308, `https://server1.mtabrasil.com.br/play?id=${id}`);
+    const safeId = encodeURIComponent(q);
+    const endpoint = bass === 'true' ? 'play-bass' : 'play';
+    res.redirect(308, `https://apimusic.thryl.com.br/${endpoint}?q=${safeId}`);
 }
-
