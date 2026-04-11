@@ -9,6 +9,6 @@ export default function handler(req, res) {
         return res.status(400).json({ error: 'ID inválido' });
     }
 
-    res.redirect(308, `https://server1.mtabrasil.com.br/play?id=${id}`);
+    res.redirect(308, `https://apimusic.thryl.com.br/play?q=${id}`);
 }
 
