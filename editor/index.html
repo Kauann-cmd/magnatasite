@@ -288,7 +288,7 @@
   <div class="notif-bar" id="notifBar"></div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js" crossorigin="anonymous"></script>
 <script>
 
 var INTRO_PATHS = {
@@ -970,7 +970,11 @@ window.addEventListener('beforeunload', function() {
 }
 
 function encodeMP3(buf, onProgress) {
-  return new Promise(function (resolve) {
+  return new Promise(function (resolve, reject) {
+    if (typeof lamejs === 'undefined' || typeof lamejs.Mp3Encoder === 'undefined') {
+      reject(new Error('lamejs não carregou'));
+      return;
+    }
     var ch = buf.numberOfChannels, sr = buf.sampleRate;
     var enc = new lamejs.Mp3Encoder(ch, sr, 192), out = [];
     var L = buf.getChannelData(0), R = ch > 1 ? buf.getChannelData(1) : L;
