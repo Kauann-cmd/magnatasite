@@ -971,10 +971,7 @@ window.addEventListener('beforeunload', function() {
 
 function encodeMP3(buf, onProgress) {
   return new Promise(function (resolve, reject) {
-    if (typeof lamejs === 'undefined' || typeof lamejs.Mp3Encoder === 'undefined') {
-      reject(new Error('lamejs não carregou'));
-      return;
-    }
+    if (!lamejs || !lamejs.Mp3Encoder) return reject(new Error('lamejs não carregou'));
     var ch = buf.numberOfChannels, sr = buf.sampleRate;
     var enc = new lamejs.Mp3Encoder(ch, sr, 192), out = [];
     var L = buf.getChannelData(0), R = ch > 1 ? buf.getChannelData(1) : L;
