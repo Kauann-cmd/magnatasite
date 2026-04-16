@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Editor de Música — Magnata Músicas</title>
+  <title>Magnata Músicas - Editor de Músicas</title>
   <meta name="description" content="Editor de Música da Magnata Músicas — faça upload da sua track, aplique efeitos, adicione a intro oficial e exporte em MP3. Tudo grátis para servidores MTA:SA.">
   <meta name="keywords" content="músicas para MTA, música MTA SA, som automotivo MTA, música roleplay MTA, músicas para servidor MTA">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -24,7 +24,7 @@
       <span class="hamburger-line"></span>
     </button>
     <ul class="nav-menu" id="navMenu">
-      <li><a href="/" class="nav-link">Início</a></li>
+            <li><a href="/" class="nav-link">Início</a></li>
       <li><a href="/editor" class="nav-link active">Editor</a></li>
       <li><a href="/contact" class="nav-link">Contato</a></li>
       <li><a href="#" class="nav-link">Em Breve</a></li>
@@ -132,9 +132,8 @@
         <button class="preset-btn" id="preset-original"  type="button" onclick="applyPreset('original')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="16"/><line x1="8" y1="12" x2="16" y2="12"/></svg>Original</button>
         <button class="preset-btn" id="preset-bass"      type="button" onclick="applyPreset('bass')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2 13a2 2 0 0 0 2-2V7a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0V4a2 2 0 0 1 4 0v13a2 2 0 0 0 4 0v-4a2 2 0 0 1 2-2"/></svg>Bass Boost</button>
         <button class="preset-btn" id="preset-ambient"   type="button" onclick="applyPreset('ambient')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/></svg>Ambiente</button>
-        <button class="preset-btn" id="preset-lofi"      type="button" onclick="applyPreset('lofi')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="5.5" cy="17.5" r="2.5"/><circle cx="17.5" cy="15.5" r="2.5"/><polyline points="8 17 8 5 20 3 20 15"/><line x1="8" y1="11" x2="20" y2="9"/></svg>Lo-Fi</button>
-        <button class="preset-btn" id="preset-radio"     type="button" onclick="applyPreset('radio')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M16 3l-4 4-4-4"/><circle cx="12" cy="14" r="3"/><line x1="18" y1="11" x2="18" y2="11.01"/></svg>Rádio MTA</button>
-        <button class="preset-btn" id="preset-nightcore" type="button" onclick="applyPreset('nightcore')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>Nightcore</button>
+        <button class="preset-btn" id="preset-speed"  type="button" onclick="applyPreset('speed')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>Speed</button>
+        <button class="preset-btn" id="preset-slow"   type="button" onclick="applyPreset('slow')"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>Slow</button>
       </div>
     </div>
 
@@ -289,7 +288,7 @@
   <div class="notif-bar" id="notifBar"></div>
 </div>
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/lamejs/1.2.1/lame.min.js" integrity="sha384-TO3xu3DOfd6XhlFY8BhMw8C3O8vmEhRGANjVoS8Lk+6K6aNX8z5TjNNJpH5T8N" crossorigin="anonymous"></script>
 <script>
 
 var INTRO_PATHS = {
@@ -301,9 +300,8 @@ var PRESETS = {
   original:  {volume:100,speed:100,bass:false,bassGain:0,  reverb:false,reverbMix:0,  lowpass:false,lowpassFreq:20000,fadeIn:0,fadeOut:0},
   bass:      {volume:100,speed:100,bass:true, bassGain:22, reverb:false,reverbMix:0,  lowpass:false,lowpassFreq:20000,fadeIn:0,fadeOut:0},
   ambient:   {volume:90, speed:100,bass:false,bassGain:0,  reverb:true, reverbMix:60, lowpass:true, lowpassFreq:8000, fadeIn:2,fadeOut:3},
-  lofi:      {volume:85, speed:95, bass:true, bassGain:10, reverb:true, reverbMix:25, lowpass:true, lowpassFreq:4000, fadeIn:0,fadeOut:0},
-  radio:     {volume:110,speed:100,bass:false,bassGain:0,  reverb:false,reverbMix:0,  lowpass:true, lowpassFreq:12000,fadeIn:1,fadeOut:1},
-  nightcore: {volume:100,speed:125,bass:true, bassGain:12, reverb:false,reverbMix:0,  lowpass:false,lowpassFreq:20000,fadeIn:0,fadeOut:0}
+  speed:     {volume:100,speed:120,bass:true, bassGain:15, reverb:false,reverbMix:0,  lowpass:false,lowpassFreq:20000,fadeIn:0,fadeOut:0},
+  slow:      {volume:100,speed:80, bass:true, bassGain:10, reverb:true, reverbMix:40, lowpass:false,lowpassFreq:20000,fadeIn:0,fadeOut:0}
 };
 
 var audioCtx      = null;  
@@ -413,7 +411,7 @@ function loadIntro(num) {
       document.getElementById('introBadge'  + other).textContent = 'PRONTO';
 
       var ind = document.getElementById('introIndicator');
-      ind.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg> Intro ' + num + ' carregada (' + fmt(buf.duration) + ')';
+      ind.textContent = 'Intro ' + num + ' carregada (' + fmt(buf.duration) + ')';
       ind.className = 'intro-indicator ok';
     })
     .catch(function (err) {
@@ -491,16 +489,12 @@ function drawWaveform() {
   }
 }
 
-window.addEventListener('resize', function () {
-  if (mainBuffer) { drawWaveform(); drawTrim(); }
-});
-
 function seekAudio(e) {
   if (!mainBuffer) return;
   var ratio       = e.offsetX / document.getElementById('waveformWrap').clientWidth;
   startOffset     = ratio * mainBuffer.duration;
   if (isPlaying) {
-    playerStop(false);   // para sem resetar startOffset
+    playerStop(false);  
     playerStart();
   } else {
     document.getElementById('currentTime').textContent      = fmt(startOffset);
@@ -754,7 +748,7 @@ function drawTrim() {
 
 var trimWrap = document.getElementById('trimWrap');
 
-trimWrap.addEventListener('mousedown', function (e) {
+function onTrimMousedown(e) {
   if (!mainBuffer) return;
   var r  = trimWrap.getBoundingClientRect();
   var x  = e.clientX - r.left;
@@ -763,9 +757,9 @@ trimWrap.addEventListener('mousedown', function (e) {
   var ex = (trimEnd   / mainBuffer.duration) * W;
   if      (Math.abs(x - sx) < 14) trimDragging = 'start';
   else if (Math.abs(x - ex) < 14) trimDragging = 'end';
-});
+}
 
-window.addEventListener('mousemove', function (e) {
+function onTrimMousemove(e) {
   if (!trimDragging || !mainBuffer) return;
   var r = trimWrap.getBoundingClientRect();
   var x = Math.max(0, Math.min(e.clientX - r.left, trimWrap.clientWidth));
@@ -775,11 +769,11 @@ window.addEventListener('mousemove', function (e) {
   trimStart = Math.max(0, trimStart);
   trimEnd   = Math.min(mainBuffer.duration, trimEnd);
   drawTrim();
-});
+}
 
-window.addEventListener('mouseup',   function () { trimDragging = null; });
+function onTrimMouseup() { trimDragging = null; }
 
-trimWrap.addEventListener('touchstart', function (e) {
+function onTrimTouchstart(e) {
   if (!mainBuffer) return;
   var r  = trimWrap.getBoundingClientRect();
   var x  = e.touches[0].clientX - r.left;
@@ -789,9 +783,9 @@ trimWrap.addEventListener('touchstart', function (e) {
   if      (Math.abs(x - sx) < 18) trimDragging = 'start';
   else if (Math.abs(x - ex) < 18) trimDragging = 'end';
   e.preventDefault();
-}, {passive: false});
+}
 
-window.addEventListener('touchmove', function (e) {
+function onTrimTouchmove(e) {
   if (!trimDragging || !mainBuffer) return;
   var r = trimWrap.getBoundingClientRect();
   var x = Math.max(0, Math.min(e.touches[0].clientX - r.left, trimWrap.clientWidth));
@@ -801,9 +795,16 @@ window.addEventListener('touchmove', function (e) {
   trimStart = Math.max(0, trimStart);
   trimEnd   = Math.min(mainBuffer.duration, trimEnd);
   drawTrim();
-}, {passive: true});
+}
 
-window.addEventListener('touchend', function () { trimDragging = null; });
+function onTrimTouchend() { trimDragging = null; }
+
+trimWrap.addEventListener('mousedown', onTrimMousedown);
+window.addEventListener('mousemove', onTrimMousemove);
+window.addEventListener('mouseup', onTrimMouseup);
+trimWrap.addEventListener('touchstart', onTrimTouchstart, {passive: false});
+window.addEventListener('touchmove', onTrimTouchmove, {passive: true});
+window.addEventListener('touchend', onTrimTouchend);
 
 function resetTrim() {
   if (!mainBuffer) return;
@@ -835,24 +836,47 @@ function applyTrim() {
 function resetEditor() {
   playerStop(false);
   mainBuffer  = null;
+  introBuffer = null;
+  gainNode = bassFilter = lowpassFilter = reverbGain = dryGain = null;
+  if (audioCtx) { audioCtx.close(); audioCtx = null; }
   startOffset = 0;
   document.getElementById('editorSection').classList.add('hidden');
   document.getElementById('uploadSection').classList.remove('hidden');
   document.getElementById('audioInput').value = '';
   document.querySelectorAll('.preset-btn').forEach(function (b) { b.classList.remove('active'); });
+  document.getElementById('introStatus1').textContent = 'Clique para carregar';
+  document.getElementById('introBadge1').textContent = 'PRONTO';
+  document.getElementById('introCard1').classList.remove('loaded', 'error');
+  document.getElementById('introStatus2').textContent = 'Clique para carregar';
+  document.getElementById('introBadge2').textContent = 'PRONTO';
+  document.getElementById('introCard2').classList.remove('loaded', 'error');
 }
 
-function exportAudio() {
-  if (!mainBuffer) return;
+function onResize() {
+  if (mainBuffer) { drawWaveform(); drawTrim(); }
+}
 
-  if (!introBuffer) {
-    showNotification('Selecione uma intro antes de exportar!', 'error');
-    return;
-  }
+window.addEventListener('resize', onResize);
 
-  initCtx();
+window.addEventListener('beforeunload', function() {
+  if (audioCtx) { audioCtx.close(); audioCtx = null; }
+  mainBuffer = introBuffer = null;
+  window.removeEventListener('mousemove', onTrimMousemove);
+  window.removeEventListener('mouseup', onTrimMouseup);
+  window.removeEventListener('touchmove', onTrimTouchmove);
+  window.removeEventListener('touchend', onTrimTouchend);
+  window.removeEventListener('resize', onResize);
+});
 
-  initCtx();
+  function exportAudio() {
+    if (!mainBuffer) return;
+
+    if (!introBuffer) {
+      showNotification('Selecione uma intro antes de exportar!', 'error');
+      return;
+    }
+
+    initCtx();
   var exportBtn   = document.getElementById('exportBtn');
   var progressDiv = document.getElementById('exportProgress');
   var progressBar = document.getElementById('exportProgressBar');
@@ -930,7 +954,7 @@ function exportAudio() {
     statusText.textContent  = 'Concluído! 🎉';
     var a = document.createElement('a');
     a.href     = URL.createObjectURL(blob);
-    a.download = (document.getElementById('trackName').textContent || 'musica') + '_magnata.mp3';
+    a.download = (document.getElementById('trackName').textContent || 'musica') + '.mp3';
     a.click();
     URL.revokeObjectURL(a.href);
     setTimeout(function () {
@@ -1000,6 +1024,8 @@ if ('IntersectionObserver' in window) {
     el.classList.add('animate-hidden');
     obs.observe(el);
   });
+
+  window.addEventListener('beforeunload', function() { obs.disconnect(); });
 }
 
 var NOTIF_ICONS = {
@@ -1017,7 +1043,7 @@ var NOTIF_COLOR = {
 var notifTimer = null;
 
 function showNotification(msg, type) {
-  type = type || 'sucess';
+  type = type || 'success';
   var notif  = document.getElementById('notification');
   var icon   = document.getElementById('notifIcon');
   var msgEl  = document.getElementById('notifMsg');
