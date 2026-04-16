@@ -2,7 +2,6 @@ export default function handler(req, res) {
     res.setHeader('X-Content-Type-Options', 'nosniff');
     res.setHeader('Referrer-Policy', 'no-referrer');
     res.setHeader('X-Robots-Tag', 'noindex, nofollow');
-    res.setHeader('Cache-Control', 'public, max-age=3600, s-maxage=3600');
 
     const { q, bass } = req.query;
 
