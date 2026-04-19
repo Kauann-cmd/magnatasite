@@ -34,14 +34,6 @@
 
     <section class="hero" id="inicio">
         <div class="hero-container">
-            <div class="hero-badge">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="2">
-                    <path d="M9 18V5l12-2v13"></path>
-                    <circle cx="6" cy="18" r="3"></circle>
-                    <circle cx="18" cy="16" r="3"></circle>
-                </svg>
-                <span>Plataforma de Música para MTA:SA</span>
-            </div>
             <h1 class="hero-title">Sua música favorita está na</h1>
             <h2 class="hero-brand">Magnata Músicas</h2>
             <p class="hero-description">
@@ -240,10 +232,10 @@
             { id: "I2u6_wnRxS8", title: "Medley 2021", author: "MC Paiva ZS" },
             { id: "ODijwjs8Qvc", title: "Famoso Ímã - O Poderoso Chatão", author: "MC Poze do Rodo, MC Lele JP, MC Leozinho ZS" },
             { id: "jLfWZ0nhTAE", title: "Jesus Chorou", author: "Racionais MC's" },
-            { id: "Ak8N08EED2I", title: "Casa Vazia", author: "Mc Menor da L" },
-            { id: "8wsOJaxc8Bs", title: "Piloto do Chefe", author: "MC Jajau, MC VC, MC L3" },
+            { id: "Ak8N08EED2I", title: "Casa Vazia", author: "MC Menor da L" },
+            { id: "8iOSmfhOiko", title: "Mundo M", author: "MC Lon - Topic" },
             { id: "xjd0ivZeJH8", title: "Bonde do Tony Country", author: "MC Felipe Boladão" },
-            { id: "J8kbUgAFq4s", title: "Tá Rico Os Menino do Gueto", author: "MC IG, MC Ryan SP, MC Negão Original, MC GP" },
+            { id: "FpQxgjpBQT4", title: "Vergonha pra Mídia", author: "Salvador Da Rima, MC Ryan SP & Mc Lele JP" },
             { id: "-0XGl6J5gRg", title: "O Que È?O Que È?", author: "DJ Leilton 011" }
         ];
 
@@ -297,11 +289,10 @@
             musicListContainer.innerHTML = `
                 <div class="loading-state">
                     <div class="spinner"></div>
-                    <p>Buscando músicas...</p>
                 </div>
             `;
-            resultsTitle.textContent = 'Buscando...';
-            resultsSubtitle.textContent = '';
+            resultsTitle.textContent = 'Buscando';
+            resultsSubtitle.textContent = `Buscando resultados pra "${term}"`;
             resultsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
             fetch(`${API}/search?q=${encodeURIComponent(term.replace(/ /g, '+'))}`, { signal: AbortSignal.timeout(10000) })
@@ -330,11 +321,6 @@
                 .catch(() => {
                     musicListContainer.innerHTML = `
                         <div class="empty-state">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="1.5">
-                                <circle cx="12" cy="12" r="10"></circle>
-                                <path d="M12 8v4"></path>
-                                <path d="M12 16h.01"></path>
-                            </svg>
                             <h4>Erro na conexão</h4>
                             <p>Verifique sua internet e tente novamente</p>
                         </div>
@@ -353,7 +339,7 @@
                             <path d="M21 21l-4.35-4.35"></path>
                             <path d="M8 11h6"></path>
                         </svg>
-                        <h4>Nenhuma música encontrada</h4>
+                        <h4>Nenhum resultado encontrada</h4>
                         <p>Tente buscar com outro termo</p>
                     </div>
                 `;
@@ -363,7 +349,7 @@
             }
 
             resultsTitle.textContent = 'Resultados da Busca';
-            resultsSubtitle.textContent = `${list.length} música${list.length !== 1 ? 's' : ''} encontrada${list.length !== 1 ? 's' : ''} para "${term}"`;
+            resultsSubtitle.textContent = `${list.length} resultado${list.length !== 1 ? 's' : ''} encontrado${list.length !== 1 ? 's' : ''} para "${term}"`;
             musicListContainer.innerHTML = '';
 
             list.forEach((m, idx) => {
