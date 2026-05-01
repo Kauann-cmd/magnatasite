@@ -26,9 +26,13 @@ body.dark-mode .hero-bg-decoration .circle-2{background:#1A1025;opacity:.9}
 body.dark-mode .hero-bg-decoration .circle-3{background:rgba(139,92,246,.08);opacity:.9}
 body.dark-mode .search-box:focus-within{border-color:var(--purple);box-shadow:none}
 body.dark-mode .step-card:hover{border-color:var(--purple);box-shadow:none}
-body.dark-mode .music-card:hover,.dark-mode .trending-card:hover{background:var(--card-hover);box-shadow:none;transform:none}
+body.dark-mode .music-card:hover,.dark-mode .trending-card:hover{background:var(--card-hover);box-shadow:var(--shadow-lg);transform:translateY(-2px);border-color:var(--purple-light)}
 body.dark-mode .action-btn:hover{background:transparent}
 body.dark-mode .footer{background:#121212;border-top:1px solid #1e1e1e}
+body.dark-mode .navbar{background:#161618;border-bottom:1px solid #1e1e1e;backdrop-filter:none;-webkit-backdrop-filter:none}
+body.dark-mode .results-section{background:#121212}
+body.dark-mode .trending-section{background:#121212}
+body.dark-mode .steps-section{background:#121212}
 body.dark-mode .fm-close:hover{background:var(--fm-close-hover);color:var(--black)}
 body.dark-mode ::-webkit-scrollbar-track{background:var(--bg)}
 body.dark-mode ::-webkit-scrollbar-thumb{background:var(--border)}
