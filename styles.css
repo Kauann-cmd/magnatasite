@@ -151,7 +151,7 @@ img{display:block;max-width:100%}
 .notification.show .notif-bar{animation:notifProgress 4s linear forwards}
 @keyframes notifProgress{from{transform:scaleX(1)}to{transform:scaleX(0)}}
 
-.footer{background:var(--purple-bg);color:var(--medium-gray);padding:24px 32px}
+.footer{background:var(--purple-bg);color:var(--medium-gray);padding:24px 32px;border-top:1px solid var(--border)}
 .footer-container{max-width:1200px;margin:0 auto}
 .footer-bottom{text-align:center;font-size:.85rem;color:var(--medium-gray)}
 
