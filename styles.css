@@ -39,8 +39,8 @@ body.dark-mode ::-webkit-scrollbar-thumb{background:var(--border)}
 .theme-toggle-btn svg{transition:opacity .25s ease,transform .3s cubic-bezier(.34,1.56,.64,1)}
 .theme-toggle-btn .icon-sun{position:absolute}
 .theme-toggle-btn .icon-moon{position:absolute}
-body:not(.dark-mode) .theme-toggle-btn{background:#e0e0e0;border-color:rgba(0,0,0, 0.4);color:#fff}
-body:not(.dark-mode) .theme-toggle-btn:hover{background:#e4e4e4}
+body:not(.dark-mode) .theme-toggle-btn{background:#d8d8d8;border-color:rgba(0,0,0, 0.4);color:#fff}
+body:not(.dark-mode) .theme-toggle-btn:hover{background:#cecece}
 body:not(.dark-mode) .theme-toggle-btn .icon-sun{opacity:0;transform:rotate(-60deg) scale(.5)}
 body:not(.dark-mode) .theme-toggle-btn .icon-moon{opacity:1;transform:rotate(0deg) scale(1)}
 body.dark-mode .theme-toggle-btn{background:rgba(255,255,240,.08);border-color:rgba(255,255,240,.2);color:#FFFFD0}
