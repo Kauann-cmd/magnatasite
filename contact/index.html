@@ -144,6 +144,13 @@
         document.body.style.overflow = '';
     }));
 
+    // --- DARK MODE SYNC ---
+    (function() {
+        if (localStorage.getItem('magnata_theme') === 'dark') {
+            document.body.classList.add('dark-mode');
+        }
+    })();
+
     function copyPix() {
         const key = document.getElementById('pixKey').textContent;
         const btn = document.getElementById('pixCopyBtn');
