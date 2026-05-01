@@ -9,7 +9,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/editor/styles.css">
+  <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -24,10 +24,10 @@
       <span class="hamburger-line"></span>
     </button>
     <ul class="nav-menu" id="navMenu">
-            <li><a href="/" class="nav-link">Início</a></li>
-      <li><a href="/editor" class="nav-link active">Editor</a></li>
-      <li><a href="/contact" class="nav-link">Contato</a></li>
-      <li><a href="#" class="nav-link">Em Breve</a></li>
+      <li><a href="/"         class="nav-link">Início</a></li>
+      <li><a href="/editor"   class="nav-link active">Editor</a></li>
+      <li><a href="/contact"  class="nav-link">Contato</a></li>
+      <li><a href="#"         class="nav-link">Em Breve</a></li>
     </ul>
   </div>
 </nav>
@@ -290,7 +290,6 @@
 <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js" crossorigin="anonymous"></script>
 <script>
 
-// --- DARK MODE SYNC ---
 (function() {
     if (localStorage.getItem('magnata_theme') === 'dark') {
         document.body.classList.add('dark-mode');
