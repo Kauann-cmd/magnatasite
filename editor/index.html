@@ -290,6 +290,13 @@
 <script src="https://cdn.jsdelivr.net/npm/lamejs@1.2.1/lame.all.js" crossorigin="anonymous"></script>
 <script>
 
+// --- DARK MODE SYNC ---
+(function() {
+    if (localStorage.getItem('magnata_theme') === 'dark') {
+        document.body.classList.add('dark-mode');
+    }
+})();
+
 var INTRO_PATHS = {
   1: '/editor/intros/intro1.mp3',
   2: '/editor/intros/intro2.mp3'
@@ -1032,14 +1039,10 @@ var NOTIF_ICONS = {
   success: '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>',
   error:   '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>',
 };
-var NOTIF_BG = {
-  success: '#f0fdf4',
-  error:   '#fee2e2',
-};
-var NOTIF_COLOR = {
-  success: '#16a34a',
-  error:   '#ef4444',
-};
+var NOTIF_BG       = { success: '#f0fdf4',  error: '#fee2e2' };
+var NOTIF_COLOR    = { success: '#16a34a',  error: '#ef4444' };
+var NOTIF_BG_DARK  = { success: '#14290f',  error: '#2d0f0f' };
+var NOTIF_COLOR_DARK = { success: '#4ade80', error: '#f87171' };
 var notifTimer = null;
 
 function showNotification(msg, type) {
@@ -1049,9 +1052,10 @@ function showNotification(msg, type) {
   var msgEl  = document.getElementById('notifMsg');
   var bar    = document.getElementById('notifBar');
 
+  var isDark = document.body.classList.contains('dark-mode');
   icon.innerHTML        = NOTIF_ICONS[type];
-  icon.style.background = NOTIF_BG[type];
-  icon.style.color      = NOTIF_COLOR[type];
+  icon.style.background = isDark ? NOTIF_BG_DARK[type]   : NOTIF_BG[type];
+  icon.style.color      = isDark ? NOTIF_COLOR_DARK[type] : NOTIF_COLOR[type];
   msgEl.textContent     = msg;
 
   bar.style.animation = 'none';
