@@ -655,11 +655,8 @@
 
         themeToggle.addEventListener('click', () => {
             const isDark = document.body.classList.contains('dark-mode');
-            const newTheme = isDark ? 'light' : 'dark';
-            document.body.classList.add('theme-transitioning');
             applyTheme(!isDark);
-            localStorage.setItem(THEME_KEY, newTheme);
-            setTimeout(() => document.body.classList.remove('theme-transitioning'), 350);
+            localStorage.setItem(THEME_KEY, isDark ? 'light' : 'dark');
         });
     </script>
     
