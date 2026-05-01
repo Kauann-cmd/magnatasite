@@ -40,7 +40,7 @@ body.dark-mode ::-webkit-scrollbar-thumb{background:var(--border)}
 .theme-toggle-btn .icon-sun{position:absolute}
 .theme-toggle-btn .icon-moon{position:absolute}
 body:not(.dark-mode) .theme-toggle-btn{background:#d8d8d8;border-color:rgba(0,0,0, 0.4);color:#fff}
-body:not(.dark-mode) .theme-toggle-btn:hover{background:#cecece}
+body:not(.dark-mode) .theme-toggle-btn:hover{background:#cacaca}
 body:not(.dark-mode) .theme-toggle-btn .icon-sun{opacity:0;transform:rotate(-60deg) scale(.5)}
 body:not(.dark-mode) .theme-toggle-btn .icon-moon{opacity:1;transform:rotate(0deg) scale(1)}
 body.dark-mode .theme-toggle-btn{background:rgba(255,255,240,.08);border-color:rgba(255,255,240,.2);color:#FFFFD0}
@@ -48,7 +48,7 @@ body.dark-mode .theme-toggle-btn:hover{background:rgba(255,255,240,.14)}
 body.dark-mode .theme-toggle-btn .icon-sun{opacity:1;transform:rotate(0deg) scale(1)}
 body.dark-mode .theme-toggle-btn .icon-moon{opacity:0;transform:rotate(60deg) scale(.5)}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--dark-gray);line-height:1.6;overflow-x:hidden;min-height:100vh;display:flex;flex-direction:column}
+body{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--dark-gray);line-height:1.6;overflow-x:hidden}
 a{text-decoration:none;color:inherit}
 button{border:none;background:none;cursor:pointer;font-family:inherit}
 ul{list-style:none}
