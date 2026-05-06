@@ -25,8 +25,8 @@ body.dark-mode{
   --shadow-xl:0 20px 25px -5px rgba(0,0,0,.7),0 8px 10px -6px rgba(0,0,0,.5);
 }
 
-body.dark-mode .navbar{background:#161618;border-bottom:1px solid #1e1e1e}
-body.dark-mode .nav-menu{background:#161618}
+body.dark-mode .navbar{background:linear-gradient(180deg,#161618 0%,#121212 200px);border-bottom:1px solid #1e1e1e}
+body.dark-mode .nav-menu{background:linear-gradient(180deg,#161618 0%,#121212 200px)}
 body.dark-mode .nav-link{color:var(--medium-gray)}
 body.dark-mode .nav-link:hover,.dark-mode .nav-link.active{color:var(--purple)}
 body.dark-mode .footer{background:#121212;border-top:1px solid #1e1e1e}
