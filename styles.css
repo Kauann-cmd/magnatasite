@@ -17,8 +17,8 @@ body.dark-mode{
   --fm-vol-stroke:#A1A1AA;--fm-close-hover:#1e1e22;
 }
 
-body.dark-mode .navbar{background:#161618;border-bottom:1px solid #1e1e1e}
-body.dark-mode .nav-menu{background:#161618}
+body.dark-mode .navbar{background:linear-gradient(180deg,#161618 0%,#121212 200px);border-bottom:1px solid #1e1e1e}
+body.dark-mode .nav-menu{background:linear-gradient(180deg,#161618 0%,#121212 200px)}
 body.dark-mode .nav-link{color:var(--medium-gray)}
 body.dark-mode .nav-link:hover,.dark-mode .nav-link.active{color:var(--purple)}
 body.dark-mode .hero{background:linear-gradient(180deg,#161618 0%,#121212 200px)}
