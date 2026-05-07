@@ -118,13 +118,45 @@
     </div>
 </section>
 
-    <footer class="footer">
+    <button class="theme-toggle-btn" id="themeToggle" type="button" aria-label="Alternar tema">
+        <svg class="icon-sun" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>
+        </svg>
+        <svg class="icon-moon" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="#505050d5" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+    </button>
+
+<footer class="footer">
     <div class="footer-container">
+        <div class="footer-grid">
+
+            <div class="footer-col">
+                <span class="footer-brand">Magnata Músicas</span>
+                <p class="footer-desc">A melhor escolha para quem busca músicas para MTA:SA com qualidade. Busque, teste e copie o link em poucos cliques.</p>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Páginas</span>
+                <ul class="footer-links">
+                    <li><a href="/">Início</a></li>
+                    <li><a href="/editor">Editor</a></li>
+                    <li><a href="/contact">Contato</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Sobre</span>
+                <p class="footer-desc">Somos uma comunidade voltada para MTA:SA. Nossa missão é facilitar o acesso a músicas de qualidade para tornar sua experiência no jogo ainda melhor.</p>
+            </div>
+
+        </div>
         <div class="footer-bottom">
             <p>© 2025 - 2026 Magnata Músicas. Todos os direitos reservados.</p>
         </div>
     </div>
 </footer>
+
 <script>
     const navbar    = document.getElementById('navbar');
     const navToggle = document.getElementById('navToggle');
@@ -143,12 +175,6 @@
         navMenu.classList.remove('open');
         document.body.style.overflow = '';
     }));
-
-    (function() {
-        if (localStorage.getItem('magnata_theme') === 'dark') {
-            document.body.classList.add('dark-mode');
-        }
-    })();
 
     function copyPix() {
         const key = document.getElementById('pixKey').textContent;
@@ -170,6 +196,22 @@
             btn.innerHTML = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
         }, 2000);
     }
+
+        const themeToggle = document.getElementById('themeToggle');
+        const THEME_KEY = 'magnata_theme';
+
+        function applyTheme(dark) {
+            document.body.classList.toggle('dark-mode', dark);
+        }
+
+        const savedTheme = localStorage.getItem(THEME_KEY);
+        applyTheme(savedTheme === 'dark');
+
+        themeToggle.addEventListener('click', () => {
+            const isDark = document.body.classList.contains('dark-mode');
+            applyTheme(!isDark);
+            localStorage.setItem(THEME_KEY, isDark ? 'light' : 'dark');
+        });
 </script>
 </body>
 </html>
