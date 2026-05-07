@@ -32,7 +32,7 @@
             </div>
             </nav>
 
-    <section class="hero" id="inicio">
+    <section class="hero">
         <div class="hero-container">
             <h1 class="hero-title">Sua música favorita está na</h1>
             <h2 class="hero-brand">Magnata Músicas</h2>
@@ -96,23 +96,23 @@
                     <p class="step-card-desc">Busque pelo nome ou cole um link do YouTube</p>
                 </div>
                 <div class="step-connector">
-                    <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
-                        <path d="M0 12H36M36 12L28 4M36 12L28 20" stroke="#9b7aff" stroke-width="2" stroke-linecap="round"></path>
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                        <path d="m9 18 6-6-6-6" stroke="#9b7aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                 </div>
                 <div class="step-card">
                     <div class="step-number"><span>2</span></div>
                     <div class="step-icon-wrapper">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="2">
-                            <polygon points="5 3 19 12 5 21 5 3"></polygon>
-                        </svg>
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#9b7aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polygon points="6 3 20 12 6 21 6 3"></polygon>
+                    </svg>
                     </div>
                     <h4 class="step-card-title">Teste agora</h4>
                     <p class="step-card-desc">Ouça a música e confirme que é a música certa</p>
                 </div>
                 <div class="step-connector">
-                    <svg width="40" height="24" viewBox="0 0 40 24" fill="none">
-                        <path d="M0 12H36M36 12L28 4M36 12L28 20" stroke="#9b7aff" stroke-width="2" stroke-linecap="round"></path>
+                    <svg width="40" height="40" viewBox="0 0 24 24" fill="none">
+                        <path d="m9 18 6-6-6-6" stroke="#9b7aff" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
                     </svg>
                 </div>
                 <div class="step-card">
@@ -150,8 +150,30 @@
         </div>
     </section>
 
-    <footer class="footer">
+<footer class="footer">
     <div class="footer-container">
+        <div class="footer-grid">
+
+            <div class="footer-col">
+                <span class="footer-brand">Magnata Músicas</span>
+                <p class="footer-desc">A melhor escolha para quem busca músicas para MTA:SA com qualidade. Busque, teste e copie o link em poucos cliques.</p>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Páginas</span>
+                <ul class="footer-links">
+                    <li><a href="/">Início</a></li>
+                    <li><a href="/editor">Editor</a></li>
+                    <li><a href="/contact">Contato</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <span class="footer-col-title">Sobre</span>
+                <p class="footer-desc">Somos uma comunidade voltada para MTA:SA. Nossa missão é facilitar o acesso a músicas de qualidade para tornar sua experiência no jogo ainda melhor.</p>
+            </div>
+
+        </div>
         <div class="footer-bottom">
             <p>© 2025 - 2026 Magnata Músicas. Todos os direitos reservados.</p>
         </div>
@@ -359,16 +381,15 @@
 
             resultsTitle.textContent = 'Resultados da Busca';
             resultsSubtitle.textContent = `${list.length} resultado${list.length !== 1 ? 's' : ''} encontrado${list.length !== 1 ? 's' : ''} para "${term}"`;
-            musicListContainer.innerHTML = '';
 
-            list.forEach((m, idx) => {
+            musicListContainer.innerHTML = list.map((m, idx) => {
                 const thumb = m.richThumb || `https://img.youtube.com/vi/${m.id}/mqdefault.jpg`;
-                musicListContainer.innerHTML += `
+                return `
                     <div class="music-card" data-index="${idx}" data-id="${m.id}">
                         <div class="music-card-left">
                             <div class="music-rank">#${idx + 1}</div>
                             <div class="music-cover" data-play="${m.id}">
-                                <img src="${thumb}" alt="${escapeHTML(m.title)}">
+                                <img src="${thumb}" alt="${escapeHTML(m.title)}" loading="lazy">
                                 <div class="cover-overlay">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                                 </div>
@@ -395,7 +416,7 @@
                         </div>
                     </div>
                 `;
-            });
+            }).join('');
         }
 
         document.addEventListener('click', (e) => {
@@ -572,18 +593,6 @@
             });
         });
 
-        const sections = document.querySelectorAll('section[id]');
-        const navLinks = document.querySelectorAll('.nav-link');
-        window.addEventListener('scroll', () => {
-            let current = '';
-            sections.forEach(s => {
-                if (window.scrollY >= s.offsetTop - 120) current = s.getAttribute('id');
-            });
-            navLinks.forEach(l => {
-                l.classList.toggle('active', l.getAttribute('href') === '#' + current);
-            });
-        }, { passive: true });
-
         window.addEventListener('beforeunload', () => {
             playerAudio.pause();
             playerAudio.src = '';
@@ -613,7 +622,7 @@
                     <div class="music-card-left">
                         <div class="music-rank">#${idx + 1}</div>
                         <div class="music-cover" data-play="${m.id}">
-                            <img src="https://img.youtube.com/vi/${m.id}/mqdefault.jpg" alt="${escapeHTML(m.title)}">
+                            <img src="https://img.youtube.com/vi/${m.id}/mqdefault.jpg" alt="${escapeHTML(m.title)}" loading="lazy">
                             <div class="cover-overlay">
                                 <svg width="24" height="24" viewBox="0 0 24 24" fill="white"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
                             </div>
