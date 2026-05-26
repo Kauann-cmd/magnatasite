@@ -15,5 +15,5 @@ export default function handler(req, res) {
 
     const safeId = encodeURIComponent(q);
     const endpoint = bass === 'true' ? 'playbass' : 'play';
-    res.redirect(308, `https://api.waveapi.fun:3333/${endpoint}?q=${safeId}`);
+    res.redirect(308, `https://api.waveapi.fun:3333/${endpoint}?id=${safeId}`);
 }
