@@ -14,6 +14,6 @@ export default function handler(req, res) {
     }
 
     const safeId = encodeURIComponent(q);
-    const endpoint = bass === 'true' ? 'playbass' : 'play';
-    res.redirect(308, `https://api.waveapi.fun:3333/${endpoint}?id=${safeId}`);
+    const endpoint = bass === 'true' ? 'play-bass' : 'play';
+    res.redirect(308, `https://apimusic.thryl.com.br/${endpoint}?q=${safeId}`);
 }
