@@ -508,7 +508,7 @@
         }
 
         function copyMusicLinkBass(id) {
-            const url = `setradio ${SITE_ORIGIN}/api/play-bass?q=${id}`;
+            const url = `setradio ${SITE_ORIGIN}/api/play?q=${id}&bass=true`;
             navigator.clipboard.writeText(url).then(() => {
                 showNotification('Link com grave copiado!', 'success');
             }).catch(() => {
