@@ -257,7 +257,7 @@
 
         let currentMusicList = [];
         const SITE_ORIGIN = window.location.origin;
-        const API = 'https://apimusic.thryl.com.br';
+        const API = 'http://api.waveapi.fun:3333';
 
         const topMusic = [
             { id: "I2u6_wnRxS8", title: "Medley 2021", author: "MC Paiva ZS" },
@@ -401,9 +401,9 @@
                             </div>
                         </div>
                         <div class="music-card-right">
-                            <button class="action-btn" data-action="youtube" data-id="${m.id}" type="button">
-                                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                                <span class="btn-tooltip">Abrir no Youtube</span>
+                            <button class="action-btn" data-action="download" data-id="${m.id}" type="button">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3,12.3v7a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2v-7"></path> <polyline points="7.9 12.3 12 16.3 16.1 12.3"></polyline><line x1="12" x2="12" y1="2.7" y2="14.2"></line></svg>
+                                <span class="btn-tooltip">Download</span>
                             </button>
                             <button class="action-btn" data-action="copy" data-id="${m.id}" type="button">
                                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
@@ -433,14 +433,14 @@
             e.preventDefault();
             e.stopPropagation();
             switch (action) {
-                case 'youtube': openYoutube(id); break;
+                case 'download': DownloadMusic(id); break;
                 case 'copy':     copyMusicLink(id); break;
                 case 'copybass': copyMusicLinkBass(id); break;
             }
         });
 
-        function openYoutube(id) {
-            window.open(`https://www.youtube.com/watch?v=${id}`, '_blank', 'noopener,noreferrer');
+        function DownloadMusic(id) {
+            window.open(`${API}/download?id=${id}`, '_blank', 'noopener,noreferrer');
         }
 
         const miniPlayer=document.getElementById('miniPlayer'),playerAudio=document.getElementById('playerAudio'),mplayerThumb=document.getElementById('mplayerThumb'),mplayerTitle=document.getElementById('mplayerTitle'),mplayerTime=document.getElementById('mplayerTime'),mplayerSeek=document.getElementById('mplayerSeek'),mplayerSeekFill=document.getElementById('mplayerSeekFill'),mplayerVolume=document.getElementById('mplayerVolume'),mplayerVolFill=document.getElementById('mplayerVolFill'),mplayerVolBtn=document.getElementById('mplayerVolBtn'),mplayerClose=document.getElementById('mplayerClose'),mplayerPP=document.getElementById('mplayerPlayPause'),fmIconPlay=mplayerPP.querySelector('.fm-icon-play'),fmIconPause=mplayerPP.querySelector('.fm-icon-pause');
@@ -456,7 +456,7 @@
                     currentMusicList=[{id:tm.id,title:tm.title,author:tm.author,duration_view:'0:00',richThumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`}];
                     music=currentMusicList[0];
                 } else {
-                    window.open(`${API}/play?q=${id}`,'_blank');return;
+                    window.open(`${API}/play?id=${id}`,'_blank');return;
                 }
             }
             if(currentPlayerId===id){playerAudio.paused?playerAudio.play():playerAudio.pause();return;}
@@ -465,7 +465,7 @@
             mplayerTitle.textContent=music.title;
             mplayerTime.textContent=`0:00 / ${music.duration_view||'0:00'}`;
             mplayerSeek.value=0;setSeekFill(0);
-            playerAudio.src=`${API}/play?q=${id}`;
+            playerAudio.src=`${API}/play?id=${id}`;
             playerAudio.load();playerAudio.play().catch(e=>console.log('Play error:',e));
             miniPlayer.classList.add('active');
             musicCards().forEach(c=>c.classList.remove('is-playing'));
@@ -508,7 +508,7 @@
         }
 
         function copyMusicLinkBass(id) {
-            const url = `setradio ${SITE_ORIGIN}/api/play?q=${id}&bass=true`;
+            const url = `setradio ${SITE_ORIGIN}/api/playbass?id=${id}`;
             navigator.clipboard.writeText(url).then(() => {
                 showNotification('Link com grave copiado!', 'success');
             }).catch(() => {
@@ -633,10 +633,10 @@
                         </div>
                     </div>
                     <div class="music-card-right">
-                        <button class="action-btn" data-action="youtube" data-id="${m.id}" type="button">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
-                            <span class="btn-tooltip">Abrir no Youtube</span>
-                        </button>
+                        <button class="action-btn" data-action="download" data-id="${m.id}" type="button">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3,12.3v7a2,2,0,0,0,2,2H19a2,2,0,0,0,2-2v-7"></path> <polyline points="7.9 12.3 12 16.3 16.1 12.3"></polyline><line x1="12" x2="12" y1="2.7" y2="14.2"></line></svg>
+                            <span class="btn-tooltip">Download</span>
+                        </button> 
                         <button class="action-btn" data-action="copy" data-id="${m.id}" type="button">
                             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"></rect><path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path></svg>
                             <span class="btn-tooltip">Copiar link</span>
