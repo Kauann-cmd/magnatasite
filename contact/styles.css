@@ -32,18 +32,18 @@ body.dark-mode .nav-link:hover,.dark-mode .nav-link.active{color:var(--purple)}
 body.dark-mode .footer{background: var(--bg)}
 body.dark-mode .contact-section{background:var(--bg)}
 body.dark-mode .hamburger-line{background:#e6e6e6}
-.theme-toggle-btn{position:fixed;bottom:28px;right:24px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,.1);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.18);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1600;box-shadow:0 2px 12px rgba(0,0,0,.15),inset 0 1px 0 rgba(255,255,255,.15);transition:transform .2s cubic-bezier(.4,0,.2,1),background .2s ease,box-shadow .2s ease,border-color .2s ease;color:#fff}
-.theme-toggle-btn:hover{transform:scale(1.08);background:rgba(255,255,255,.18);box-shadow:0 4px 20px rgba(0,0,0,.2),inset 0 1px 0 rgba(255,255,255,.2)}
+.theme-toggle-btn{position:fixed;bottom:28px;right:24px;width:44px;height:44px;border-radius:30%;background:rgba(255,255,255,.1);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.18);cursor:pointer;display:flex;align-items:center;justify-content:center;z-index:1600;transition:transform .2s cubic-bezier(.4,0,.2,1),background .2s ease,box-shadow .2s ease,border-color .2s ease;color:#fff}
+.theme-toggle-btn:hover{transform:scale(1.08);background:rgba(200, 200, 200, 0.1)}
 .theme-toggle-btn:active{transform:scale(.94)}
 .theme-toggle-btn svg{transition:opacity .25s ease,transform .3s cubic-bezier(.34,1.56,.64,1)}
 .theme-toggle-btn .icon-sun{position:absolute}
 .theme-toggle-btn .icon-moon{position:absolute}
-body:not(.dark-mode) .theme-toggle-btn{background:#d8d8d8;border-color:#505050d5;color:#fff}
-body:not(.dark-mode) .theme-toggle-btn:hover{background:#cacaca}
+body:not(.dark-mode) .theme-toggle-btn{background:rgba(81, 72, 255, 0.05);border-color:rgba(81, 72, 255, 0.15) ;color:#fff}
+body:not(.dark-mode) .theme-toggle-btn:hover{background:rgba(110, 110, 110, 0.15)}
 body:not(.dark-mode) .theme-toggle-btn .icon-sun{opacity:0;transform:rotate(-60deg) scale(.5)}
 body:not(.dark-mode) .theme-toggle-btn .icon-moon{opacity:1;transform:rotate(0deg) scale(1)}
-body.dark-mode .theme-toggle-btn{background:rgba(255,255,240,.08);border-color:rgba(255,255,240,.2);color:#FFFFD0}
-body.dark-mode .theme-toggle-btn:hover{background:rgba(255,255,240,.14)}
+body.dark-mode .theme-toggle-btn{background:rgba(17, 17, 17,.08);border-color:rgba(42, 42, 46,.7);color:#FFFFD0}
+body.dark-mode .theme-toggle-btn:hover{background:rgba(20,20,20,.14)}
 body.dark-mode .theme-toggle-btn .icon-sun{opacity:1;transform:rotate(0deg) scale(1)}
 body.dark-mode .theme-toggle-btn .icon-moon{opacity:0;transform:rotate(60deg) scale(.5)}
 a{text-decoration:none;color:inherit}
@@ -79,7 +79,7 @@ ul{list-style:none}
 .pix-copy:hover{background:var(--purple-ultra-light);color:var(--purple)}
 .pix-copy.copied{color:var(--purple)}
 
-.cards-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px;animation:fadeInUp .7s ease .2s both}
+.cards-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;animation:fadeInUp .7s ease .2s both}
 .scard{background:var(--bg);border:1.5px solid var(--border);border-radius:var(--radius-xl);padding:36px 20px 28px;display:flex;flex-direction:column;align-items:center;text-decoration:none;color:inherit;box-shadow:var(--shadow-lg);transition:border-color .25s ease,box-shadow .25s ease}
 .scard:hover{border-color:var(--purple);box-shadow:0 0 0 3px var(--purple-ultra-light),var(--shadow-xl)}
 .scard-icon{width:72px;height:72px;border-radius:50%;background:var(--purple-ultra-light);display:flex;align-items:center;justify-content:center;margin-bottom:22px;transition:transform .28s cubic-bezier(.34,1.56,.64,1)}
@@ -133,4 +133,8 @@ ul{list-style:none}
 .apoio-card{padding:24px 20px;flex-direction:column;gap:20px}
 }
 
-@media(max-width:380px){.cards-grid{grid-template-columns:1fr}}
+@media(max-width:380px){.cards-grid{grid-template-columns:1fr}}.contact-info{
+    max-width:420px;
+}
+.image-card {width: 100%;max-width: 200px;height: 200px;overflow: hidden;}
+.image-card img {width: 100%;height: auto;max-height: 250px;  object-fit: contain;}
