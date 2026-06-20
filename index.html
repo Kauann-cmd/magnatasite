@@ -15,9 +15,9 @@
 
     <nav class="navbar" id="navbar">
         <div class="nav-container">
-            <span class="nav-logo">
+            <a href="/" class="nav-logo">
                 <span class="logo-text">Magnata Músicas</span>
-            </span>
+            </a>
             <button class="nav-toggle" id="navToggle" type="button" aria-label="Menu">
                 <span class="hamburger-line"></span>
                 <span class="hamburger-line"></span>
@@ -260,14 +260,14 @@
         const API = 'https://apimusic.thryl.com.br';
 
         const topMusic = [
-            { id: "rIuKKV06CZA", title: "NA RELÍQUIA DO 2T", author: "MC Vine 7, MC Tuto, MC FR da Norte, MC Joãozinho VT, MC Dkzin" },
-            { id: "nVQJY_hR0mo", title: "Eu Vou Dançando Sem Você", author: "DJ Brunin da ZL, DJ Nevasca ZS" },
-            { id: "msTB_9qIOvI", title: "ZN PITBULL (GP DA ZL)", author: "MC Jhey" },
-            { id: "hToGSAFPwds", title: "CARNÍVORO", author: "MC Jacaré, MC Lele JP, MC Negão Original, Japa NK" },
-            { id: "jMCOjRIlYrY", title: "NÃO SOU COMPROMETIDO, GOSTO MUITO DISSO", author: "MC Tuto, DJ Oreia" },
-            { id: "knNct48vAdU", title: "LEVADA MALA", author: "MC Kadu, MC Daniel, MC Ryan SP, MC Luuky, MC GP, MC Cebezinho" },
-            { id: "jLfWZ0nhTAE", title: "Jesus Chorou", author: "Racionais MC's" },
-            { id: "xjd0ivZeJH8", title: "Bonde do Tony Country", author: "MC Felipe Boladão" }
+            { id: "rIuKKV06CZA", title: "NA RELÍQUIA DO 2T", author: "MC Vine7, MC Tuto, MC FR da Norte, MC Joãozinho VT, MC Dkzin", duration_view: "5:23" },
+            { id: "hToGSAFPwds", title: "CARNÍVORO", author: "MC Jacaré, MC Lele JP, MC Negão Original, Japa NK", duration_view: "3:37" },
+            { id: "ztC8bM-EYOg", title: "Posso Até Não Te Dar Flores", author: "MC Ryan SP, MC Jacaré, MC Meno K", duration_view: "2:51" },
+            { id: "fuRT1uFv-4s", title: "Gauchinha", author: "MC Meno K, DJ Japa NK, MC Luuky, MC Brinquedo, MC Ryan SP", duration_view: "4:34" },
+            { id: "c70Dvo-LyM0", title: "Amo Minha Favela", author: "MC Meno K, DJ Japa NK", duration_view: "2:15" },
+            { id: "WQHYbOy7H2g", title: "Diário de um Cafajeste", author: "MC Lele JP, MC Ryan SP, MC Meno K, MC Tuto, MC Negão Original", duration_view: "6:04" },
+            { id: "ODijwjs8Qvc", title: "Famoso Ímã", author: "MC Lele JP, MC Poze do Rodo, MC Leozinho ZS", duration_view: "3:54" },
+            { id: "I-CFd8SjO34", title: "Bola Uma Vela (Trava Chip)", author: "MC Meno K, DJ Yuri Pedrada", duration_view: "1:40" }
         ];
 
         function parseAuthor(v) {
@@ -453,7 +453,7 @@
             if(!music){
                 const tm=topMusic.find(m=>m.id===id);
                 if(tm){
-                    currentMusicList=[{id:tm.id,title:tm.title,author:tm.author,duration_view:'0:00',richThumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`}];
+                    currentMusicList=[{id:tm.id,title:tm.title,author:tm.author,duration_view:tm.duration_view||'0:00',richThumb:`https://img.youtube.com/vi/${id}/mqdefault.jpg`}];
                     music=currentMusicList[0];
                 } else {
                     window.open(`${API}/play?id=${id}`,'_blank');return;
@@ -630,6 +630,7 @@
                         <div class="music-info">
                             <h4 class="music-title">${escapeHTML(m.title)}</h4>
                             <p class="music-artist">${escapeHTML(m.author)}</p>
+                            <p class="music-duration">${m.duration_view}</p>
                         </div>
                     </div>
                     <div class="music-card-right">
